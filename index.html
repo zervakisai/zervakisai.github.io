@@ -1,121 +1,275 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Konstantinos Zervakis - Portfolio</title>
+<title>Konstantinos Zervakis - AI/ML Engineer</title>
 <style>
-:root {
-  --bg-gradient: linear-gradient(180deg,#0A0A0A,#1A1A1A);
-  --accent: #00D4FF;
-  --accent-dim: #0099CC;
-  --text-main: #FFFFFF;
-  --text-secondary: #CCCCCC;
-}
-html,body{margin:0;padding:0;scroll-behavior:smooth;font-family:Arial,Helvetica,sans-serif;background:var(--bg-gradient);color:var(--text-main);}
-section{padding:80px 20px;position:relative;overflow:hidden;}
-h1,h2,h3{margin:0 0 20px;}
-#hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;}
-#hero .scan{position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent);animation:scan 5s linear infinite;}
-@keyframes scan{0%{transform:translateY(0);}100%{transform:translateY(100vh);}}
-#hero h1{font-size:48px;text-shadow:0 0 10px var(--accent);}#hero p{font-size:24px;color:var(--text-secondary);}a.btn{display:inline-block;padding:12px 30px;margin-top:20px;color:var(--text-main);border:1px solid var(--accent);border-radius:4px;text-decoration:none;transition:background .3s;}a.btn:hover{background:var(--accent);} 
-.particle{position:absolute;background:var(--accent-dim);border-radius:50%;opacity:.3;animation:float 8s linear infinite;}@keyframes float{0%{transform:translateY(100vh) scale(.5);}100%{transform:translateY(-10vh) scale(1);}}
-section h2{text-align:center;font-size:32px;margin-bottom:40px;color:var(--accent);}
-#about .panel{background:rgba(255,255,255,0.05);border:1px solid rgba(0,212,255,.2);padding:20px;border-radius:8px;backdrop-filter:blur(4px);max-width:800px;margin:0 auto;}
-#about .panel p{color:var(--text-secondary);}
-#education .timeline{position:relative;max-width:800px;margin:0 auto;}
-#education .timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--accent);}
-#education .event{position:relative;margin-bottom:40px;padding-left:50%;min-height:80px;}
-#education .event:nth-child(odd){padding-left:0;padding-right:50%;text-align:right;}
-#education .event span{display:block;font-weight:bold;color:var(--accent);}
-#education .event .desc{color:var(--text-secondary);}
-#projects .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:1000px;margin:0 auto;}
-.card{background:rgba(255,255,255,0.05);border:1px solid rgba(0,212,255,.2);padding:20px;border-radius:8px;transition:transform .3s;}
-.card:hover{transform:translateY(-5px);} .card h3{color:var(--accent);margin-bottom:10px;} .card p{color:var(--text-secondary);}
-#skills .hex-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:800px;margin:0 auto;}
-.skill{width:100px;height:100px;background:rgba(255,255,255,0.05);border:1px solid rgba(0,212,255,.2);clip-path:polygon(25% 6.7%,75% 6.7%,100% 50%,75% 93.3%,25% 93.3%,0% 50%);display:flex;align-items:center;justify-content:center;color:var(--text-main);position:relative;}
-.skill::after{content:"";position:absolute;inset:0;border:2px solid var(--accent);opacity:0;transition:opacity .3s;}
-.skill:hover::after{opacity:1;}
-#contact form{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
-#contact input,#contact textarea{padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(0,212,255,.2);border-radius:4px;color:var(--text-main);font-size:16px;}
-#contact button{align-self:center;padding:10px 40px;border:1px solid var(--accent);background:none;color:var(--text-main);transition:background .3s;border-radius:4px;}
-#contact button:hover{background:var(--accent);}footer{text-align:center;padding:20px;color:var(--text-secondary);font-size:14px;border-top:1px solid rgba(0,212,255,.2);background:rgba(255,255,255,0.03);}
-@media(max-width:768px){#education .event{padding-left:0;padding-right:0;text-align:left;}#education .timeline::before{left:20px;}#education .event{padding-left:40px;}#education .event:nth-child(odd){padding-right:0;}}
-@media(prefers-reduced-motion:reduce){*{animation:none !important;}}
+  :root {
+    --bg: #0B1426;
+    --bg-secondary: #152238;
+    --jarvis-blue: #00E5FF;
+    --jarvis-blue-dark: #0091EA;
+    --highlight: #1E88E5;
+    --text: #E3F2FD;
+    --white: #FFFFFF;
+    --gold: #FFD700;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  header {
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    color: var(--jarvis-blue);
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px var(--jarvis-blue);
+  }
+
+  header p {
+    color: var(--white);
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+  }
+
+  .waveform {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .waveform span {
+    display: block;
+    width: 4px;
+    height: 40px;
+    margin: 0 2px;
+    background: var(--jarvis-blue);
+    animation: wave 1s linear infinite;
+  }
+
+  .waveform span:nth-child(2) { animation-delay: 0.1s; }
+  .waveform span:nth-child(3) { animation-delay: 0.2s; }
+  .waveform span:nth-child(4) { animation-delay: 0.3s; }
+  .waveform span:nth-child(5) { animation-delay: 0.4s; }
+  .waveform span:nth-child(6) { animation-delay: 0.5s; }
+  .waveform span:nth-child(7) { animation-delay: 0.6s; }
+  .waveform span:nth-child(8) { animation-delay: 0.7s; }
+  .waveform span:nth-child(9) { animation-delay: 0.8s; }
+  .waveform span:nth-child(10) { animation-delay: 0.9s; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.2); opacity: 0.4; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    color: var(--jarvis-blue);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--jarvis-blue-dark);
+  }
+
+  .panel {
+    background: var(--bg-secondary);
+    padding: 20px;
+    border: 1px solid var(--highlight);
+    border-radius: 6px;
+    margin-bottom: 40px;
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .stat {
+    flex: 1 1 250px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--jarvis-blue-dark);
+    padding: 20px;
+    border-radius: 6px;
+  }
+
+  .stat h3 {
+    color: var(--jarvis-blue);
+    margin-bottom: 10px;
+  }
+
+  .contact {
+    text-align: center;
+  }
+
+  a {
+    color: var(--jarvis-blue);
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--jarvis-blue-dark);
+    background: var(--bg-secondary);
+    color: var(--text);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .waveform span {
+      animation: none;
+    }
+  }
 </style>
 </head>
 <body>
-<section id="hero">
-  <div class="scan"></div>
-  <div id="particles"></div>
-  <div>
-    <h1>Konstantinos Zervakis</h1>
-    <p>Software Engineer | Innovator | Problem Solver</p>
-    <a href="#about" class="btn">Μάθε Περισσότερα</a>
-  </div>
-</section>
-<section id="about">
-  <h2>Σχετικά Με Εμένα</h2>
-  <div class="panel">
-    <p>Πάθος μου είναι η δημιουργία προηγμένων λύσεων που συνδυάζουν τεχνολογία και καινοτομία. Στο εργαστήριο μου πειραματίζομαι συνεχώς με νέα εργαλεία, επιδιώκοντας να κάνω τη διαφορά στον ψηφιακό κόσμο.</p>
-  </div>
-</section>
-<section id="education">
-  <h2>Σπουδές</h2>
-  <div class="timeline">
-    <div class="event">
-      <span>2022 - 2024</span>
-      <div class="desc">Μεταπτυχιακό στην Πληροφορική, Πανεπιστήμιο Πατρών</div>
+  <header>
+    <div class="waveform" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
     </div>
-    <div class="event">
-      <span>2018 - 2022</span>
-      <div class="desc">Πτυχίο Μηχανικού Λογισμικού, Εθνικό Μετσόβιο Πολυτεχνείο</div>
-    </div>
-  </div>
-</section>
-<section id="projects">
-  <h2>Επαγγελματικά Projects</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Agro Optimizer</h3>
-      <p>Σύστημα βελτιστοποίησης καλλιεργειών με τεχνητή νοημοσύνη.</p>
-    </div>
-    <div class="card">
-      <h3>Marine Optima</h3>
-      <p>Πλατφόρμα διαχείρισης στόλου με ανάλυση δεδομένων σε πραγματικό χρόνο.</p>
-    </div>
-    <div class="card">
-      <h3>Fleet AI</h3>
-      <p>Εφαρμογή πρόβλεψης συντήρησης για θαλάσσια σκάφη.</p>
-    </div>
-  </div>
-</section>
-<section id="skills">
-  <h2>Δεξιότητες</h2>
-  <div class="hex-grid">
-    <div class="skill">Python</div>
-    <div class="skill">JavaScript</div>
-    <div class="skill">React</div>
-    <div class="skill">Docker</div>
-    <div class="skill">TensorFlow</div>
-    <div class="skill">SQL</div>
-  </div>
-</section>
-<section id="contact">
-  <h2>Επικοινωνία</h2>
-  <form>
-    <input type="text" placeholder="Όνομα" required>
-    <input type="email" placeholder="Email" required>
-    <textarea rows="4" placeholder="Μήνυμα" required></textarea>
-    <button type="submit">Initialize Communication</button>
-  </form>
-</section>
-<footer>&copy; 2024 Konstantinos Zervakis</footer>
-<script>
-const particlesContainer=document.getElementById('particles');
-function createParticle(){const p=document.createElement('div');const size=Math.random()*6+2;p.classList.add('particle');p.style.left=Math.random()*100+'%';p.style.width=size+'px';p.style.height=size+'px';p.style.animationDuration=(Math.random()*5+5)+'s';particlesContainer.appendChild(p);setTimeout(()=>p.remove(),10000);}setInterval(createParticle,300);
+    <h1>JARVIS ONLINE</h1>
+    <p>Presenting: Konstantinos Zervakis - AI / Machine Learning Engineer</p>
+  </header>
 
-document.addEventListener('DOMContentLoaded',()=>{const tagline=document.querySelector('#hero p');const text=tagline.textContent;tagline.textContent='';let i=0;function type(){if(i<text.length){tagline.textContent+=text.charAt(i);i++;setTimeout(type,80);}}type();});
-</script>
+  <section id="summary" class="panel">
+    <h2>Personnel File</h2>
+    <p>Analysis complete. Technology enthusiast and future-driven engineer with strong academic background in Machine Learning, Mathematics, and Robotics. Specialized in autonomous systems, reinforcement learning, and predictive modeling. Currently leading AI forecasting startup with multiple real-time AI projects across finance, motorsport, and agriculture.</p>
+  </section>
+
+  <section id="education" class="panel">
+    <h2>Academic Records</h2>
+    <div class="stats">
+      <div class="stat">
+        <h3>MSc, Machine Learning &amp; Data Science</h3>
+        <p>Technical University of Crete (Sep 2024)<br>
+        Honours courses: Practical Data Science, Optimisation, Databases, Probabilities &amp; ML</p>
+      </div>
+      <div class="stat">
+        <h3>BSc, Mathematics &amp; Applied Mathematics</h3>
+        <p>University of Crete (2024)<br>
+        Advanced Calculus, Linear Algebra, Probability Theory, Algorithms. Graduated with 241 ECTS.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="panel">
+    <h2>Active Operations</h2>
+    <div class="stats">
+      <div class="stat">
+        <h3>AI Financial Forecasting Startup</h3>
+        <p>Founder &amp; Technical Lead<br>
+        Hybrid forecasting pipelines (ARIMAX, XGBoost, LSTM, Transformer).<br>
+        Real-time financial prediction for algorithmic trading. (Jan 2025 - Present)</p>
+      </div>
+      <div class="stat">
+        <h3>Aerial Intelligence System</h3>
+        <p>YOLOv8-based detection for UAV imagery. REST API for drone-ground communication.<br>
+        Dockerized models on Jetson devices. (Jun 2025 - Present)</p>
+      </div>
+      <div class="stat">
+        <h3>Humanoid Robotics</h3>
+        <p>Vision-Based Reinforcement Learning on MuJoCo humanoids via PPO/CNN.<br>
+        Real-time locomotion control and curriculum learning. (May 2025 - Present)</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="archive" class="panel">
+    <h2>Mission Archive</h2>
+    <div class="stats">
+      <div class="stat">
+        <h3>Formula Student TUC - Predictive Engine Safety</h3>
+        <p>Forecasted critical telemetry signals using LSTM, ARIMAX, ETSformer.<br>
+        &lt;5ms latency deployment on embedded ECUs. Inspired by real-world F1 failures. (Apr 2025)</p>
+      </div>
+      <div class="stat">
+        <h3>IoT Environmental Monitoring Platform</h3>
+        <p>End-to-end sensor-to-cloud pipeline (ESP32 + MQTT). IsolationForest anomaly detection + LSTM forecasting.<br>
+        Real-time dashboards via Grafana and WebSocket streams. (Mar 2025)</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="panel">
+    <h2>System Capabilities</h2>
+    <div class="stats">
+      <div class="stat">
+        <h3>Programming Languages</h3>
+        <p>Python (90% proficiency)<br>
+        C++ (70% proficiency)<br>
+        SQL, MATLAB, JavaScript (60% proficiency)</p>
+      </div>
+      <div class="stat">
+        <h3>AI/ML Frameworks</h3>
+        <p>PyTorch, TensorFlow, Scikit-learn<br>
+        YOLOv8, FastAPI<br>
+        MuJoCo, OpenAI Gym, PPO, CNNs</p>
+      </div>
+      <div class="stat">
+        <h3>Data &amp; Deployment</h3>
+        <p>Pandas, Numpy, Matplotlib, Seaborn<br>
+        Docker, GitHub Actions, Heroku, CI/CD<br>
+        REST APIs, Jetson, CAN Bus integration</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="recognition" class="panel">
+    <h2>Intelligence Reports</h2>
+    <div class="stats">
+      <div class="stat">
+        <h3>Research Experience</h3>
+        <p>Cryptography team with Dr. Garefalakis (11/23-05/24)<br>
+        Ising machines project with Dr. Komineas (09/23-06/24)</p>
+      </div>
+      <div class="stat">
+        <h3>Professional Recognition</h3>
+        <p>Formula E Software Engineer Offer (Feb 2025) - Declined for academic priorities<br>
+        Manuscript in preparation: "Forecast-First ECUs: Real-Time Telemetry Prediction"</p>
+      </div>
+      <div class="stat">
+        <h3>Awards &amp; Achievements</h3>
+        <p>2x Silver Medalist, Panhellenic &amp; Global Fencing Championships (2016)<br>
+        Founder of "Security4All" Android app (200+ downloads, 2015)</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="panel contact">
+    <h2>Communication Protocols</h2>
+    <p>ESTABLISHING SECURE CONNECTION</p>
+    <p>Contact: <a href="mailto:zervakisai@gmail.com">zervakisai@gmail.com</a></p>
+    <p>Phone: <a href="tel:+306940696921">+30 6940 696921</a></p>
+    <p>GitHub: <a href="#">Profile Link</a></p>
+    <p>LinkedIn: <a href="#">Profile Link</a></p>
+    <p>END TRANSMISSION</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Konstantinos Zervakis - AI / ML Engineer
+  </footer>
+
 </body>
 </html>
