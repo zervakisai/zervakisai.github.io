@@ -8,51 +8,340 @@
       content="Portfolio of Konstantinos Zervakis, AI and Machine Learning Engineer"
     />
     <title>Konstantinos Zervakis - AI/ML Engineer</title>
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --bg: #0b1426;
+        --bg-secondary: #152238;
+        --jarvis-blue: #00e5ff;
+        --jarvis-blue-dark: #0091ea;
+        --highlight: #1e88e5;
+        --text: #e3f2fd;
+        --white: #ffffff;
+        --gold: #ffd700;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        text-align: center;
+        padding: 60px 20px;
+        position: relative;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        color: var(--jarvis-blue);
+        margin-bottom: 10px;
+        text-shadow: 0 0 20px var(--jarvis-blue);
+      }
+
+      header p {
+        color: var(--white);
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+      }
+
+      .waveform {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .waveform span {
+        display: block;
+        width: 4px;
+        height: 40px;
+        margin: 0 2px;
+        background: var(--jarvis-blue);
+        animation: wave 1s linear infinite;
+      }
+
+      .waveform span:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .waveform span:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .waveform span:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      .waveform span:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+      .waveform span:nth-child(6) {
+        animation-delay: 0.5s;
+      }
+      .waveform span:nth-child(7) {
+        animation-delay: 0.6s;
+      }
+      .waveform span:nth-child(8) {
+        animation-delay: 0.7s;
+      }
+      .waveform span:nth-child(9) {
+        animation-delay: 0.8s;
+      }
+      .waveform span:nth-child(10) {
+        animation-delay: 0.9s;
+      }
+
+      @keyframes wave {
+        0%,
+        100% {
+          transform: scaleY(0.2);
+          opacity: 0.4;
+        }
+        50% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+      }
+
+      section {
+        padding: 60px 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      h2 {
+        color: var(--jarvis-blue);
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px var(--jarvis-blue-dark);
+      }
+
+      .panel {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border: 1px solid var(--highlight);
+        border-radius: 6px;
+        margin-bottom: 40px;
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .stat {
+        flex: 1 1 250px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--jarvis-blue-dark);
+        padding: 20px;
+        border-radius: 6px;
+      }
+
+      .stat h3 {
+        color: var(--jarvis-blue);
+        margin-bottom: 10px;
+      }
+
+      .contact {
+        text-align: center;
+      }
+
+      a {
+        color: var(--jarvis-blue);
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        border-top: 1px solid var(--jarvis-blue-dark);
+        background: var(--bg-secondary);
+        color: var(--text);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .waveform span {
+          animation: none;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
-      <h1>Konstantinos Zervakis</h1>
-      <p>AI / Machine Learning Engineer</p>
+      <div class="waveform" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <h1>JARVIS ONLINE</h1>
+      <p>Presenting: Konstantinos Zervakis - AI / Machine Learning Engineer</p>
     </header>
-    <main>
-      <section id="about">
-        <h2>About</h2>
-        <p>
-          Technology enthusiast and engineer focused on machine learning,
-          mathematics and robotics.
-        </p>
-      </section>
-      <section id="projects">
-        <h2>Projects</h2>
-        <ul>
-          <li>
-            <a href="predictive-maintenance.html"
-              >Predictive Maintenance ML System</a
-            >
-          </li>
-          <li><a href="har-drive.html">HAR-DRive</a></li>
-          <li><a href="lightningtext.html">LightningText</a></li>
-        </ul>
-      </section>
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>
-          Email: <a href="mailto:zervakisai@gmail.com">zervakisai@gmail.com</a>
-        </p>
-        <p>
-          GitHub:
-          <a
-            href="https://github.com/zervakisai"
-            target="_blank"
-            rel="noopener noreferrer"
-            >zervakisai</a
-          >
-        </p>
-      </section>
-    </main>
-    <footer>
-      <p>&copy; 2025 Konstantinos Zervakis</p>
-    </footer>
+
+    <section id="summary" class="panel">
+      <h2>Personnel File</h2>
+      <p>
+        Analysis complete. Technology enthusiast and future-driven engineer with
+        a strong academic background in Machine Learning, Mathematics, and
+        Robotics. Passionate about autonomous systems, reinforcement learning,
+        and predictive modeling. Currently leading an AI forecasting startup and
+        contributing to real-time AI projects across finance, motorsport, and
+        agriculture.
+      </p>
+    </section>
+
+    <section id="education" class="panel">
+      <h2>Academic Records</h2>
+      <div class="stats">
+        <div class="stat">
+          <h3>MSc, Machine Learning &amp; Data Science</h3>
+          <p>
+            Technical University of Crete (Sep 2025)<br />
+            Honours courses: Practical Data Science, Optimisation, Data bases,
+            Probabilities &amp; ML
+          </p>
+        </div>
+        <div class="stat">
+          <h3>BSc, Mathematics &amp; Applied Mathematics</h3>
+          <p>
+            University of Crete (2024)<br />
+            Advanced Calculus, Linear Algebra, Probability Theory, Algorithms,
+            Applied &amp; Parametric Statistics, Global Economics.<br />
+            Graduated with 241 ECTS.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="panel">
+      <h2>Projects</h2>
+      <div class="stats">
+        <div class="stat">
+          <h3>Predictive Maintenance ML System – Hydraulic Equipment</h3>
+          <p>
+            Modular pipeline for UCI 447 sensor data with engineered features,
+            interpretable models, and real-time FastAPI service.<br />
+            <a href="predictive-maintenance.html">Project Link</a>
+          </p>
+        </div>
+        <div class="stat">
+          <h3>HAR-DRive — High-Accuracy Activity Recognition with PCA/LDA</h3>
+          <p>
+            Automated PCA vs LDA pipeline on UCI HAR; 5-D LDA + SVM-RBF achieves
+            macro-F1 0.984 with 98% feature reduction.<br />
+            <a href="har-drive.html">Project Link</a> |
+            <a href="report.pdf">Report (PDF)</a>
+          </p>
+        </div>
+        <div class="stat">
+          <h3>
+            LightningText — Ultra-Lean, Real-Time Text Analytics on Apache Spark
+          </h3>
+          <p>
+            Spark pipeline with sketching and compression to analyze 14M
+            BookCorpus paragraphs in real time using only 20&nbsp;KB RAM.<br />
+            <a href="lightningtext.html">Project Link</a> |
+            <a href="BD.pdf">Report (PDF)</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="archive" class="panel">
+      <h2>Mission Archive</h2>
+      <div class="stats">
+        <div class="stat">
+          <h3>Formula Student TUC - Predictive Engine Safety Modeling</h3>
+          <p>
+            Forecasted telemetry signals (Lambda, RPM) via LSTM, ARIMAX,
+            ETSformer with &lt;5ms latency on embedded ECUs.<br />
+            <a href="formula-student.html">Project Link</a> |
+            <a href="MLDS (7).pdf">Report (PDF)</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="panel">
+      <h2>System Capabilities</h2>
+      <div class="stats">
+        <div class="stat">
+          <h3>Programming Languages</h3>
+          <p>Python, C++, SQL (PostgreSQL), MATLAB</p>
+        </div>
+        <div class="stat">
+          <h3>ML &amp; Forecasting</h3>
+          <p>
+            PyTorch, TensorFlow, scikit-learn, XGBoost, ARIMAX/ARIMA, LSTM,
+            Transformers (ETSformer), SHAP
+          </p>
+        </div>
+        <div class="stat">
+          <h3>MLOps &amp; Deployment</h3>
+          <p>
+            FastAPI, Docker, Kubernetes, MLflow, Airflow, GitHub Actions,
+            Prometheus, Grafana, Evidently
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="recognition" class="panel">
+      <h2>Intelligence Reports</h2>
+      <div class="stats">
+        <div class="stat">
+          <h3>Research Experience</h3>
+          <p>
+            Cryptography team with Dr. Garefalakis (11/23-05/24)<br />
+            Ising machines project with Dr. Komineas (09/23-06/24)
+          </p>
+        </div>
+        <div class="stat">
+          <h3>Professional Recognition</h3>
+          <p>
+            Formula E Software Engineer Offer (Feb 2025) - Declined for academic
+            priorities<br />
+            Manuscript in preparation: "Forecast-First ECUs: Real-Time Telemetry
+            Prediction"
+          </p>
+        </div>
+        <div class="stat">
+          <h3>Awards &amp; Achievements</h3>
+          <p>
+            2x Silver Medalist, Panhellenic &amp; Global Fencing Championships
+            (2016)<br />
+            Founder of "Security4All" Android app (200+ downloads, 2015)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="panel contact">
+      <h2>Communication Protocols</h2>
+      <p>ESTABLISHING SECURE CONNECTION</p>
+      <p>
+        Contact: <a href="mailto:zervakisai@gmail.com">zervakisai@gmail.com</a>
+      </p>
+      <p>Phone: <a href="tel:+306940696921">+30 6940 696921</a></p>
+      <p>
+        GitHub:
+        <a
+          href="https://github.com/zervakisai"
+          target="_blank"
+          rel="noopener noreferrer"
+          >zervakisai</a
+        >
+      </p>
+      <p>
+        LinkedIn: <a href="https://www.linkedin.com/in/-zervakisai-">Profile</a>
+      </p>
+      <p>END TRANSMISSION</p>
+    </section>
+
+    <footer>&copy; 2025 Konstantinos Zervakis - AI / ML Engineer</footer>
   </body>
 </html>
