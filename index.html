@@ -1,155 +1,1078 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Portfolio of Konstantinos Zervakis, AI and Machine Learning Engineer"
-    />
-    <title>Konstantinos Zervakis - AI/ML Engineer</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Konstantinos Zervakis</h1>
-      <p>AI / Machine Learning Engineer</p>
-      <nav aria-label="Primary">
-        <a href="#summary">About</a>
-        <a href="#education">Education</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#recognition">Recognition</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Konstantinos Zervakis — ML/Aerospace engineer. PhD candidate, OHB Hellas, FLARE (Drones MDPI 2026). Interactive 3D mission control and AI chat." />
+<meta name="keywords" content="Konstantinos Zervakis, Machine Learning, Aerospace, OHB Hellas, FLARE, UAV, PhD, Crete" />
+<meta name="author" content="Konstantinos Zervakis" />
+<meta property="og:title" content="Konstantinos Zervakis // Mission Control" />
+<meta property="og:description" content="ML + Aerospace engineer. Interactive portfolio." />
+<meta property="og:type" content="website" />
+<title>KONSTANTINOS ZERVAKIS // MISSION_CONTROL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='monospace'%3E%E2%98%A2%3C/text%3E%3C/svg%3E" />
+<style>
+/* ============================================================
+   CORE / RESET
+============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060a;
+  --bg-2:#080d14;
+  --panel:rgba(6,14,18,.85);
+  --grid:rgba(0,255,156,.08);
+  --neon:#00ff9c;
+  --neon-dim:#00b373;
+  --cyan:#00e5ff;
+  --magenta:#ff2bd6;
+  --amber:#ffb020;
+  --red:#ff3860;
+  --text:#cfeee0;
+  --text-dim:#7fa896;
+  --border:rgba(0,255,156,.22);
+  --border-strong:rgba(0,255,156,.6);
+  --shadow-neon:0 0 12px rgba(0,255,156,.45), 0 0 32px rgba(0,255,156,.18);
+  --shadow-cyan:0 0 12px rgba(0,229,255,.45), 0 0 32px rgba(0,229,255,.18);
+  --shadow-magenta:0 0 10px rgba(255,43,214,.45), 0 0 28px rgba(255,43,214,.18);
+}
+html,body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:15px;line-height:1.55;overflow-x:hidden;scroll-behavior:smooth}
+body{min-height:100vh;position:relative}
+::selection{background:var(--neon);color:#000}
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dashed rgba(0,229,255,.35);transition:all .2s}
+a:hover{color:var(--neon);border-color:var(--neon);text-shadow:0 0 8px rgba(0,255,156,.6)}
+h1,h2,h3,h4{font-family:'Orbitron','JetBrains Mono',monospace;letter-spacing:.05em;color:var(--neon);text-transform:uppercase}
+button{font-family:inherit;cursor:pointer}
+img{max-width:100%}
 
-    <main>
-      <section id="summary">
-        <h2>About</h2>
-        <p>
-          Technology enthusiast and future-driven engineer with a strong
-          academic background in Machine Learning, Mathematics, and Robotics.
-          Passionate about autonomous systems, reinforcement learning, and
-          predictive modeling. Currently leading an AI forecasting startup and
-          contributing to real-time AI projects across finance, motorsport, and
-          agriculture.
-        </p>
-      </section>
+/* ============================================================
+   BACKGROUND LAYERS (matrix rain + grid + CRT)
+============================================================ */
+#matrix-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.35;pointer-events:none}
+#grid-bg{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 30%,#000 0%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 0%,transparent 80%)}
+.scanlines{position:fixed;inset:0;z-index:9998;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);mix-blend-mode:multiply;opacity:.45}
+.vignette{position:fixed;inset:0;z-index:9997;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.7) 100%)}
+.crt-flicker{position:fixed;inset:0;z-index:9999;pointer-events:none;background:rgba(0,255,156,.015);animation:flicker 6s infinite}
+@keyframes flicker{0%,97%,100%{opacity:.0}98%{opacity:.3}99%{opacity:.08}}
 
-      <section id="education">
-        <h2>Education</h2>
-        <ul>
-          <li>
-            <strong>MSc, Machine Learning &amp; Data Science</strong> –
-            Technical University of Crete (Sep 2025). Honours courses: Practical
-            Data Science, Optimisation, Databases, Probabilities &amp; ML
-          </li>
-          <li>
-            <strong>BSc, Mathematics &amp; Applied Mathematics</strong> –
-            University of Crete (2024). Advanced Calculus, Linear Algebra,
-            Probability Theory, Algorithms, Applied &amp; Parametric Statistics,
-            Global Economics. Graduated with 241 ECTS.
-          </li>
-        </ul>
-      </section>
+/* ============================================================
+   BOOT SEQUENCE
+============================================================ */
+#boot{position:fixed;inset:0;z-index:10000;background:#000;color:var(--neon);display:flex;align-items:flex-start;justify-content:flex-start;padding:6vh 5vw;overflow:hidden;font-family:'Share Tech Mono',monospace;font-size:14px;white-space:pre-wrap}
+#boot.done{animation:bootOut .6s forwards}
+@keyframes bootOut{to{opacity:0;visibility:hidden;transform:scale(1.02)}}
+#boot .line{opacity:0;animation:bootLine .01s forwards}
+@keyframes bootLine{to{opacity:1}}
+#boot .ok{color:var(--neon)}
+#boot .warn{color:var(--amber)}
+#boot .err{color:var(--red)}
+#boot .dim{color:var(--text-dim)}
 
-      <section id="projects">
-        <h2>Projects</h2>
-        <ul>
-          <li>
-            Predictive Maintenance ML System – Hydraulic Equipment. Modular
-            pipeline for UCI 447 sensor data with engineered features,
-            interpretable models, and real-time FastAPI service.
-            <a href="predictive-maintenance.html">Project</a> |
-            <a href="https://github.com/zervakisai/hydraulic-maintenance" target="_blank" rel="noopener noreferrer">Code</a>
-          </li>
-          <li>
-            HAR-DRive — High-Accuracy Activity Recognition with PCA/LDA.
-            Automated PCA vs LDA pipeline on UCI HAR; 5-D LDA + SVM-RBF achieves
-            macro-F1 0.984 with 98% feature reduction.
-            <a href="har-drive.html">Project</a> |
-            <a href="report.pdf">Report</a>
-          </li>
-          <li>
-            LightningText — Ultra-Lean, Real-Time Text Analytics on Apache
-            Spark. Spark pipeline with sketching and compression to analyze 14M
-            BookCorpus paragraphs in real time using only 20&nbsp;KB RAM.
-            <a href="lightningtext.html">Project</a> |
-            <a href="BD.pdf">Report</a> |
-            <a href="BD.ipynb">Code</a>
-          </li>
-          <li>
-            Formula Student TUC - Predictive Engine Safety Modeling. Forecasted
-            telemetry signals (Lambda, RPM) via LSTM, ARIMAX, ETSformer with
-            &lt;5ms latency on embedded ECUs.
-            <a href="formula-student.html">Project</a> |
-            <a href="MLDS (7).pdf">Report</a> |
-            <a href="MLDS (2).ipynb">Code</a>
-          </li>
-        </ul>
-      </section>
+/* ============================================================
+   LAYOUT
+============================================================ */
+.wrap{position:relative;z-index:5;max-width:1360px;margin:0 auto;padding:0 28px}
+nav.top{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(8px);background:linear-gradient(180deg,rgba(4,6,10,.92),rgba(4,6,10,.5));border-bottom:1px solid var(--border)}
+nav.top .inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;gap:16px}
+nav.top .brand{display:flex;align-items:center;gap:10px;font-family:'Orbitron',monospace;font-weight:900;color:var(--neon);text-shadow:var(--shadow-neon);letter-spacing:.15em;font-size:13px}
+nav.top .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--neon);box-shadow:0 0 12px var(--neon);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+nav.top ul{list-style:none;display:flex;gap:4px;flex-wrap:wrap}
+nav.top a.link{color:var(--text-dim);padding:8px 12px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid transparent;border-radius:2px;border-bottom:1px solid transparent}
+nav.top a.link:hover{color:var(--neon);border-color:var(--border);background:rgba(0,255,156,.05);text-shadow:var(--shadow-neon)}
+nav.top .sys{font-size:11px;color:var(--text-dim)}
+nav.top .sys .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 8px var(--neon);margin-right:6px;animation:pulse 1.6s infinite}
 
-      <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-          <li>
-            <strong>Programming Languages:</strong> Python, C++, SQL
-            (PostgreSQL), MATLAB
-          </li>
-          <li>
-            <strong>ML &amp; Forecasting:</strong> PyTorch, TensorFlow,
-            scikit-learn, XGBoost, ARIMAX/ARIMA, LSTM, Transformers (ETSformer),
-            SHAP
-          </li>
-          <li>
-            <strong>MLOps &amp; Deployment:</strong> FastAPI, Docker,
-            Kubernetes, MLflow, Airflow, GitHub Actions, Prometheus, Grafana,
-            Evidently
-          </li>
-        </ul>
-      </section>
+section.block{padding:96px 0 40px;position:relative}
+.section-head{display:flex;align-items:center;gap:14px;margin-bottom:28px;flex-wrap:wrap}
+.section-head .prompt{color:var(--cyan);font-size:13px}
+.section-head h2{font-size:22px;margin:0;color:var(--neon);text-shadow:var(--shadow-neon)}
+.section-head .meta{margin-left:auto;font-size:11px;color:var(--text-dim);letter-spacing:.12em}
 
-      <section id="recognition">
-        <h2>Recognition</h2>
-        <ul>
-          <li>
-            <strong>Research Experience:</strong> Cryptography team with Dr.
-            Garefalakis (11/23–05/24); Ising machines project with Dr. Komineas
-            (09/23–06/24)
-          </li>
-          <li>
-            <strong>Professional Recognition:</strong> Formula E Software
-            Engineer Offer (Feb 2025) — declined for academic priorities;
-            Manuscript in preparation: “Forecast-First ECUs: Real-Time Telemetry
-            Prediction”
-          </li>
-          <li>
-            <strong>Awards &amp; Achievements:</strong> 2× Silver Medalist,
-            Panhellenic &amp; Global Fencing Championships (2016); Founder of
-            “Security4All” Android app (200+ downloads, 2015)
-          </li>
-        </ul>
-      </section>
+/* glitch effect for hero title */
+.glitch{position:relative;display:inline-block;color:var(--neon);font-family:'Orbitron',monospace;font-weight:900;text-shadow:0 0 18px rgba(0,255,156,.65), 0 0 40px rgba(0,255,156,.2)}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;opacity:.85}
+.glitch::before{color:var(--magenta);transform:translate(2px,0);clip-path:polygon(0 0,100% 0,100% 33%,0 33%);animation:glitchA 3.6s infinite linear alternate-reverse}
+.glitch::after{color:var(--cyan);transform:translate(-2px,0);clip-path:polygon(0 66%,100% 66%,100% 100%,0 100%);animation:glitchB 2.8s infinite linear alternate-reverse}
+@keyframes glitchA{0%{clip-path:polygon(0 2%,100% 2%,100% 5%,0 5%)}20%{clip-path:polygon(0 15%,100% 15%,100% 16%,0 16%)}40%{clip-path:polygon(0 40%,100% 40%,100% 42%,0 42%)}60%{clip-path:polygon(0 60%,100% 60%,100% 63%,0 63%)}80%{clip-path:polygon(0 80%,100% 80%,100% 82%,0 82%)}100%{clip-path:polygon(0 95%,100% 95%,100% 98%,0 98%)}}
+@keyframes glitchB{0%{clip-path:polygon(0 10%,100% 10%,100% 12%,0 12%)}25%{clip-path:polygon(0 30%,100% 30%,100% 32%,0 32%)}50%{clip-path:polygon(0 55%,100% 55%,100% 57%,0 57%)}75%{clip-path:polygon(0 72%,100% 72%,100% 74%,0 74%)}100%{clip-path:polygon(0 88%,100% 88%,100% 90%,0 90%)}}
 
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>
-          Email:
-          <a href="mailto:zervakisai@gmail.com">zervakisai@gmail.com</a> |
-          Phone: <a href="tel:+306940696921">+30 6940 696921</a> |
-          GitHub:
-          <a href="https://github.com/zervakisai" target="_blank" rel="noopener noreferrer">zervakisai</a>
-          |
-          LinkedIn:
-          <a href="https://www.linkedin.com/in/zervakisai" target="_blank" rel="noopener noreferrer">Profile</a>
-        </p>
-      </section>
-    </main>
+/* terminal panel */
+.panel{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:4px;box-shadow:0 0 0 1px rgba(0,255,156,.04), 0 8px 40px rgba(0,0,0,.55), inset 0 0 60px rgba(0,255,156,.03);backdrop-filter:blur(4px)}
+.panel .bar{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(0,255,156,.06),transparent);font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase}
+.panel .bar .lights{display:flex;gap:6px}
+.panel .bar .lights i{width:10px;height:10px;border-radius:50%;background:#333;display:block}
+.panel .bar .lights i.r{background:#ff5f56;box-shadow:0 0 6px #ff5f56}
+.panel .bar .lights i.y{background:#ffbd2e;box-shadow:0 0 6px #ffbd2e}
+.panel .bar .lights i.g{background:#27c93f;box-shadow:0 0 6px #27c93f}
+.panel .bar .title{flex:1}
+.panel .bar .title span{color:var(--neon)}
+.panel .body{padding:20px}
 
-    <footer>
-      <p>&copy; 2025 Konstantinos Zervakis — AI / ML Engineer</p>
-    </footer>
-  </body>
+/* ============================================================
+   HERO
+============================================================ */
+#hero{padding-top:140px;min-height:100vh;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;width:100%}
+.hero-left .tagline{color:var(--cyan);font-size:13px;letter-spacing:.3em;margin-bottom:18px;text-transform:uppercase}
+.hero-left h1{font-size:clamp(36px,6.8vw,84px);line-height:.95;margin-bottom:14px;letter-spacing:.01em}
+.hero-left h1 .sub{display:block;font-size:.32em;color:var(--text-dim);font-weight:400;letter-spacing:.3em;margin-top:12px;text-transform:uppercase}
+.typing{display:inline-block;border-right:2px solid var(--neon);padding-right:4px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-weight:500;text-transform:none;letter-spacing:0;animation:caret 1s steps(2) infinite}
+@keyframes caret{50%{border-color:transparent}}
+.hero-left .bio{color:var(--text);max-width:54ch;margin:24px 0 22px;font-size:14.5px}
+.hero-left .bio strong{color:var(--neon);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0 28px}
+.stat{border:1px solid var(--border);padding:12px 10px;text-align:left;background:rgba(0,255,156,.03);position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(0,255,156,.08));pointer-events:none}
+.stat .n{font-family:'Orbitron',monospace;font-weight:800;color:var(--neon);font-size:22px;text-shadow:var(--shadow-neon)}
+.stat .l{font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.15em;text-transform:uppercase;border:1px solid var(--border-strong);background:rgba(0,255,156,.06);color:var(--neon);transition:all .2s;text-decoration:none;border-radius:2px}
+.btn:hover{background:var(--neon);color:#000;box-shadow:var(--shadow-neon);text-shadow:none;border-color:var(--neon)}
+.btn.cyan{border-color:rgba(0,229,255,.6);color:var(--cyan);background:rgba(0,229,255,.06)}
+.btn.cyan:hover{background:var(--cyan);color:#000;box-shadow:var(--shadow-cyan)}
+.btn.magenta{border-color:rgba(255,43,214,.6);color:var(--magenta);background:rgba(255,43,214,.06)}
+.btn.magenta:hover{background:var(--magenta);color:#000;box-shadow:var(--shadow-magenta)}
+
+.hero-right{position:relative;height:560px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(0,30,30,.3),rgba(0,10,12,.6));border-radius:4px;overflow:hidden}
+.hero-right .bar{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.6);font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase}
+.hero-right .bar .lights{display:flex;gap:6px}
+.hero-right .bar .lights i{width:10px;height:10px;border-radius:50%;background:#333;display:block}
+.hero-right .bar .lights i.r{background:#ff5f56}
+.hero-right .bar .lights i.y{background:#ffbd2e}
+.hero-right .bar .lights i.g{background:#27c93f}
+#three-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.hero-hud{position:absolute;inset:0;z-index:2;pointer-events:none;padding:50px 20px 20px;display:flex;flex-direction:column;justify-content:space-between;font-size:11px;letter-spacing:.1em}
+.hud-row{display:flex;justify-content:space-between;color:var(--text-dim)}
+.hud-row span b{color:var(--neon);font-weight:500}
+.hud-mission{align-self:flex-start;background:rgba(0,0,0,.6);border:1px solid var(--border);padding:10px 14px;max-width:320px;pointer-events:auto;color:var(--text);font-size:12px}
+.hud-mission .ttl{color:var(--cyan);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px}
+.hud-mission .body{color:var(--text);font-size:12.5px;line-height:1.45}
+.waypoints{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;pointer-events:auto}
+.waypoints button{font-family:inherit;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,255,156,.08);border:1px solid var(--border);color:var(--neon);padding:5px 9px;cursor:pointer;transition:all .15s;border-radius:2px}
+.waypoints button:hover,.waypoints button.active{background:var(--neon);color:#000;box-shadow:var(--shadow-neon)}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+.about-grid .panel .body p{margin-bottom:14px}
+.about-grid .panel .body p:last-child{margin-bottom:0}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:13px}
+.kv dt{color:var(--cyan);text-transform:uppercase;letter-spacing:.1em;font-size:11px;align-self:start;padding-top:3px}
+.kv dd{color:var(--text)}
+.kv dd a{color:var(--neon)}
+
+/* ============================================================
+   AI CHAT
+============================================================ */
+#chat .panel{max-width:980px;margin:0 auto}
+#chat .intro{color:var(--text-dim);font-size:13px;margin-bottom:16px;max-width:720px}
+.chat-log{min-height:300px;max-height:420px;overflow-y:auto;padding:16px;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:2px;font-size:13.5px;line-height:1.55;scrollbar-width:thin;scrollbar-color:var(--neon-dim) transparent}
+.chat-log::-webkit-scrollbar{width:8px}
+.chat-log::-webkit-scrollbar-thumb{background:var(--neon-dim);border-radius:4px}
+.msg{margin-bottom:14px;display:flex;gap:10px;animation:msgIn .25s ease-out}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.msg .who{flex-shrink:0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:3px 8px;height:fit-content;border:1px solid}
+.msg.me .who{color:var(--cyan);border-color:rgba(0,229,255,.5);background:rgba(0,229,255,.08)}
+.msg.ko .who{color:var(--neon);border-color:var(--border-strong);background:rgba(0,255,156,.08)}
+.msg .text{flex:1;color:var(--text)}
+.msg .text strong{color:var(--neon)}
+.msg .text em{color:var(--cyan);font-style:normal}
+.chat-controls{margin-top:14px;display:flex;gap:8px}
+.chat-controls input{flex:1;background:rgba(0,0,0,.5);border:1px solid var(--border);color:var(--neon);padding:12px 14px;font-family:inherit;font-size:14px;border-radius:2px;outline:none;caret-color:var(--neon)}
+.chat-controls input:focus{border-color:var(--neon);box-shadow:var(--shadow-neon)}
+.chat-controls button{background:var(--neon);color:#000;border:none;padding:0 20px;font-family:'Orbitron',monospace;font-weight:700;letter-spacing:.15em;text-transform:uppercase;font-size:12px;border-radius:2px}
+.chat-controls button:hover{box-shadow:var(--shadow-neon)}
+.chips{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.chips button{background:rgba(0,255,156,.05);border:1px solid var(--border);color:var(--text);padding:6px 10px;font-size:11.5px;font-family:inherit;border-radius:2px;transition:all .15s}
+.chips button:hover{border-color:var(--neon);color:var(--neon);background:rgba(0,255,156,.12);box-shadow:var(--shadow-neon)}
+.cursor-blink{display:inline-block;width:7px;height:14px;background:var(--neon);vertical-align:text-bottom;margin-left:2px;animation:caret 1s steps(2) infinite}
+
+/* ============================================================
+   EXPERIENCE / RESEARCH timeline
+============================================================ */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:linear-gradient(180deg,var(--neon),transparent)}
+.tl-item{position:relative;padding:0 0 28px 0}
+.tl-item::before{content:"";position:absolute;left:-24px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--neon);box-shadow:var(--shadow-neon)}
+.tl-item .when{color:var(--cyan);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px}
+.tl-item h3{font-size:17px;color:var(--neon);margin-bottom:4px;text-transform:none}
+.tl-item .org{color:var(--text-dim);font-size:12.5px;margin-bottom:8px}
+.tl-item ul{list-style:none;margin-top:6px}
+.tl-item ul li{padding-left:18px;position:relative;margin-bottom:5px;font-size:13.5px;color:var(--text)}
+.tl-item ul li::before{content:"▸";color:var(--neon);position:absolute;left:0}
+
+/* ============================================================
+   PROJECTS
+============================================================ */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.proj{position:relative;padding:20px;border:1px solid var(--border);background:rgba(0,255,156,.02);transition:all .25s;border-radius:2px;overflow:hidden}
+.proj::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,156,.08),transparent 50%);opacity:0;transition:opacity .3s;pointer-events:none}
+.proj:hover{border-color:var(--neon);transform:translateY(-4px);box-shadow:var(--shadow-neon)}
+.proj:hover::before{opacity:1}
+.proj .tag{display:inline-block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(0,229,255,.4);padding:2px 8px;margin-bottom:10px}
+.proj h3{font-size:16px;margin-bottom:6px;color:var(--neon);text-transform:none}
+.proj .when{font-size:11px;color:var(--text-dim);margin-bottom:12px;letter-spacing:.1em;text-transform:uppercase}
+.proj p{font-size:13.5px;color:var(--text);margin-bottom:12px}
+.proj .metrics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.proj .metrics span{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(255,176,32,.4);background:rgba(255,176,32,.05);padding:3px 8px}
+.proj .stack{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
+.proj .stack span{font-size:10.5px;color:var(--text-dim);background:rgba(255,255,255,.03);padding:3px 8px;border:1px solid rgba(255,255,255,.06)}
+.proj .links{display:flex;gap:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;flex-wrap:wrap}
+.proj .links a{color:var(--neon);border-bottom:1px dashed var(--border)}
+
+/* ============================================================
+   SKILLS
+============================================================ */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.skill-cat{border:1px solid var(--border);padding:16px;background:rgba(0,255,156,.02);border-radius:2px}
+.skill-cat h4{font-size:11px;letter-spacing:.2em;color:var(--cyan);margin-bottom:12px;font-family:'JetBrains Mono',monospace;text-transform:uppercase}
+.skill-cat .tags{display:flex;flex-wrap:wrap;gap:5px}
+.skill-cat .tags span{font-size:11.5px;color:var(--text);background:rgba(0,255,156,.06);border:1px solid var(--border);padding:4px 8px;transition:all .15s}
+.skill-cat .tags span:hover{background:var(--neon);color:#000;border-color:var(--neon)}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+.contact-card{padding:26px;border:1px solid var(--border);background:rgba(0,255,156,.03);border-radius:2px}
+.contact-card h3{font-size:18px;margin-bottom:14px}
+.contact-card p{color:var(--text-dim);margin-bottom:14px;font-size:13.5px}
+.contact-list{list-style:none}
+.contact-list li{padding:10px 0;border-bottom:1px dashed var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.contact-list li:last-child{border:none}
+.contact-list .k{color:var(--cyan);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.contact-list .v a{color:var(--neon)}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{padding:40px 0 60px;border-top:1px solid var(--border);margin-top:60px;text-align:center;color:var(--text-dim);font-size:12px;letter-spacing:.1em}
+footer .ascii{color:var(--neon);font-family:'Share Tech Mono',monospace;font-size:10px;line-height:1.1;white-space:pre;opacity:.5;margin-bottom:16px;display:inline-block;text-align:left}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-right{height:420px}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  nav.top ul{display:none}
+  section.block{padding:70px 0 20px}
+  .wrap{padding:0 18px}
+}
+.reveal{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+<div id="grid-bg"></div>
+<div class="vignette"></div>
+<div class="scanlines"></div>
+<div class="crt-flicker"></div>
+
+<!-- BOOT -->
+<div id="boot"><div id="boot-out"></div></div>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="inner">
+    <div class="brand"><span class="dot"></span>KZ // MISSION_CONTROL</div>
+    <ul>
+      <li><a class="link" href="#hero">/home</a></li>
+      <li><a class="link" href="#about">/about</a></li>
+      <li><a class="link" href="#chat">/ask-me</a></li>
+      <li><a class="link" href="#experience">/work</a></li>
+      <li><a class="link" href="#projects">/projects</a></li>
+      <li><a class="link" href="#research">/research</a></li>
+      <li><a class="link" href="#skills">/skills</a></li>
+      <li><a class="link" href="#contact">/contact</a></li>
+    </ul>
+    <div class="sys"><span class="dot"></span><span id="clock">--:--:--</span> UTC</div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- HERO -->
+<section id="hero" class="block">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="tagline">// ML × AEROSPACE × AUTONOMOUS_SYSTEMS</div>
+      <h1>
+        <span class="glitch" data-text="KONSTANTINOS">KONSTANTINOS</span><br/>
+        <span class="glitch" data-text="ZERVAKIS">ZERVAKIS</span>
+        <span class="sub">&gt; <span id="role" class="typing"></span></span>
+      </h1>
+      <p class="bio">
+        Hybrid engineer — <strong>PhD(c)</strong> in Machine Learning for Autonomous Systems,
+        <strong>MSc ML &amp; Data Science</strong> (TUC), and Software Test Engineer at
+        <strong>OHB Hellas</strong> building ECSS-aligned V&amp;V for space. Author of
+        <strong>FLARE</strong> (Drones, MDPI 2026), a benchmark for risk-aware UAV path-planning
+        in disaster scenarios. I turn complex systems into simple, trustworthy outcomes.
+      </p>
+      <div class="stats">
+        <div class="stat"><div class="n" data-n="0.984">0.000</div><div class="l">HAR F1-score</div></div>
+        <div class="stat"><div class="n" data-n="14">0</div><div class="l">M+ docs / 20KB RAM</div></div>
+        <div class="stat"><div class="n" data-n="5">0</div><div class="l">ms ECU latency</div></div>
+        <div class="stat"><div class="n" data-n="450">0</div><div class="l">+ UAV episodes</div></div>
+      </div>
+      <div class="cta">
+        <a class="btn" href="#chat">▸ Ask me anything</a>
+        <a class="btn cyan" href="#projects">▸ View missions</a>
+        <a class="btn magenta" href="mailto:zervakisai@gmail.com">▸ Initiate contact</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="bar">
+        <div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+        <div>flare://missions/live &nbsp; · &nbsp; <span style="color:var(--neon)">● TELEMETRY OK</span></div>
+      </div>
+      <canvas id="three-canvas"></canvas>
+      <div class="hero-hud">
+        <div class="hud-row">
+          <span>LAT <b id="hud-lat">35.3387°N</b></span>
+          <span>LON <b id="hud-lon">25.1442°E</b></span>
+          <span>ALT <b id="hud-alt">120 m</b></span>
+          <span>ρ <b id="hud-rho">0.65</b></span>
+        </div>
+        <div>
+          <div id="hud-mission" class="hud-mission">
+            <div class="ttl">» MISSION BRIEF</div>
+            <div class="body" id="hud-body">Click a waypoint below — the drone will fly to it and I'll brief you on that project.</div>
+            <div class="waypoints" id="waypoints"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="block reveal">
+  <div class="section-head">
+    <span class="prompt">[root@zervakis ~]$</span>
+    <h2>cat about.md</h2>
+    <span class="meta">// PROFILE_LOADED</span>
+  </div>
+  <div class="about-grid">
+    <div class="panel">
+      <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/profile/<span>summary.md</span></div></div>
+      <div class="body">
+        <p>I'm a hybrid engineer who lives at the intersection of <strong style="color:var(--neon)">machine learning research</strong> and <strong style="color:var(--neon)">mission-critical software delivery</strong>. My background spans pure mathematics (BSc, 241 ECTS), applied ML (MSc, TUC), and ECSS-aligned verification &amp; validation for spaceflight software at OHB Hellas.</p>
+        <p>What recruiters care about: I ship work that holds up under adversarial conditions — 98% feature reduction without losing F1, real-time inference under 5 ms on embedded ECUs, and peer-reviewed UAV path-planning research that survived rigorous statistical testing across 450+ episodes.</p>
+        <p>I care about <em style="color:var(--cyan);font-style:normal">traceability</em>, <em style="color:var(--cyan);font-style:normal">reproducibility</em>, and <em style="color:var(--cyan);font-style:normal">objective evidence</em>. If you need someone who links research thinking to disciplined delivery, we should talk.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/profile/<span>identity.cfg</span></div></div>
+      <div class="body">
+        <dl class="kv">
+          <dt>Location</dt><dd>Crete, Greece &nbsp;<span style="color:var(--text-dim)">(remote-ok)</span></dd>
+          <dt>Role</dt><dd>Software Test Engineer @ OHB Hellas</dd>
+          <dt>PhD</dt><dd>ML for Autonomous Systems — H.A.A (starts Jan 2026)</dd>
+          <dt>MSc</dt><dd>ML &amp; Data Science — TU of Crete (Sep 2025)</dd>
+          <dt>BSc</dt><dd>Mathematics &amp; Applied Math — U of Crete (241 ECTS)</dd>
+          <dt>Languages</dt><dd>English (C2), Greek (native)</dd>
+          <dt>Focus</dt><dd>ECSS V&amp;V · UAV autonomy · Time-series ML</dd>
+          <dt>Offline</dt><dd>2× Silver Medalist — National &amp; Global Fencing</dd>
+          <dt>Status</dt><dd><span style="color:var(--neon)">● OPEN</span> to research &amp; aerospace ML roles</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI CHAT -->
+<section id="chat" class="block reveal">
+  <div class="section-head">
+    <span class="prompt">[guest@zervakis ~]$</span>
+    <h2>./ask_konstantinos.sh</h2>
+    <span class="meta">// LIVE_Q&amp;A_ENGINE · v2.6</span>
+  </div>
+  <p class="intro">Recruiter mode active. Ask me anything — experience, projects, how I'd approach a problem, my research. The answers below are synthesised live from my CV knowledge base.</p>
+  <div class="panel">
+    <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">terminal/<span>chat://zervakis</span> &nbsp; · &nbsp; <span style="color:var(--neon)">● READY</span></div></div>
+    <div class="body">
+      <div class="chat-log" id="chat-log">
+        <div class="msg ko"><div class="who">KZ</div><div class="text"><strong>» Hi, I'm Konstantinos.</strong> You can ask me about my work at OHB Hellas, my FLARE research published in Drones (MDPI), any of my projects, my skills, or why I'd be a good fit. I'll answer as myself. Try one of the suggestions below, or just type.</div></div>
+      </div>
+      <div class="chat-controls">
+        <input id="chat-input" autocomplete="off" placeholder="Ask me anything…  (try: tell me about FLARE)" />
+        <button id="chat-send">Send</button>
+      </div>
+      <div class="chips" id="chat-chips">
+        <button>Tell me about FLARE</button>
+        <button>What do you do at OHB Hellas?</button>
+        <button>Why should I hire you?</button>
+        <button>Walk me through HAR-Drive</button>
+        <button>What's your ML stack?</button>
+        <button>Are you available?</button>
+        <button>Formula Student project?</button>
+        <button>Education background</button>
+        <button>Research interests</button>
+        <button>Fencing?</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="block reveal">
+  <div class="section-head">
+    <span class="prompt">[root@zervakis ~]$</span>
+    <h2>ls -la experience/</h2>
+    <span class="meta">// TIMELINE</span>
+  </div>
+  <div class="panel">
+    <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/experience/<span>timeline.log</span></div></div>
+    <div class="body">
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="when">Jan 2026 — present</div>
+          <h3>PhD Candidate · Machine Learning for Autonomous Systems</h3>
+          <div class="org">Hellenic Air Force Academy (H.A.A)</div>
+          <ul>
+            <li>Research on risk-aware decision-making and learning-based control for UAV autonomy.</li>
+            <li>Bridging ECSS-style verification with RL/DL methods for safety-critical systems.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="when">Oct 2025 — present</div>
+          <h3>Software Test Engineer · Aerospace</h3>
+          <div class="org">OHB Hellas — Space Industry</div>
+          <ul>
+            <li>Built XML automated verification tests and Python test-generation for space projects, aligned with ECSS V&amp;V/PA (repeatability, objective evidence, Req↔Test↔Result traceability).</li>
+            <li>Defined pass/fail criteria, test configs, and audit-ready reports per ECSS-style verification practices.</li>
+            <li>Designed and delivered junior-tester training on ECSS-minded testing discipline.</li>
+            <li>Run weekly LinkedIn content promoting OHB Hellas engineering culture.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="when">Sep 2023 — Sep 2025</div>
+          <h3>MSc · Machine Learning &amp; Data Science</h3>
+          <div class="org">Technical University of Crete</div>
+          <ul>
+            <li>Thesis-adjacent work: HAR-Drive, LightningText, Predictive Engine Modeling (Formula Student).</li>
+            <li>Honours coursework in Practical Data Science, Optimisation, Databases, Probabilities &amp; ML.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="when">2023 — 2024</div>
+          <h3>Research · Ising Machines &amp; Cryptography</h3>
+          <div class="org">University of Crete — with Dr. Komineas &amp; Dr. Garefalakis</div>
+          <ul>
+            <li>Ising Machines project (Dr. Komineas) — optimisation via physical computing models.</li>
+            <li>University Cryptography Team (Dr. Garefalakis) — explored AI × cybersecurity links.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="when">2020 — 2024</div>
+          <h3>BSc · Mathematics &amp; Applied Mathematics (241 ECTS)</h3>
+          <div class="org">University of Crete</div>
+          <ul>
+            <li>Advanced Calculus, Linear Algebra, Probability Theory, Algorithms, Statistics.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="block reveal">
+  <div class="section-head">
+    <span class="prompt">[root@zervakis ~]$</span>
+    <h2>git log --oneline projects</h2>
+    <span class="meta">// SELECTED_MISSIONS</span>
+  </div>
+  <div class="projects-grid">
+
+    <article class="proj">
+      <span class="tag">» Publication · 2026</span>
+      <h3>FLARE — UAV Path-Planning Benchmark</h3>
+      <div class="when">Published in Drones (MDPI)</div>
+      <p>High-fidelity benchmark for evaluating UAV path-planning in dynamic disaster scenarios — wildfires, structural collapses — using real OpenStreetMap data from events in Greece. Engineered a risk-aware control framework with a configurable risk coefficient (ρ) to balance safety vs. time-critical delivery value.</p>
+      <div class="metrics"><span>450+ episodes</span><span>Friedman tests</span><span>Shapley attr.</span><span>Ranking-Inversion</span></div>
+      <div class="stack"><span>Python</span><span>Gymnasium</span><span>PyTorch</span><span>OpenStreetMap</span><span>RL</span></div>
+      <div class="links"><a href="#chat">▸ Ask me about this</a></div>
+    </article>
+
+    <article class="proj">
+      <span class="tag">» ML · Wearables</span>
+      <h3>HAR-Drive — Activity Recognition</h3>
+      <div class="when">Jun 2025</div>
+      <p>Lightweight LDA+SVM pipeline on UCI HAR. Delivered SOTA performance with 98% feature reduction — resource-efficient recognition for wearable/mobile apps. Automated PCA-vs-LDA sweep with 5-D LDA + SVM-RBF.</p>
+      <div class="metrics"><span>F1 = 0.984</span><span>-98% features</span><span>UCI HAR</span></div>
+      <div class="stack"><span>scikit-learn</span><span>Python</span><span>LDA</span><span>SVM</span></div>
+      <div class="links">
+        <a href="har-drive.html">▸ Project page</a>
+        <a href="report.pdf">▸ Report</a>
+      </div>
+    </article>
+
+    <article class="proj">
+      <span class="tag">» NLP · Big Data</span>
+      <h3>LightningText on Spark</h3>
+      <div class="when">May 2025</div>
+      <p>Large-scale text-processing pipeline on Apache Spark. Handled 14M+ BookCorpus documents with sketching and compression — sub-2% error inside a 20 KB RAM footprint. Ultra-lightweight NLP for constrained environments.</p>
+      <div class="metrics"><span>14M+ docs</span><span>20 KB RAM</span><span>&lt;2% error</span></div>
+      <div class="stack"><span>Apache Spark</span><span>Python</span><span>Sketching</span><span>Compression</span></div>
+      <div class="links">
+        <a href="lightningtext.html">▸ Project page</a>
+        <a href="BD.pdf">▸ Report</a>
+        <a href="BD.ipynb">▸ Notebook</a>
+      </div>
+    </article>
+
+    <article class="proj">
+      <span class="tag">» Motorsport · Embedded</span>
+      <h3>Predictive Engine Modeling — Formula Student TUC</h3>
+      <div class="when">Apr 2025 · Capstone</div>
+      <p>Forecast-first ECU pipeline using LSTM, LightGBM, and ETSformer to predict Lambda (λ) and RPM from live telemetry. Sub-5 ms inference on embedded controllers — real-time prevention of lean spikes and over-rev failures.</p>
+      <div class="metrics"><span>&lt;5 ms latency</span><span>LSTM+GBM+ETS</span><span>Live telemetry</span></div>
+      <div class="stack"><span>PyTorch</span><span>LightGBM</span><span>ETSformer</span><span>Embedded C</span></div>
+      <div class="links">
+        <a href="formula-student.html">▸ Project page</a>
+        <a href="MLDS (7).pdf">▸ Report</a>
+        <a href="MLDS (2).ipynb">▸ Notebook</a>
+      </div>
+    </article>
+
+    <article class="proj">
+      <span class="tag">» Predictive Maintenance</span>
+      <h3>Hydraulic Equipment ML System</h3>
+      <div class="when">2024</div>
+      <p>Modular pipeline for UCI 447 sensor data with engineered features, interpretable models, and a real-time FastAPI service for production-ready inference.</p>
+      <div class="metrics"><span>FastAPI</span><span>Docker</span><span>MLflow</span></div>
+      <div class="stack"><span>Python</span><span>scikit-learn</span><span>SHAP</span><span>FastAPI</span></div>
+      <div class="links">
+        <a href="predictive-maintenance.html">▸ Project page</a>
+        <a href="https://github.com/zervakisai/hydraulic-maintenance" target="_blank" rel="noopener">▸ Code</a>
+      </div>
+    </article>
+
+    <article class="proj">
+      <span class="tag">» Aerospace · V&amp;V</span>
+      <h3>XML Test Generation @ OHB Hellas</h3>
+      <div class="when">Oct 2025 — present</div>
+      <p>Production work: automated XML verification tests with Python generators aligned to ECSS V&amp;V/PA. Req↔Test↔Result traceability, audit-ready reports, junior-tester training materials.</p>
+      <div class="metrics"><span>ECSS</span><span>Traceability</span><span>Audit-ready</span></div>
+      <div class="stack"><span>XML</span><span>Python</span><span>pytest</span><span>DOORS Next</span><span>Jira/Xray</span></div>
+      <div class="links"><a href="#chat">▸ Ask me about this</a></div>
+    </article>
+
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" class="block reveal">
+  <div class="section-head">
+    <span class="prompt">[root@zervakis ~]$</span>
+    <h2>grep -i "research" publications/</h2>
+    <span class="meta">// PEER-REVIEWED</span>
+  </div>
+  <div class="panel">
+    <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/research/<span>flare.md</span> &nbsp; · &nbsp; <span style="color:var(--amber)">MDPI · Drones · 2026</span></div></div>
+    <div class="body">
+      <h3 style="font-size:20px;color:var(--neon);margin-bottom:8px;text-transform:none">FLARE — Risk-Aware UAV Path-Planning for Disaster Response</h3>
+      <p style="color:var(--text-dim);margin-bottom:14px;font-size:12.5px;letter-spacing:.05em">Published in <em style="color:var(--cyan);font-style:normal">Drones</em> (MDPI), 2026 &nbsp;·&nbsp; benchmark &amp; framework contribution</p>
+      <ul style="list-style:none">
+        <li style="padding-left:22px;position:relative;margin-bottom:10px;color:var(--text)"><span style="color:var(--neon);position:absolute;left:0">[01]</span> <strong style="color:var(--neon)">High-fidelity benchmark</strong> for evaluating UAV path-planning in dynamic disaster scenarios (wildfires, structural collapses) using OpenStreetMap data from real-world events in Greece.</li>
+        <li style="padding-left:22px;position:relative;margin-bottom:10px;color:var(--text)"><span style="color:var(--neon);position:absolute;left:0">[02]</span> <strong style="color:var(--neon)">"Ranking Inversion" discovery</strong> — statistically proved that planners optimised for survival often <em style="color:var(--magenta);font-style:normal">fail</em> mission-critical objectives due to excessive risk aversion. Key insight for autonomous emergency response.</li>
+        <li style="padding-left:22px;position:relative;margin-bottom:10px;color:var(--text)"><span style="color:var(--neon);position:absolute;left:0">[03]</span> <strong style="color:var(--neon)">Risk-Aware Control Framework</strong> — introduced a configurable risk coefficient (ρ) balancing UAV safety vs. time-critical delivery value, giving operators a principled dial.</li>
+        <li style="padding-left:22px;position:relative;margin-bottom:10px;color:var(--text)"><span style="color:var(--neon);position:absolute;left:0">[04]</span> <strong style="color:var(--neon)">Rigorous validation</strong> — 450+ experimental episodes in a Gymnasium-compatible environment, with Friedman tests and Shapley attribution for interpretable result analysis.</li>
+      </ul>
+      <div style="margin-top:22px;padding:14px;border:1px dashed var(--border);background:rgba(0,229,255,.04);font-size:12.5px;color:var(--cyan)">
+        <strong style="color:var(--neon)">» Why this matters for you:</strong> The same risk-aware framework generalises to any autonomous system facing a safety/value trade-off — last-mile delivery, search-and-rescue, inspection drones, even on-orbit servicing.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="block reveal">
+  <div class="section-head">
+    <span class="prompt">[root@zervakis ~]$</span>
+    <h2>inventory --skills</h2>
+    <span class="meta">// TECH_STACK</span>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-cat"><h4>▸ Languages</h4><div class="tags"><span>Python</span><span>C</span><span>C++</span><span>SQL</span><span>MATLAB</span><span>XML</span></div></div>
+    <div class="skill-cat"><h4>▸ ML / DL</h4><div class="tags"><span>PyTorch</span><span>scikit-learn</span><span>Transformers</span><span>LSTM</span><span>LightGBM</span><span>ETSformer</span><span>SHAP</span></div></div>
+    <div class="skill-cat"><h4>▸ V&amp;V · Testing</h4><div class="tags"><span>XML</span><span>GoogleTest</span><span>CppUTest</span><span>pytest</span><span>Unity/CMock</span><span>Mull (mutation)</span><span>RapidCheck</span><span>Postman/Newman</span><span>Cypress</span></div></div>
+    <div class="skill-cat"><h4>▸ Static Analysis · Standards</h4><div class="tags"><span>clang-tidy</span><span>cppcheck</span><span>MISRA-C/C++</span><span>CERT-C</span><span>ECSS V&amp;V/PA</span></div></div>
+    <div class="skill-cat"><h4>▸ CI/CD · DevOps</h4><div class="tags"><span>Git</span><span>Jenkins</span><span>GitLab CI</span><span>GitHub Actions</span><span>Docker</span><span>Kubernetes</span></div></div>
+    <div class="skill-cat"><h4>▸ Data · Telemetry</h4><div class="tags"><span>Pandas</span><span>NumPy</span><span>PostgreSQL</span><span>Apache Spark</span></div></div>
+    <div class="skill-cat"><h4>▸ Space · Embedded · Interfaces</h4><div class="tags"><span>CCSDS/PUS</span><span>CAN bus</span><span>MQTT</span><span>WebSockets</span></div></div>
+    <div class="skill-cat"><h4>▸ System Verification (SIL/HIL)</h4><div class="tags"><span>YAMCS (TM/TC, replay)</span><span>EGSE basics</span><span>Fault-injection</span><span>FDIR</span></div></div>
+    <div class="skill-cat"><h4>▸ Requirements · Traceability</h4><div class="tags"><span>IBM DOORS Next</span><span>OSLC Connect</span><span>Jira / Xray</span><span>Req Coverage Matrix</span></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="block reveal">
+  <div class="section-head">
+    <span class="prompt">[root@zervakis ~]$</span>
+    <h2>./initiate_contact.sh</h2>
+    <span class="meta">// CHANNEL_OPEN</span>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>» Ready when you are</h3>
+      <p>Open to research collaborations, ML/aerospace roles, and interesting autonomous-systems problems. Fastest response: email.</p>
+      <ul class="contact-list">
+        <li><span class="k">Email</span><span class="v"><a href="mailto:zervakisai@gmail.com">zervakisai@gmail.com</a></span></li>
+        <li><span class="k">Phone</span><span class="v"><a href="tel:+306940696921">+30 6940 696921</a></span></li>
+        <li><span class="k">GitHub</span><span class="v"><a href="https://github.com/zervakisai" target="_blank" rel="noopener">@zervakisai</a></span></li>
+        <li><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/zervakisai" target="_blank" rel="noopener">in/zervakisai</a></span></li>
+        <li><span class="k">Location</span><span class="v">Crete, Greece</span></li>
+        <li><span class="k">Timezone</span><span class="v">EET (UTC+2)</span></li>
+      </ul>
+    </div>
+    <div class="contact-card">
+      <h3>» Still have questions?</h3>
+      <p>The fastest way to evaluate fit: ask me directly. The chat in section <code style="color:var(--neon)">./ask_konstantinos.sh</code> knows my CV cold and answers as me.</p>
+      <a class="btn" href="#chat" style="margin-top:10px">▸ Open chat interface</a>
+      <p style="margin-top:22px;color:var(--text-dim);font-size:12px">System status: <span style="color:var(--neon)">● all channels nominal</span><br/>Expected response: &lt; 24h on weekdays.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ascii">  _  __    ______
+ | |/ /___|__  /
+ | ' // _ \ / /
+ | . \  __// /_
+ |_|\_\___/____|
+</div>
+  <div>&copy; 2026 KONSTANTINOS ZERVAKIS · compiled with neon &amp; coffee · <a href="#hero">return to top ▲</a></div>
+</footer>
+
+</div>
+
+<!-- ==========================================================
+     SCRIPTS
+========================================================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* =============================================================
+   UTILITIES
+============================================================= */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* =============================================================
+   CLOCK
+============================================================= */
+function tickClock(){
+  const d = new Date();
+  const p = n => String(n).padStart(2,'0');
+  $('#clock').textContent = `${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`;
+}
+setInterval(tickClock,1000); tickClock();
+
+/* =============================================================
+   BOOT SEQUENCE
+============================================================= */
+const bootLines = [
+  {t:'[OK]  KZ-OS v2.6.1 mission-control kernel … loaded',c:'ok'},
+  {t:'[OK]  mounting /dev/neon … mounted',c:'ok'},
+  {t:'[OK]  probing telemetry bus CAN0 … 1 Mbps nominal',c:'ok'},
+  {t:'[OK]  loading flare-benchmark.rom … v2026.1',c:'ok'},
+  {t:'[..]  authenticating credentials … PhD(c), MSc, BSc',c:'dim'},
+  {t:'[OK]  ECSS V&V/PA compliance … verified',c:'ok'},
+  {t:'[OK]  risk-coefficient ρ = 0.65 (balanced)',c:'ok'},
+  {t:'[OK]  warming up AI chat kernel …',c:'ok'},
+  {t:'[..]  linking CV knowledge base … 24 topics indexed',c:'dim'},
+  {t:'[OK]  Three.js WebGL context … acquired',c:'ok'},
+  {t:'[  ]  handshaking with recruiter … ready.',c:'warn'},
+  {t:'',c:''},
+  {t:'▸ Welcome. Launching interface …',c:'ok'},
+];
+async function runBoot(){
+  const out = $('#boot-out');
+  for(const ln of bootLines){
+    const el = document.createElement('div');
+    el.className = 'line ' + ln.c;
+    el.textContent = ln.t || ' ';
+    out.appendChild(el);
+    requestAnimationFrame(()=>el.style.animationDelay='0ms');
+    await sleep(90 + Math.random()*70);
+  }
+  await sleep(420);
+  $('#boot').classList.add('done');
+  setTimeout(()=>$('#boot').remove(), 700);
+  startIntro();
+}
+
+/* =============================================================
+   HERO: typewriter role + stat counters
+============================================================= */
+const roles = ['Software Test Engineer @ OHB Hellas', 'PhD(c) in ML for Autonomous Systems', 'FLARE — Drones (MDPI) 2026', 'ML × Aerospace × V&V'];
+async function rotateRole(){
+  const el = $('#role'); let i=0;
+  while(true){
+    const s = roles[i % roles.length];
+    for(let k=0;k<=s.length;k++){ el.textContent = s.slice(0,k); await sleep(38); }
+    await sleep(1800);
+    for(let k=s.length;k>=0;k--){ el.textContent = s.slice(0,k); await sleep(18); }
+    await sleep(300); i++;
+  }
+}
+function animateStats(){
+  $$('.stat .n').forEach(el=>{
+    const target = parseFloat(el.dataset.n);
+    const isDecimal = target < 10 && !Number.isInteger(target);
+    let v = 0; const step = target / 60;
+    const timer = setInterval(()=>{
+      v += step;
+      if(v >= target){ v = target; clearInterval(timer); }
+      el.textContent = isDecimal ? v.toFixed(3) : Math.round(v);
+    }, 22);
+  });
+}
+function startIntro(){ rotateRole(); animateStats(); }
+
+/* =============================================================
+   MATRIX RAIN
+============================================================= */
+(function matrix(){
+  const c = $('#matrix-canvas'); const ctx = c.getContext('2d');
+  const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789<>[]{}/=+*!?$#@'.split('');
+  let w, h, cols, drops;
+  function size(){ w = c.width = innerWidth; h = c.height = innerHeight; cols = Math.floor(w/14); drops = Array(cols).fill(0).map(()=>Math.random()*-100); }
+  size(); addEventListener('resize', size);
+  function draw(){
+    ctx.fillStyle='rgba(4,6,10,.08)'; ctx.fillRect(0,0,w,h);
+    ctx.font='14px "Share Tech Mono", monospace';
+    for(let i=0;i<cols;i++){
+      const ch = chars[Math.floor(Math.random()*chars.length)];
+      const y = drops[i]*14;
+      ctx.fillStyle = Math.random()>.985 ? '#fff' : 'rgba(0,255,156,.85)';
+      ctx.fillText(ch, i*14, y);
+      if(y > h && Math.random() > .975) drops[i] = 0;
+      drops[i]++;
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* =============================================================
+   THREE.JS — DRONE + MISSIONS
+============================================================= */
+const MISSIONS = [
+  {id:'ohb',   label:'OHB Hellas',   pos:[ 2.8, 0.8,-0.2], color:0x00ff9c,
+   body:'<strong>OHB Hellas — Space V&V.</strong> I build XML automated verification tests and Python generators aligned with ECSS V&V/PA. Traceability Req↔Test↔Result is non-negotiable. I also train juniors on ECSS-minded testing discipline.'},
+  {id:'flare', label:'FLARE (MDPI)', pos:[-2.6, 1.1, 0.4], color:0xff2bd6,
+   body:'<strong>FLARE — Drones, MDPI 2026.</strong> Risk-aware UAV path-planning benchmark for disaster scenarios using real OSM data from Greek wildfires/collapses. I discovered "Ranking Inversion" — survival-optimised planners often fail mission-critical objectives. I introduced a configurable ρ coefficient and validated over 450+ episodes with Friedman tests and Shapley attribution.'},
+  {id:'har',   label:'HAR-Drive',    pos:[ 1.4,-1.0, 1.6], color:0x00e5ff,
+   body:'<strong>HAR-Drive.</strong> Lightweight LDA + SVM on UCI HAR — F1 = 0.984 with 98% feature reduction. Built for wearables and mobile. The trick: automated PCA-vs-LDA sweep, then SVM-RBF on a 5-D LDA embedding.'},
+  {id:'light', label:'LightningText', pos:[-1.4,-1.2,-1.6], color:0xffb020,
+   body:'<strong>LightningText (Spark).</strong> 14M+ BookCorpus documents processed with sketching and compression — sub-2% error inside a 20 KB RAM footprint. Ultra-lean NLP for constrained environments.'},
+  {id:'fs',    label:'Formula Student', pos:[ 0.2, 1.6,-2.2], color:0x00ff9c,
+   body:'<strong>Formula Student TUC Capstone.</strong> Forecast-first ECU: LSTM + LightGBM + ETSformer predicting λ and RPM from live telemetry. Sub-5 ms inference on embedded controllers — real-time prevention of lean spikes and over-rev failures.'},
+];
+let three = {};
+function initThree(){
+  const canvas = $('#three-canvas');
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(w,h,false);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(52, w/h, 0.1, 100);
+  camera.position.set(0,1.4,6.4);
+
+  /* stars */
+  const starGeo = new THREE.BufferGeometry();
+  const starCount = 900;
+  const sp = new Float32Array(starCount*3);
+  for(let i=0;i<starCount;i++){
+    sp[i*3]   = (Math.random()-.5)*40;
+    sp[i*3+1] = (Math.random()-.5)*22;
+    sp[i*3+2] = (Math.random()-.5)*40;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(sp,3));
+  const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({color:0x66ffcc, size:.03, transparent:true, opacity:.75}));
+  scene.add(stars);
+
+  /* grid floor */
+  const grid = new THREE.GridHelper(24, 24, 0x00ff9c, 0x005533);
+  grid.position.y = -1.6; grid.material.transparent = true; grid.material.opacity = .35;
+  scene.add(grid);
+
+  /* drone group */
+  const drone = new THREE.Group();
+  const bodyMat = new THREE.MeshBasicMaterial({color:0x00ff9c, wireframe:true});
+  const body = new THREE.Mesh(new THREE.IcosahedronGeometry(.32, 0), bodyMat);
+  drone.add(body);
+  /* arms */
+  const armMat = new THREE.MeshBasicMaterial({color:0x00e5ff});
+  const armGeo = new THREE.CylinderGeometry(.02,.02,.65,8);
+  const arms = [];
+  for(let i=0;i<4;i++){
+    const a = new THREE.Mesh(armGeo, armMat);
+    const ang = i*Math.PI/2 + Math.PI/4;
+    a.position.set(Math.cos(ang)*.32, 0, Math.sin(ang)*.32);
+    a.rotation.z = Math.PI/2; a.rotation.y = -ang;
+    drone.add(a); arms.push(a);
+  }
+  /* rotors */
+  const rotors = [];
+  for(let i=0;i<4;i++){
+    const r = new THREE.Mesh(
+      new THREE.TorusGeometry(.15,.02,8,24),
+      new THREE.MeshBasicMaterial({color:0xff2bd6})
+    );
+    const ang = i*Math.PI/2 + Math.PI/4;
+    r.position.set(Math.cos(ang)*.6, .06, Math.sin(ang)*.6);
+    r.rotation.x = Math.PI/2;
+    drone.add(r); rotors.push(r);
+  }
+  /* led core */
+  const led = new THREE.Mesh(new THREE.SphereGeometry(.06,12,12), new THREE.MeshBasicMaterial({color:0xffffff}));
+  drone.add(led);
+  scene.add(drone);
+
+  /* mission waypoints */
+  const waypoints = MISSIONS.map(m=>{
+    const g = new THREE.Group();
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(.28,.015,8,32), new THREE.MeshBasicMaterial({color:m.color}));
+    ring.rotation.x = Math.PI/2; g.add(ring);
+    const core = new THREE.Mesh(new THREE.SphereGeometry(.07,12,12), new THREE.MeshBasicMaterial({color:m.color}));
+    g.add(core);
+    const pillar = new THREE.Mesh(new THREE.CylinderGeometry(.006,.006, 3.4, 6), new THREE.MeshBasicMaterial({color:m.color, transparent:true, opacity:.35}));
+    pillar.position.y = 1.7;
+    g.add(pillar);
+    g.position.set(...m.pos);
+    scene.add(g);
+    return {m, g, core};
+  });
+
+  /* telemetry trail */
+  const trailMaxPts = 60;
+  const trailPositions = new Float32Array(trailMaxPts*3);
+  const trailGeo = new THREE.BufferGeometry();
+  trailGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions,3));
+  const trail = new THREE.Line(trailGeo, new THREE.LineBasicMaterial({color:0x00ff9c, transparent:true, opacity:.6}));
+  scene.add(trail);
+  let trailIdx = 0;
+
+  three = {renderer, scene, camera, drone, rotors, waypoints, trail, trailPositions, trailIdx,
+           target: new THREE.Vector3(0,0,0), activeMission:null};
+
+  /* resize */
+  const ro = new ResizeObserver(()=>{
+    const W = canvas.clientWidth, H = canvas.clientHeight;
+    renderer.setSize(W,H,false); camera.aspect = W/H; camera.updateProjectionMatrix();
+  });
+  ro.observe(canvas);
+
+  /* animate */
+  let t0 = 0;
+  function animate(t){
+    const dt = (t - t0) * 0.001; t0 = t;
+    drone.position.lerp(three.target, 0.04);
+    drone.rotation.y += 0.01 + dt*0.2;
+    rotors.forEach((r,i)=>{ r.rotation.z += 0.6 * (i%2?1:-1); });
+    stars.rotation.y += 0.0006;
+    waypoints.forEach(w=>{
+      w.g.rotation.y += 0.01;
+      w.core.scale.setScalar(1 + Math.sin(t*0.003)*0.2);
+    });
+    /* trail */
+    trailPositions[three.trailIdx*3]   = drone.position.x;
+    trailPositions[three.trailIdx*3+1] = drone.position.y;
+    trailPositions[three.trailIdx*3+2] = drone.position.z;
+    three.trailIdx = (three.trailIdx+1) % trailMaxPts;
+    trailGeo.setDrawRange(0, trailMaxPts);
+    trailGeo.attributes.position.needsUpdate = true;
+    /* parallax camera */
+    camera.position.x = Math.sin(t*0.0002) * .6;
+    camera.position.y = 1.2 + Math.cos(t*0.00015) * .25;
+    camera.lookAt(drone.position);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+function flyTo(mid){
+  const m = MISSIONS.find(x=>x.id===mid);
+  if(!m || !three.target) return;
+  three.target.set(...m.pos);
+  three.activeMission = mid;
+  $('#hud-body').innerHTML = m.body;
+  $('#hud-lat').textContent = (35.3 + Math.random()*0.5).toFixed(4)+'°N';
+  $('#hud-lon').textContent = (25.0 + Math.random()*0.4).toFixed(4)+'°E';
+  $('#hud-alt').textContent = (80 + Math.floor(Math.random()*120)) + ' m';
+  $('#hud-rho').textContent = (0.3 + Math.random()*0.5).toFixed(2);
+  $$('#waypoints button').forEach(b=>b.classList.toggle('active', b.dataset.id===mid));
+}
+function buildWaypoints(){
+  const wp = $('#waypoints');
+  wp.innerHTML = '';
+  MISSIONS.forEach(m=>{
+    const b = document.createElement('button');
+    b.textContent = '» ' + m.label;
+    b.dataset.id = m.id;
+    b.addEventListener('click', ()=>flyTo(m.id));
+    wp.appendChild(b);
+  });
+  /* autoplay cycle */
+  let i = 0;
+  flyTo(MISSIONS[0].id);
+  setInterval(()=>{
+    if(document.hidden) return;
+    i = (i+1) % MISSIONS.length;
+    /* only auto-advance if user hasn't clicked recently */
+    if(Date.now() - (window._lastClick||0) > 12000) flyTo(MISSIONS[i].id);
+  }, 7000);
+  $('#waypoints').addEventListener('click', ()=>window._lastClick = Date.now());
+}
+
+/* =============================================================
+   REVEAL ON SCROLL
+============================================================= */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.08});
+$$('.reveal').forEach(el=>io.observe(el));
+
+/* =============================================================
+   AI CHAT — CV-grounded responder
+============================================================= */
+const KB = [
+  {k:['flare','mdpi','drones','paper','publication','research paper','uav research'],
+   r:'**FLARE** is my benchmark and framework for risk-aware UAV path-planning in disaster scenarios, published in **Drones (MDPI), 2026**. I built it on real OpenStreetMap data from Greek wildfires and structural collapses, ran 450+ episodes in a Gymnasium-compatible environment, and validated with Friedman tests and Shapley attribution. The headline finding is **"Ranking Inversion"** — planners optimised purely for survival often *fail* mission-critical objectives because they become too risk-averse. To fix that I introduced a configurable risk coefficient **ρ** that lets operators dial the trade-off between safety and time-critical delivery value.'},
+  {k:['ohb','hellas','space','aerospace','current job','where do you work','software test','test engineer'],
+   r:'Since **October 2025** I\'m a **Software Test Engineer at OHB Hellas**. I build XML automated verification tests and Python test-generation for space projects, aligned with **ECSS V&V / PA** — repeatability, objective evidence, and full **Req ↔ Test ↔ Result traceability**. I also define pass/fail criteria, author audit-ready reports, and recently created onboarding training for junior testers on ECSS-minded discipline. I also run weekly LinkedIn content for OHB Hellas.'},
+  {k:['har','har-drive','activity recognition','svm','lda'],
+   r:'**HAR-Drive (Jun 2025).** I designed a lightweight **LDA + SVM** pipeline on the UCI HAR dataset. It hits **F1 = 0.984** with a **98% feature reduction** — basically state-of-the-art performance for a 5-D LDA embedding feeding an SVM-RBF classifier. The automated PCA-vs-LDA sweep made the choice defensible; the small footprint makes it deployable on wearables.'},
+  {k:['lightning','lightningtext','spark','big data','bookcorpus','nlp','text'],
+   r:'**LightningText (May 2025).** Large-scale text pipeline on **Apache Spark** that handles **14M+ BookCorpus documents** with sketching and compression, achieving **&lt;2% error inside a 20 KB RAM footprint**. The point was to prove ultra-lightweight, high-throughput NLP on constrained environments.'},
+  {k:['formula','student','ecu','engine','racing','lstm','etsformer','motorsport','tuc capstone'],
+   r:'**Formula Student TUC — Predictive Engine Modeling (Apr 2025).** A forecast-first ECU pipeline using **LSTM + LightGBM + ETSformer** to predict **λ (Lambda) and RPM** from live telemetry. Inference is **sub-5 ms on embedded controllers**, so the ECU can *pre-empt* lean spikes and over-rev events in real time — directly improving reliability and safety of the race engine.'},
+  {k:['predictive maintenance','hydraulic','fastapi','maintenance'],
+   r:'**Predictive Maintenance — Hydraulic Equipment.** Modular pipeline on UCI-447 sensor data: engineered features, interpretable models, and a real-time **FastAPI** service behind a Docker image. Full monitoring hooks so the model never drifts silently.'},
+  {k:['skill','skills','stack','tools','technologies','tech'],
+   r:'**Core:** Python, C/C++, SQL, MATLAB, XML.  \n**ML/DL:** PyTorch, scikit-learn, Transformers, LSTM, LightGBM, ETSformer, SHAP.  \n**V&V:** pytest, GoogleTest/CppUTest, Unity/CMock, Mull (mutation), RapidCheck, Postman/Newman, Cypress.  \n**Static analysis & standards:** clang-tidy, cppcheck, MISRA-C/C++, CERT-C.  \n**CI/CD:** Jenkins, GitLab CI, GitHub Actions, Docker, Kubernetes.  \n**Space/embedded:** CCSDS/PUS (basic), CAN bus, MQTT, WebSockets, YAMCS (TM/TC, replay), EGSE basics.  \n**Requirements:** IBM DOORS Next, OSLC Connect, Jira/Xray.'},
+  {k:['education','degree','master','msc','bsc','bachelor','phd','study','studied','university'],
+   r:'**PhD(c)** — Machine Learning for Autonomous Systems, Hellenic Air Force Academy (Jan 2026 →).  \n**MSc** — Machine Learning & Data Science, **Technical University of Crete** (Sep 2025).  \n**BSc** — Mathematics & Applied Mathematics, **University of Crete** (Jul 2024, **241 ECTS**).'},
+  {k:['hire','why hire','fit','why should','reason to hire','what makes you'],
+   r:'Three reasons. **One**, I link research to delivery — my FLARE work passed MDPI peer review *and* fits into real autonomous-system pipelines. **Two**, I work to aerospace-grade standards: ECSS V&V, traceability, audit-ready evidence. **Three**, I ship lean — 98% feature reduction on HAR, 20 KB RAM on LightningText, sub-5 ms ECU inference. If you need someone who makes complex systems trustworthy *and* fast, that\'s my pattern.'},
+  {k:['available','availability','open to','looking','hiring','join','relocate','remote','work with'],
+   r:'I\'m **open** to research collaborations, ML/aerospace engineering roles, and interesting autonomous-systems problems. Based in **Crete, Greece** — remote-friendly, open to relocation for the right mission. Fastest reach: **zervakisai@gmail.com**.'},
+  {k:['contact','email','reach','phone','linkedin','github'],
+   r:'Email **zervakisai@gmail.com**, phone **+30 6940 696921**, GitHub **@zervakisai**, LinkedIn **in/zervakisai**. I typically respond within 24h on weekdays.'},
+  {k:['fencing','silver','medal','sport','hobby'],
+   r:'Outside engineering — **2× Silver Medalist** in National and Global Fencing Championships. Fencing taught me what I still use daily: reading intent, composure under pressure, and acting within a tight OODA loop.'},
+  {k:['ising','komineas','cryptography','garefalakis'],
+   r:'During my BSc I worked on **Ising Machines** with **Dr. Komineas** (optimisation via physical computing) and was on the **University Cryptography Team** with **Dr. Garefalakis**, where we explored connections between AI and cybersecurity.'},
+  {k:['research interest','interests','focus','what do you research','phd topic'],
+   r:'My research interests sit at **learning-based control for safety-critical autonomous systems** — risk-aware planning, formal V&V of ML-in-the-loop, and benchmarks that actually measure mission value rather than just survival. FLARE is the first step; the PhD will push it into learning controllers and certifiable pipelines.'},
+  {k:['ecss','v&v','verification','validation','traceability','doors','xray','standards'],
+   r:'I work to **ECSS V&V/PA** practice: requirements authored or imported into **IBM DOORS Next**, linked to tests in **Jira/Xray** with OSLC Connect, then executed as XML/pytest suites producing audit-ready evidence and a full **Req↔Test↔Result** traceability matrix. The rule is simple — nothing is "verified" until the evidence is reproducible.'},
+  {k:['greek','greece','crete','location','where are you'],
+   r:'I\'m based in **Crete, Greece**. Happy to work remotely, and willing to travel or relocate for the right role.'},
+  {k:['language','spoken languages'],
+   r:'**English (C2)** and **Greek (native)**.'},
+  {k:['hello','hi','hey','yo','γεια','greetings'],
+   r:'» Hey! Ask me anything about my work, research, or projects. Try one of the chips below, or type a question.'},
+  {k:['who are you','introduce','about you','yourself','summary'],
+   r:'I\'m **Konstantinos Zervakis** — hybrid ML + aerospace engineer based in Crete. PhD candidate in ML for Autonomous Systems, MSc in ML & Data Science (TUC), currently a Software Test Engineer at **OHB Hellas** and first author of **FLARE** (Drones, MDPI 2026). I turn complex systems into simple, trustworthy outcomes.'},
+  {k:['risk','rho','ρ','ranking inversion'],
+   r:'**Ranking Inversion** is the FLARE finding that planners optimised only for survival can still *fail* the overall mission — the safety-optimal ranking inverts against the value-optimal ranking. I address it with a configurable **risk coefficient ρ**: at ρ → 0 the agent behaves mission-greedy, at ρ → 1 it\'s safety-greedy. You pick ρ based on scenario, and the planner adapts.'},
+  {k:['aerospace','space','satellite','ccsds','pus','yamcs','egse'],
+   r:'Aerospace-wise: I work with **CCSDS/PUS** basics, **YAMCS** for TM/TC and replay, **EGSE** basics, **CAN bus**, and fault-injection / FDIR coverage concepts. At OHB Hellas I bring this together under ECSS V&V practice.'},
+  {k:['embedded','c','c++','misra','cert'],
+   r:'Embedded & safe-C practice: **C/C++** to **MISRA-C/C++** and **CERT-C**, static analysis via **clang-tidy** and **cppcheck**, unit testing with **GoogleTest / CppUTest / Unity / CMock**, mutation testing with **Mull**, and property-based testing with **RapidCheck**.'},
+  {k:['ml','deep learning','model','pytorch','scikit','transformer'],
+   r:'ML toolbelt: **PyTorch** for DL, **scikit-learn** for classical ML, **Transformers** and **LSTM** for sequence modelling, **LightGBM** when tabular wins, **ETSformer** for forecasting with seasonality, **SHAP** for attribution. I default to the simplest model that clears the bar.'},
+];
+function reply(q){
+  const s = q.toLowerCase();
+  let best = null, bestScore = 0;
+  for(const item of KB){
+    let sc = 0;
+    for(const kw of item.k){ if(s.includes(kw)) sc += kw.length; }
+    if(sc > bestScore){ bestScore = sc; best = item; }
+  }
+  if(best && bestScore >= 2) return best.r;
+  return 'Hm — I don\'t have a crisp answer to that in my CV knowledge base. Try asking about **FLARE**, **OHB Hellas**, **HAR-Drive**, **LightningText**, **Formula Student**, my **skills**, **education**, or **availability**. Or just email me directly at **zervakisai@gmail.com**.';
+}
+function mdInline(s){
+  /* convert lightweight markdown */
+  return s
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/  \n/g,'<br/>')
+    .replace(/\n/g,'<br/>');
+}
+async function typeInto(el, html){
+  /* type word-by-word for speed but preserve tags */
+  const tmp = document.createElement('div'); tmp.innerHTML = html;
+  const text = tmp.innerHTML;
+  const tokens = text.match(/(<[^>]+>|[^<]+)/g) || [text];
+  el.innerHTML = '';
+  const caret = document.createElement('span'); caret.className='cursor-blink'; el.appendChild(caret);
+  for(const tok of tokens){
+    if(tok.startsWith('<')){ caret.insertAdjacentHTML('beforebegin', tok); }
+    else{
+      for(const ch of tok){
+        caret.insertAdjacentText('beforebegin', ch);
+        if(ch !== ' ') await sleep(9);
+      }
+    }
+  }
+  caret.remove();
+}
+function pushMsg(who, html){
+  const log = $('#chat-log');
+  const m = document.createElement('div'); m.className = 'msg ' + who;
+  const w = document.createElement('div'); w.className='who'; w.textContent = who==='me'?'YOU':'KZ';
+  const t = document.createElement('div'); t.className='text';
+  m.appendChild(w); m.appendChild(t); log.appendChild(m);
+  log.scrollTop = log.scrollHeight;
+  return t;
+}
+async function ask(q){
+  if(!q.trim()) return;
+  pushMsg('me', mdInline(q)).innerHTML = mdInline(q);
+  const t = pushMsg('ko', '');
+  await sleep(280);
+  const r = reply(q);
+  await typeInto(t, mdInline(r));
+  $('#chat-log').scrollTop = $('#chat-log').scrollHeight;
+}
+$('#chat-send').addEventListener('click', ()=>{ const v = $('#chat-input').value; $('#chat-input').value=''; ask(v); });
+$('#chat-input').addEventListener('keydown', e=>{ if(e.key==='Enter'){ const v = e.target.value; e.target.value=''; ask(v); } });
+$$('#chat-chips button').forEach(b=>b.addEventListener('click', ()=>ask(b.textContent)));
+
+/* =============================================================
+   INIT
+============================================================= */
+window.addEventListener('load', async ()=>{
+  try{ initThree(); buildWaypoints(); }catch(e){ console.warn('three-init',e); }
+  runBoot();
+});
+</script>
+</body>
 </html>
-
