@@ -951,7 +951,7 @@ footer .ascii{display:none}
         <li><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/-zervakisai-/" target="_blank" rel="noopener">in/-zervakisai-</a></span></li>
         <li><span class="k">CV</span><span class="v"><a href="CV_Konstantinos_Zervakis.docx" download>Download DOCX</a></span></li>
         <li><span class="k">Based in</span><span class="v">Heraklion, Crete</span></li>
-        <li><span class="k">Timezone</span><span class="v">EET (UTC+2)</span></li>
+        <li><span class="k">Timezone</span><span class="v" id="tz-label">Athens</span></li>
       </ul>
     </div>
     <div class="contact-card">
@@ -999,6 +999,20 @@ function tickClock(){
   $('#clock').textContent = `${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`;
 }
 setInterval(tickClock,1000); tickClock();
+
+/* Dynamic Athens timezone label (EET/EEST depending on DST) */
+(function(){
+  const el = document.getElementById('tz-label');
+  if(!el) return;
+  try{
+    const now = new Date();
+    const athens = new Date(now.toLocaleString('en-US',{timeZone:'Europe/Athens'}));
+    const utc = new Date(now.toLocaleString('en-US',{timeZone:'UTC'}));
+    const offset = Math.round((athens - utc)/3600000);
+    const abbr = offset === 3 ? 'EEST' : 'EET';
+    el.textContent = `${abbr} (UTC+${offset})`;
+  }catch(e){ el.textContent = 'Europe/Athens'; }
+})();
 
 /* =============================================================
    BOOT SEQUENCE
