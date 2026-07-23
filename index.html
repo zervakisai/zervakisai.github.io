@@ -1,2548 +1,287 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Konstantinos Zervakis — AI Engineer, PhD Candidate. Agentic AI, MCP, real-time ML, edge inference, quantum ML. Based in Crete." />
-<meta name="keywords" content="Konstantinos Zervakis, AI Engineer, Agentic AI, Claude Code, MCP, Predictive Maintenance, Edge AI, Quantum ML, PennyLane, Crete" />
-<meta name="author" content="Konstantinos Zervakis" />
-<meta property="og:title" content="Konstantinos Zervakis // AI Engineer" />
-<meta property="og:description" content="AI Engineer · PhD Candidate. Agentic AI, production ML, edge inference." />
-<meta property="og:type" content="website" />
-<title>KONSTANTINOS ZERVAKIS // AI ENGINEER · PHD CANDIDATE</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='monospace'%3E%E2%98%A2%3C/text%3E%3C/svg%3E" />
-<style>
-/* ============================================================
-   CORE / RESET — MINIMAL DARK GLASS
-============================================================ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  /* base tones — industrial dark w/ cool undertone */
-  --bg:#07101a;
-  --bg-2:#0b1724;
-  --text:#e6ecf2;
-  --text-dim:#9aa6b2;
-  --text-mute:#5e6b78;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05060A" />
+  <title>Konstantinos Zervakis — AI Engineer. Problems, solved.</title>
+  <meta name="description" content="Konstantinos Zervakis — AI Engineer building production ML, LLMs & multi-agent systems for environments where decisions carry real cost. Case files as problem → solution → result, plus a live GitHub trending feed." />
 
-  /* glass surfaces */
-  --panel:rgba(180,210,255,0.035);
-  --surface:rgba(180,210,255,0.035);
-  --surface-hi:rgba(180,210,255,0.065);
-  --border:rgba(160,200,240,0.1);
-  --border-strong:rgba(160,200,240,0.2);
-  --grid:rgba(160,200,240,0.04);
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Konstantinos Zervakis — AI Engineer" />
+  <meta property="og:description" content="Production ML, LLMs & multi-agent systems. Case files as problem → solution → result, plus a live GitHub trending feed." />
 
-  /* Plastika-Kritis-inspired accents (corporate cyan-blue + Cretan warm) */
-  --neon:#eaf2fa;
-  --neon-dim:#c3d2e3;
-  --cyan:#4fb3e6;          /* PK corporate blue */
-  --magenta:#7cc9d9;        /* softer teal */
-  --amber:#e8b060;          /* Cretan sun */
-  --red:#e07a86;
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='6' fill='%235EEAD4'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23F2C46B' stroke-width='1.5' opacity='.6'/%3E%3C/svg%3E" />
 
-  --shadow-neon:none;
-  --shadow-cyan:none;
-  --shadow-magenta:none;
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
-  --radius:14px;
-  --radius-sm:10px;
-  --blur:saturate(1.3) blur(22px);
-}
-html,body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{min-height:100vh;position:relative}
-::selection{background:rgba(158,177,255,0.25);color:var(--text)}
-a{color:var(--text);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.14);transition:color .15s,border-color .15s}
-a:hover{color:var(--cyan);border-color:var(--cyan)}
-h1,h2,h3,h4{font-family:inherit;letter-spacing:-0.015em;color:var(--text);text-transform:none;font-weight:500}
-button{font-family:inherit;cursor:pointer}
-img{max-width:100%}
-
-/* ============================================================
-   BACKGROUND — Plastika Kritis vibe
-   • Mediterranean-night base
-   • Corporate-blue glow top-left (sea / PK brand)
-   • Cretan-sun warm glow bottom-right (agriculture / island)
-   • Faint hexagonal mesh overlay (polymer / molecular nod)
-============================================================ */
-#grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:
-  radial-gradient(1300px 780px at 12% -5%,rgba(79,179,230,0.12),transparent 55%),
-  radial-gradient(1000px 600px at 95% 15%,rgba(45,130,200,0.08),transparent 60%),
-  radial-gradient(1100px 700px at 88% 100%,rgba(232,176,96,0.07),transparent 60%),
-  radial-gradient(900px 560px at 10% 95%,rgba(80,180,170,0.05),transparent 60%),
-  linear-gradient(180deg,#07101a 0%,#081420 50%,#07101a 100%)}
-.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.55;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='96' viewBox='0 0 56 96'><path d='M28 2 L54 17 L54 47 L28 62 L2 47 L2 17 Z M28 50 L54 65 L54 95 L28 110 L2 95 L2 65 Z' fill='none' stroke='rgba(160,210,255,0.09)' stroke-width='0.9'/></svg>");
-  background-size:56px 96px;
-  mask-image:radial-gradient(ellipse at 50% 40%,#000 0%,rgba(0,0,0,0.5) 50%,transparent 85%);
-  -webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 0%,rgba(0,0,0,0.5) 50%,transparent 85%);
-  display:block}
-
-/* ============================================================
-   BOOT — disabled for minimal theme
-============================================================ */
-#boot{display:none!important}
-
-/* ============================================================
-   LAYOUT
-============================================================ */
-.wrap{position:relative;z-index:5;max-width:1200px;margin:0 auto;padding:0 24px}
-nav.top{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);background:rgba(20,22,28,0.55);border:1px solid var(--border);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.35)}
-nav.top .inner{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;gap:14px}
-nav.top .brand{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--text);letter-spacing:-0.01em;font-size:13px}
-nav.top .brand .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 2.4s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
-nav.top ul{list-style:none;display:flex;gap:2px;flex-wrap:wrap}
-nav.top a.link{color:var(--text-dim);padding:6px 11px;font-size:12.5px;letter-spacing:0;text-transform:none;border:none;border-radius:999px;transition:all .15s}
-nav.top a.link:hover{color:var(--text);background:var(--surface-hi)}
-nav.top .sys{font-size:11px;color:var(--text-mute);display:flex;align-items:center;gap:6px}
-nav.top .sys .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:none}
-
-section.block{padding:100px 0 40px;position:relative}
-.section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:28px;flex-wrap:wrap}
-.section-head .prompt{display:none}
-.section-head h2{font-size:24px;margin:0;color:var(--text);letter-spacing:-0.02em;font-weight:600;text-transform:none}
-.section-head .meta{margin-left:auto;font-size:10.5px;color:var(--text-mute);letter-spacing:0.08em;text-transform:uppercase}
-
-/* neutralize glitch — plain text */
-.glitch{position:relative;display:inline-block;color:var(--text);font-family:inherit;font-weight:600;text-shadow:none;letter-spacing:-0.03em}
-.glitch::before,.glitch::after{display:none!important}
-
-/* glass panel */
-.panel{
-  position:relative;
-  background:var(--surface);
-  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
-  border:1px solid var(--border);border-radius:var(--radius);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.04), 0 20px 60px rgba(0,0,0,0.35)
-}
-.panel .bar{display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--border);background:transparent;font-size:11px;color:var(--text-mute);letter-spacing:0.05em;text-transform:uppercase}
-.panel .bar .lights{display:none}
-.panel .bar .title{flex:1;color:var(--text-dim)}
-.panel .bar .title span{color:var(--text)}
-.panel .body{padding:24px}
-
-/* ============================================================
-   HERO
-============================================================ */
-#three-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2;display:block;pointer-events:none;transition:opacity .4s ease;opacity:0.55}
-#hero{padding:140px 0 80px;min-height:100vh;position:relative;display:block}
-.hero-scene-mask{position:fixed;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(10,11,14,0.35) 0%,transparent 25%,transparent 75%,rgba(10,11,14,0.7) 100%)}
-.hero-scene-scan{display:none}
-
-.mission-bar{
-  position:relative;z-index:3;display:flex;align-items:center;gap:12px;
-  padding:10px 18px;border:1px solid var(--border);
-  background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
-  font-size:11.5px;color:var(--text-dim);letter-spacing:0;text-transform:none;
-  border-radius:999px;margin-bottom:28px
-}
-.mission-bar .lights{display:none}
-.mission-bar .live{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--text)}
-.mission-bar .live .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse 2s infinite}
-
-.hero-grid{position:relative;z-index:3;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:stretch;width:100%}
-.hero-left{
-  padding:36px;
-  background:var(--surface);
-  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
-  border:1px solid var(--border);border-radius:var(--radius);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 60px rgba(0,0,0,0.35)
-}
-.hero-left h1 .glitch{text-shadow:none}
-.hero-left .bio{text-shadow:none}
-.hero-left .tagline{color:var(--text-mute);font-size:11.5px;letter-spacing:0.2em;margin-bottom:22px;text-transform:uppercase;font-weight:500}
-.hero-left h1{font-size:clamp(36px,5.4vw,64px);line-height:1.02;margin-bottom:16px;letter-spacing:-0.03em;font-weight:600}
-.hero-left h1 .sub{display:block;font-size:.3em;color:var(--text-dim);font-weight:400;letter-spacing:0;margin-top:14px;text-transform:none;font-family:ui-monospace,'JetBrains Mono',monospace}
-.typing{display:inline-block;border-right:2px solid var(--cyan);padding-right:4px;color:var(--text);font-family:ui-monospace,'JetBrains Mono',monospace;font-weight:400;text-transform:none;letter-spacing:0;animation:caret 1s steps(2) infinite}
-@keyframes caret{50%{border-color:transparent}}
-.hero-left .bio{color:var(--text-dim);max-width:56ch;margin:24px 0 24px;font-size:14.5px;line-height:1.65}
-.hero-left .bio strong{color:var(--text);font-weight:500}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0 28px}
-.stat{border:1px solid var(--border);padding:14px 12px;text-align:left;background:var(--surface);border-radius:var(--radius-sm);position:relative;overflow:hidden}
-.stat::before{display:none}
-.stat .n{font-family:ui-monospace,'JetBrains Mono',monospace;font-weight:600;color:var(--text);font-size:22px;text-shadow:none;letter-spacing:-0.02em}
-.stat .l{font-size:10.5px;color:var(--text-mute);letter-spacing:0.05em;text-transform:uppercase;margin-top:4px}
-.cta{display:flex;flex-wrap:wrap;gap:10px}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;padding:11px 18px;
-  font-family:inherit;font-size:13px;letter-spacing:0;text-transform:none;font-weight:500;
-  border:1px solid var(--border);background:var(--surface);color:var(--text);
-  transition:background .15s,border-color .15s,transform .15s;text-decoration:none;border-radius:999px
-}
-.btn:hover{background:var(--surface-hi);color:var(--text);border-color:var(--border-strong);text-shadow:none;transform:translateY(-1px)}
-.btn.cyan{border-color:var(--border);color:var(--text);background:var(--surface)}
-.btn.cyan:hover{background:var(--surface-hi);color:var(--text);border-color:var(--border-strong);box-shadow:none}
-.btn.magenta{border-color:rgba(158,177,255,0.35);color:var(--text);background:rgba(158,177,255,0.08)}
-.btn.magenta:hover{background:rgba(158,177,255,0.16);color:var(--text);border-color:rgba(158,177,255,0.5);box-shadow:none}
-
-.hero-right{position:relative;display:flex;flex-direction:column;gap:10px;align-self:start;padding-top:4px}
-.research-stack{border:1px solid var(--border);background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);padding:14px 16px;border-radius:var(--radius-sm);font-family:ui-monospace,'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);display:flex;flex-direction:column;gap:5px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.03), 0 12px 32px rgba(0,0,0,0.3)}
-.research-stack .rp-head{color:var(--text);letter-spacing:0.05em;font-size:10px;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:2px;text-transform:uppercase;font-weight:500}
-.research-stack .rp-eq{color:var(--text-dim);font-size:11.5px;letter-spacing:0;padding:6px 0;border-bottom:1px dashed var(--border);line-height:1.35}
-.research-stack .rp-eq sub{font-size:.75em;opacity:.85}
-.research-stack .rp-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:10.5px;line-height:1.3;padding:1px 0}
-.research-stack .rp-row b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
-.research-stack .rp-tag{color:var(--cyan);font-weight:500;letter-spacing:0.05em;min-width:44px;font-size:10px}
-.research-stack .rp-state{display:grid;grid-template-columns:auto 1fr auto 1fr auto 1fr auto 1fr;gap:2px 8px;font-size:10.5px;border-top:1px dashed var(--border);padding-top:6px;margin-top:2px}
-.research-stack .rp-state b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
-.research-stack .rp-state span{color:var(--text-mute);font-style:normal}
-.hud{display:flex;flex-direction:column;gap:10px}
-.hud-top{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);padding:14px 12px;border:1px solid var(--border);border-radius:var(--radius-sm)}
-.hud-cell{text-align:center;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mute)}
-.hud-cell b{display:block;font-family:ui-monospace,'JetBrains Mono',monospace;font-weight:500;color:var(--text);font-size:15px;text-shadow:none;margin-top:4px;letter-spacing:0}
-.hud-cell.warn b{color:var(--amber);text-shadow:none}
-.hud-bot{display:flex;flex-direction:column;gap:8px}
-.wp-chips{display:flex;flex-wrap:wrap;gap:5px}
-.wp-chips button{font-family:inherit;font-size:10.5px;letter-spacing:0;text-transform:none;background:var(--surface);border:1px solid var(--border);color:var(--text-dim);padding:5px 11px;cursor:pointer;transition:all .15s;border-radius:999px;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
-.wp-chips button:hover,.wp-chips button.active{background:var(--surface-hi);color:var(--text);border-color:var(--border-strong);box-shadow:none}
-.obj-card{background:var(--surface);border:1px solid var(--border);padding:12px 14px;font-size:12px;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:var(--radius-sm)}
-.obj-card .o-ttl{color:var(--text-mute);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px}
-.obj-card .o-body{color:var(--text-dim);font-size:12.5px;line-height:1.5}
-/* rho control */
-.rho-panel{padding:11px 14px;border:1px solid var(--border);background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);display:flex;align-items:center;gap:10px;border-radius:999px}
-.rho-panel .lbl{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mute)}
-.rho-panel .lbl b{color:var(--text);font-family:ui-monospace,'JetBrains Mono',monospace;margin-right:4px;font-weight:500}
-.rho-panel input[type=range]{flex:1;accent-color:var(--cyan);height:4px}
-.rho-panel .val{font-family:ui-monospace,'JetBrains Mono',monospace;color:var(--text);font-size:13px;min-width:48px;text-align:right;text-shadow:none;font-weight:500}
-.rho-panel .mode{font-size:10px;letter-spacing:0.08em;color:var(--text-dim);text-transform:uppercase}
-/* mission log */
-.log{max-height:138px;min-height:120px;overflow-y:auto;padding:10px 14px;background:var(--surface);border:1px solid var(--border);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);font-family:ui-monospace,'JetBrains Mono',monospace;font-size:11px;line-height:1.5;scrollbar-width:thin;scrollbar-color:var(--text-mute) transparent;border-radius:var(--radius-sm)}
-.log::-webkit-scrollbar{width:4px}.log::-webkit-scrollbar-thumb{background:var(--text-mute);border-radius:4px}
-.log .lg{opacity:0;animation:lgin .2s forwards;display:flex;gap:8px}
-@keyframes lgin{to{opacity:1}}
-.log .t{color:var(--text-mute);flex-shrink:0}
-.log .k{flex-shrink:0;font-weight:500;color:var(--text-dim)}
-.log .k.ok{color:#7fc49a} .log .k.wr{color:var(--amber)} .log .k.er{color:var(--red)} .log .k.in{color:var(--cyan)}
-.log .m{color:var(--text-dim)}
-
-/* ============================================================
-   ABOUT
-============================================================ */
-.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
-.about-grid .panel .body p{margin-bottom:14px;color:var(--text-dim);line-height:1.65}
-.about-grid .panel .body p:last-child{margin-bottom:0}
-.about-grid .panel .body p strong{color:var(--text)!important;font-weight:500}
-.kv{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:13px}
-.kv dt{color:var(--text-mute);text-transform:uppercase;letter-spacing:0.05em;font-size:10.5px;align-self:start;padding-top:3px}
-.kv dd{color:var(--text-dim)}
-.kv dd a{color:var(--text)}
-
-/* ============================================================
-   AI CHAT
-============================================================ */
-#chat .panel{max-width:960px;margin:0 auto}
-#chat .intro{color:var(--text-dim);font-size:13.5px;margin-bottom:16px;max-width:720px;line-height:1.6}
-.chat-log{min-height:280px;max-height:420px;overflow-y:auto;padding:18px;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13.5px;line-height:1.65;scrollbar-width:thin;scrollbar-color:var(--text-mute) transparent}
-.chat-log::-webkit-scrollbar{width:6px}
-.chat-log::-webkit-scrollbar-thumb{background:var(--text-mute);border-radius:4px}
-.msg{margin-bottom:14px;display:flex;gap:12px;animation:msgIn .25s ease-out}
-@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.msg .who{flex-shrink:0;font-family:ui-monospace,'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;padding:3px 10px;height:fit-content;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
-.msg.me .who{color:var(--cyan);border-color:rgba(158,177,255,0.3);background:rgba(158,177,255,0.08)}
-.msg.ko .who{color:var(--text);border-color:var(--border-strong);background:var(--surface-hi)}
-.msg .text{flex:1;color:var(--text-dim)}
-.msg .text strong{color:var(--text);font-weight:500}
-.msg .text em{color:var(--text);font-style:normal}
-.chat-controls{margin-top:14px;display:flex;gap:8px}
-.chat-controls input{flex:1;background:rgba(0,0,0,0.25);border:1px solid var(--border);color:var(--text);padding:12px 16px;font-family:inherit;font-size:14px;border-radius:999px;outline:none;caret-color:var(--cyan)}
-.chat-controls input::placeholder{color:var(--text-mute)}
-.chat-controls input:focus{border-color:var(--border-strong);box-shadow:none;background:rgba(0,0,0,0.35)}
-.chat-controls button{background:var(--text);color:#0a0b0e;border:none;padding:0 22px;font-family:inherit;font-weight:500;letter-spacing:0;text-transform:none;font-size:13px;border-radius:999px;transition:opacity .15s}
-.chat-controls button:hover{box-shadow:none;opacity:0.85}
-.chips{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
-.chips button{background:var(--surface);border:1px solid var(--border);color:var(--text-dim);padding:7px 12px;font-size:12px;font-family:inherit;border-radius:999px;transition:all .15s}
-.chips button:hover{border-color:var(--border-strong);color:var(--text);background:var(--surface-hi);box-shadow:none}
-.cursor-blink{display:inline-block;width:2px;height:14px;background:var(--cyan);vertical-align:text-bottom;margin-left:2px;animation:caret 1s steps(2) infinite}
-
-/* ============================================================
-   EXPERIENCE / RESEARCH timeline
-============================================================ */
-.timeline{position:relative;padding-left:24px}
-.timeline::before{content:"";position:absolute;left:7px;top:4px;bottom:4px;width:1px;background:var(--border)}
-.tl-item{position:relative;padding:0 0 28px 0}
-.tl-item::before{content:"";position:absolute;left:-22px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--text-dim);border:2px solid var(--bg);box-shadow:0 0 0 1px var(--border)}
-.tl-item .when{color:var(--text-mute);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px}
-.tl-item h3{font-size:16px;color:var(--text);margin-bottom:4px;text-transform:none;font-weight:500;letter-spacing:-0.01em}
-.tl-item .org{color:var(--text-dim);font-size:13px;margin-bottom:8px}
-.tl-item ul{list-style:none;margin-top:6px}
-.tl-item ul li{padding-left:16px;position:relative;margin-bottom:6px;font-size:13.5px;color:var(--text-dim);line-height:1.6}
-.tl-item ul li::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--text-mute);position:absolute;left:2px;top:10px}
-
-/* ============================================================
-   PROJECTS
-============================================================ */
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-.proj{
-  position:relative;padding:22px;
-  border:1px solid var(--border);
-  background:var(--surface);
-  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
-  transition:all .2s;border-radius:var(--radius);overflow:hidden
-}
-.proj::before{display:none}
-.proj:hover{border-color:var(--border-strong);transform:translateY(-2px);background:var(--surface-hi);box-shadow:0 16px 40px rgba(0,0,0,0.3)}
-.proj:hover::before{opacity:0}
-.proj .tag{display:inline-block;font-size:10.5px;letter-spacing:0.03em;text-transform:uppercase;color:var(--text-mute);border:1px solid var(--border);padding:3px 10px;margin-bottom:12px;border-radius:999px}
-.proj h3{font-size:16px;margin-bottom:6px;color:var(--text);text-transform:none;font-weight:500;letter-spacing:-0.01em}
-.proj .when{font-size:11px;color:var(--text-mute);margin-bottom:12px;letter-spacing:0.02em;text-transform:none}
-.proj p{font-size:13.5px;color:var(--text-dim);margin-bottom:14px;line-height:1.65}
-.proj .metrics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.proj .metrics span{font-size:10.5px;letter-spacing:0;text-transform:none;color:var(--text-dim);border:1px solid var(--border);background:var(--surface);padding:3px 9px;border-radius:999px}
-.proj .stack{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
-.proj .stack span{font-size:10.5px;color:var(--text-mute);background:transparent;padding:3px 9px;border:1px solid var(--border);border-radius:999px}
-.proj .links{display:flex;gap:14px;font-size:12px;letter-spacing:0;text-transform:none;flex-wrap:wrap}
-.proj .links a{color:var(--text);border-bottom:1px solid var(--border)}
-.proj .links a:hover{color:var(--cyan);border-color:var(--cyan)}
-
-/* ============================================================
-   SKILLS
-============================================================ */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.skill-cat{border:1px solid var(--border);padding:18px;background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:var(--radius)}
-.skill-cat h4{font-size:11px;letter-spacing:0.08em;color:var(--text-mute);margin-bottom:14px;font-family:inherit;text-transform:uppercase;font-weight:500}
-.skill-cat .tags{display:flex;flex-wrap:wrap;gap:5px}
-.skill-cat .tags span{font-size:11.5px;color:var(--text-dim);background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:999px;transition:all .15s}
-.skill-cat .tags span:hover{background:var(--surface-hi);color:var(--text);border-color:var(--border-strong)}
-
-/* ============================================================
-   CONTACT
-============================================================ */
-.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
-.contact-card{padding:28px;border:1px solid var(--border);background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:var(--radius)}
-.contact-card h3{font-size:18px;margin-bottom:12px;font-weight:500;letter-spacing:-0.01em;text-transform:none}
-.contact-card p{color:var(--text-dim);margin-bottom:14px;font-size:13.5px;line-height:1.65}
-.contact-list{list-style:none}
-.contact-list li{padding:12px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.contact-list li:last-child{border:none}
-.contact-list .k{color:var(--text-mute);font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase}
-.contact-list .v a{color:var(--text)}
-
-/* ============================================================
-   FOOTER
-============================================================ */
-footer{padding:40px 0 60px;border-top:1px solid var(--border);margin-top:60px;text-align:center;color:var(--text-mute);font-size:12px;letter-spacing:0}
-footer .ascii{display:none}
-
-/* ============================================================
-   MOBILE
-============================================================ */
-@media (max-width:900px){
-  #hero{padding:110px 0 30px}
-  .hero-grid{grid-template-columns:1fr;gap:14px}
-  .hero-left{padding:24px}
-  .hero-right{gap:8px}
-  .log{max-height:110px;min-height:90px;font-size:10.5px}
-  .hud-cell b{font-size:13px}
-  .obj-card{font-size:11px}
-  .about-grid,.contact-grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  nav.top{top:12px;padding:0}
-  nav.top .inner{padding:6px 10px;gap:10px}
-  nav.top ul{display:none}
-  section.block{padding:80px 0 20px}
-  .wrap{padding:0 16px}
-}
-.reveal{opacity:0;transform:translateY(16px);transition:all .6s cubic-bezier(.2,.8,.2,1)}
-.reveal.in{opacity:1;transform:none}
-
-/* ============================================================
-   TECH LOGO STRIP — "Built with" prestige
-============================================================ */
-.tech-strip{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px;align-items:center}
-.tech-strip .label{font-size:10px;letter-spacing:0.14em;color:var(--text-mute);text-transform:uppercase;margin-right:4px}
-.tech-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--border);background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:999px;font-size:11.5px;color:var(--text);letter-spacing:0;transition:all .15s}
-.tech-pill:hover{background:var(--surface-hi);border-color:var(--border-strong);transform:translateY(-1px)}
-.tech-pill svg{width:14px;height:14px;flex-shrink:0}
-.tech-pill .mark{width:10px;height:10px;border-radius:50%;flex-shrink:0;display:inline-block}
-
-/* ============================================================
-   CORE COMPETENCIES grid
-============================================================ */
-.comp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px;margin-top:18px}
-.comp-grid .comp{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--border);background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:var(--radius-sm);font-size:13px;color:var(--text-dim)}
-.comp-grid .comp .chk{color:var(--cyan);font-weight:600;flex-shrink:0}
-@media(max-width:700px){.comp-grid{grid-template-columns:1fr}}
-</style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="progress-bar"></span></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
 
-<!-- SVG ICON SPRITE — reusable tool logos (referenced via <use href="#ico-..."/>) -->
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-  <symbol id="ico-claude" viewBox="0 0 32 32"><path fill="#d97757" d="M16 2c.4 5.8 2.3 9.5 7.5 10.8 1.7.4 2.7 1.3 2.7 2.2s-1 1.8-2.7 2.2C18.3 18.5 16.4 22.2 16 28c-.4-5.8-2.3-9.5-7.5-10.8-1.7-.4-2.7-1.3-2.7-2.2s1-1.8 2.7-2.2C13.7 11.5 15.6 7.8 16 2z"/></symbol>
-  <symbol id="ico-mcp" viewBox="0 0 32 32"><circle cx="8" cy="16" r="3" fill="#9eb1ff"/><circle cx="24" cy="8" r="3" fill="#9eb1ff"/><circle cx="24" cy="24" r="3" fill="#9eb1ff"/><path d="M10.5 14.5L21.5 9M10.5 17.5L21.5 23" stroke="#9eb1ff" stroke-width="1.6" fill="none" stroke-linecap="round"/></symbol>
-  <symbol id="ico-openclaw" viewBox="0 0 32 32"><path fill="#e8b060" d="M16 4c1.5 0 3 .7 3.8 2l3.5 5c.5.7.7 1.6.7 2.4v10c0 1.5-1.2 2.6-2.7 2.6h-10.6c-1.5 0-2.7-1.1-2.7-2.6v-10c0-.8.2-1.7.7-2.4l3.5-5C13 4.7 14.5 4 16 4zm-3 10c-.8 0-1.5.7-1.5 1.5S12.2 17 13 17s1.5-.7 1.5-1.5S13.8 14 13 14zm6 0c-.8 0-1.5.7-1.5 1.5S18.2 17 19 17s1.5-.7 1.5-1.5S19.8 14 19 14z"/></symbol>
-  <symbol id="ico-nvidia" viewBox="0 0 32 32"><path fill="#76b900" d="M6 8h20c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V10c0-1.1.9-2 2-2zm5 4l-3 4 3 4v-3h5c.6 0 1-.4 1-1s-.4-1-1-1h-5v-3z"/></symbol>
-  <symbol id="ico-pennylane" viewBox="0 0 32 32"><path fill="#f5c842" d="M16 4c-2 4-5 6-9 7 4 1 7 3 9 7 2-4 5-6 9-7-4-1-7-3-9-7zm-8 16c-.8 1.6-2 2.4-3.6 2.8 1.6.4 2.8 1.2 3.6 2.8.8-1.6 2-2.4 3.6-2.8-1.6-.4-2.8-1.2-3.6-2.8z"/></symbol>
-  <symbol id="ico-docker" viewBox="0 0 32 32"><path fill="#2496ed" d="M25 13h-3v3h3v-3zm-4 0h-3v3h3v-3zm0-4h-3v3h3V9zm-4 4h-3v3h3v-3zm0-4h-3v3h3V9zm0-4h-3v3h3V5zm-4 8H10v3h3v-3zm-4 0H6v3h3v-3zm21 1c-.3-.2-2-1-3.4-.3-.3-2-1.7-3-2-3.2l-.5-.3-.3.5c-.6 1-.8 2.4 0 3.5-.4.2-1 .4-1.8.4H3v1c0 2.8 1.4 5.5 3.8 7 2 1 4.2 1.4 6 1.4 4 0 7.6-1.8 10-5 1.5.1 3-.4 3.7-1l.2-.2-.1-.2z"/></symbol>
-  <symbol id="ico-python" viewBox="0 0 32 32"><path fill="#3776ab" d="M16 3c-6 0-5 3-5 3v3h6v1H8s-5-.5-5 6 4 6 4 6h2v-3c0-3 3-3 3-3h6s3 0 3-3V6s1-3-5-3zm-4 3c.8 0 1.5.7 1.5 1.5S12.8 9 12 9s-1.5-.7-1.5-1.5S11.2 6 12 6z"/><path fill="#ffd43b" d="M16 29c6 0 5-3 5-3v-3h-6v-1h9s5 .5 5-6-4-6-4-6h-2v3c0 3-3 3-3 3h-6s-3 0-3 3v5s-1 3 5 3zm4-3c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/></symbol>
-  <symbol id="ico-pytorch" viewBox="0 0 32 32"><path fill="#ee4c2c" d="M22 5l-2 2c3 3 3 8 0 11s-8 3-11 0-3-8 0-11L5 12c-4 4-4 10 0 14s10 4 14 0 4-10 0-14l3-3zM18 10c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5S18.8 10 18 10z"/></symbol>
-  <symbol id="ico-sklearn" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#f7931e"/><circle cx="16" cy="16" r="5" fill="#29abe2"/></symbol>
-  <symbol id="ico-fastapi" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="#009688"/><path fill="#fff" d="M15 7l-5 11h4l-3 7 8-12h-4l3-6z"/></symbol>
-  <symbol id="ico-spark" viewBox="0 0 32 32"><path fill="#e25a1c" d="M16 3c-4 4-6 8-6 12 0 3 2 6 6 8 4-2 6-5 6-8 0-4-2-8-6-12zm0 7c2 2 3 4 3 6s-1 4-3 5c-2-1-3-3-3-5s1-4 3-6z"/></symbol>
-  <symbol id="ico-prometheus" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11" fill="#e6522c"/><circle cx="16" cy="14" r="2" fill="#fff"/></symbol>
-  <symbol id="ico-grafana" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#f46800"/><path fill="#fff" d="M16 10a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 9a3 3 0 1 1 3-3 3 3 0 0 1-3 3z"/></symbol>
-  <symbol id="ico-huggingface" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#ffd21e"/><circle cx="12" cy="14" r="2" fill="#232323"/><circle cx="20" cy="14" r="2" fill="#232323"/><path fill="none" stroke="#232323" stroke-width="2" stroke-linecap="round" d="M11 20c1 2 3 3 5 3s4-1 5-3"/></symbol>
-  <symbol id="ico-k8s" viewBox="0 0 32 32"><path fill="#326ce5" d="M16 3l11 6v12l-11 6-11-6V9l11-6zm0 4L8 11v10l8 4 8-4V11l-8-4z"/></symbol>
-  <symbol id="ico-git" viewBox="0 0 32 32"><path fill="#f05032" d="M29.5 14.9L17.1 2.5a1.6 1.6 0 0 0-2.2 0l-2.6 2.6 3.3 3.3a1.9 1.9 0 0 1 2.4 2.4l3.1 3.1a1.9 1.9 0 1 1-1.1 1.1l-2.9-2.9v7.6a1.9 1.9 0 1 1-1.6 0V12.1a1.9 1.9 0 0 1-1-2.5L10.3 6.3 2.5 14.1a1.6 1.6 0 0 0 0 2.2l12.4 12.4a1.6 1.6 0 0 0 2.2 0l12.4-12.4a1.6 1.6 0 0 0 0-2.4z"/></symbol>
-  <symbol id="ico-postgres" viewBox="0 0 32 32"><ellipse cx="16" cy="16" rx="13" ry="12" fill="#336791"/><text x="16" y="21" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="13" fill="#fff">Pg</text></symbol>
-  <symbol id="ico-redis" viewBox="0 0 32 32"><rect x="3" y="6" width="26" height="20" rx="2" fill="#dc382d"/><path fill="#fff" d="M8 12l8-3 8 3-8 3zm0 5l8-3 8 3-8 3z"/></symbol>
-  <symbol id="ico-hook" viewBox="0 0 32 32"><path fill="#e8b060" d="M10 4v14a6 6 0 1 0 12 0v-4h-4v4a2 2 0 1 1-4 0V4z"/></symbol>
-</svg>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
 
-<div id="grid-bg"></div>
-<div class="vignette"></div>
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav-brand" data-magnetic>
+      <span class="nav-mark"></span>
+      <span class="nav-name">K·Z</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="#about">01 / Approach</a>
+      <a href="#work">02 / Work</a>
+      <a href="#stack">03 / Stack</a>
+      <a href="#hot">04 / Hot repos</a>
+      <a href="#beyond">05 / Beyond</a>
+      <a href="#contact">06 / Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta" data-magnetic>Let's talk <span>→</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </header>
 
-<!-- BOOT -->
-<div id="boot"><div id="boot-out"></div></div>
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <canvas class="hero-canvas" id="constellation" aria-hidden="true"></canvas>
+      <div class="hero-grid" aria-hidden="true"></div>
 
-<!-- NAV -->
-<nav class="top">
-  <div class="inner">
-    <div class="brand"><span class="dot"></span>KZ // AI_ENGINEER</div>
-    <ul>
-      <li><a class="link" href="#hero">/home</a></li>
-      <li><a class="link" href="#about">/about</a></li>
-      <li><a class="link" href="#chat">/ask-me</a></li>
-      <li><a class="link" href="#competencies">/competencies</a></li>
-      <li><a class="link" href="#experience">/work</a></li>
-      <li><a class="link" href="#projects">/projects</a></li>
-      <li><a class="link" href="#research">/research</a></li>
-      <li><a class="link" href="#skills">/skills</a></li>
-      <li><a class="link" href="#contact">/contact</a></li>
-      <li><a class="link" href="CV_Konstantinos_Zervakis.docx" download style="color:var(--cyan)">↓ CV</a></li>
-    </ul>
-    <div class="sys"><span class="dot"></span><span id="clock">--:--:--</span> UTC</div>
-  </div>
-</nav>
+      <div class="hero-inner">
+        <div class="status reveal" data-reveal>
+          <span class="status-dot"></span>
+          <span id="status-text">AI Engineer · Crete, Greece · shipping production AI</span>
+        </div>
 
-<div class="wrap">
+        <h1 class="hero-title">
+          <span class="line reveal" data-reveal>I turn hard</span>
+          <span class="line reveal" data-reveal data-delay="1"><em>problems</em> into</span>
+          <span class="line reveal" data-reveal data-delay="2">shipped <span class="grad">solutions</span>.</span>
+        </h1>
 
-<!-- HERO -->
-<section id="hero" class="block">
-  <canvas id="three-canvas"></canvas>
-  <div class="hero-scene-mask"></div>
-  <div class="hero-scene-scan"></div>
-  <div class="mission-bar">
-    <div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div>
-    <div>demo://ai-engineering · <span id="mission-name">LIVE DECISION LOOP</span> · <span style="color:var(--cyan)">real-time risk-aware decision-making — the pattern behind my FLARE research</span> · submitted to Hellenic Robotics Forum</div>
-    <div class="live"><span class="dot"></span>LIVE · 50 Hz</div>
-  </div>
-  <div class="hero-grid">
-    <div class="hero-left">
-      <div class="tagline">// AI ENGINEER · AGENTIC AI · EDGE ML · CRETE</div>
-      <h1>
-        <span class="glitch" data-text="KONSTANTINOS">KONSTANTINOS</span><br/>
-        <span class="glitch" data-text="ZERVAKIS">ZERVAKIS</span>
-        <span class="sub">&gt; <span id="role" class="typing"></span></span>
-      </h1>
-      <p class="bio">
-        <strong>I help organizations become harder to compete with.</strong> In an era where margins
-        shrink, energy costs climb, and competitors modernize fast, the companies that win are those
-        that see problems before they happen, optimize what others leave on autopilot, and make
-        decisions from data instead of gut feeling. That&rsquo;s what I build. I&rsquo;m an
-        <strong>AI Engineer</strong> and <strong>PhD candidate</strong> who has predicted equipment
-        failures from live sensor streams at <strong>sub-5 ms latency</strong>, produced research
-        proving that &ldquo;safe default&rdquo; algorithms silently waste throughput (<strong>FLARE</strong>,
-        submitted to Hellenic Robotics Forum, targeting <i>Drones</i> / MDPI), and built audit-ready
-        quality systems at OHB Hellas where a single undetected defect can end a space mission.
-        I also build AI-powered automation pipelines (<strong>Claude Code</strong>,
-        <strong>OpenClaw</strong>, <strong>MCP</strong>) that turn weeks of manual work into hours —
-        not to replace people, but to free them for the work that actually matters. Based in Crete.
-      </p>
-      <div class="stats">
-        <div class="stat"><div class="n" data-n="0.984">0.000</div><div class="l">Classifier F1-score</div></div>
-        <div class="stat"><div class="n" data-n="14">0</div><div class="l">M+ rows streamed</div></div>
-        <div class="stat"><div class="n" data-n="5">0</div><div class="l">ms inference · edge</div></div>
-        <div class="stat"><div class="n" data-n="98">0</div><div class="l">% feature reduction</div></div>
+        <p class="hero-sub reveal" data-reveal data-delay="3">
+          I'm <strong>Konstantinos Zervakis</strong> — I build production ML, LLMs &amp; multi-agent
+          systems for environments where a wrong answer costs <span class="kw">€50,000 an hour</span>,
+          or a <span class="kw">satellite mission</span>. Everything here follows how I actually think:
+          the problem, the solution, the result.
+        </p>
+
+        <div class="hero-actions reveal" data-reveal data-delay="4">
+          <a href="#work" class="btn btn-primary" data-magnetic>
+            See the case files <span class="btn-arrow">↓</span>
+          </a>
+          <a href="#hot" class="btn btn-ghost" data-magnetic>
+            <span class="live-dot"></span> What's hot on GitHub
+          </a>
+        </div>
+
+        <ul class="hero-stats reveal" data-reveal data-delay="5">
+          <li><b>5</b> production deployments</li>
+          <li><b>94.2%</b> RAG accuracy</li>
+          <li><b>+42.7%</b> F1 over single-agent</li>
+          <li><b>Sensors / MDPI</b> 2026</li>
+        </ul>
       </div>
-      <div class="cta">
-        <a class="btn" href="#chat">▸ Ask me anything</a>
-        <a class="btn cyan" href="CV_Konstantinos_Zervakis.docx" download>↓ Download CV</a>
-        <a class="btn" href="https://www.linkedin.com/in/-zervakisai-/" target="_blank" rel="noopener">▸ LinkedIn</a>
-        <a class="btn magenta" href="mailto:zervakisai@gmail.com">✉ Get in touch</a>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <span>scroll</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>PYDANTIC AI</span><span class="sep">✦</span>
+        <span>MULTI-AGENT ORCHESTRATION</span><span class="sep">✦</span>
+        <span>RAG</span><span class="sep">✦</span>
+        <span>MODEL CONTEXT PROTOCOL</span><span class="sep">✦</span>
+        <span>PRODUCTION LLMs</span><span class="sep">✦</span>
+        <span>QUANTUM ML</span><span class="sep">✦</span>
+        <span>PYDANTIC AI</span><span class="sep">✦</span>
+        <span>MULTI-AGENT ORCHESTRATION</span><span class="sep">✦</span>
+        <span>RAG</span><span class="sep">✦</span>
+        <span>MODEL CONTEXT PROTOCOL</span><span class="sep">✦</span>
+        <span>PRODUCTION LLMs</span><span class="sep">✦</span>
+        <span>QUANTUM ML</span><span class="sep">✦</span>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="hud">
-        <div class="hud-top">
-          <div class="hud-cell">ALT<b id="hud-alt">000 m</b></div>
-          <div class="hud-cell">SPD<b id="hud-spd">00 m/s</b></div>
-          <div class="hud-cell">HDG<b id="hud-hdg">000°</b></div>
-          <div class="hud-cell" id="hud-bat-c">BAT<b id="hud-bat">100%</b></div>
+
+    <!-- ============ ABOUT / APPROACH ============ -->
+    <section class="section about" id="about">
+      <div class="section-head">
+        <span class="eyebrow"><span class="eyebrow-num">01</span> Approach</span>
+        <h2 class="reveal" data-reveal>Most people ship demos.<br /><span class="grad">I ship systems people depend on.</span></h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-lead reveal" data-reveal>
+          <p>
+            A benchmark impresses for a minute. A <strong>solved problem</strong> holds up when downtime
+            costs €50,000 an hour and a missed defect ends a satellite mission. So I don't lead with
+            model names — I lead with the constraint that mattered, the design that removed it, and the
+            number that proves it worked.
+          </p>
+          <p class="muted">
+            I'm relentlessly <em>curious</em> — first to try what just shipped — and I aim high on
+            purpose. But curiosity without rigor is just noise, so every experiment lands as something
+            measurable. The work below isn't a gallery. It's a stack of case files.
+          </p>
+          <p class="now">
+            <span class="now-label">Now</span>
+            Software Test Engineer @ <b>OHB Hellas</b> (aerospace, ECSS V&amp;V/PA) ·
+            PhD candidate, autonomous UAV navigation @ <b>Hellenic Army Academy</b>
+          </p>
         </div>
-        <div class="hud-bot">
-          <div class="wp-chips" id="waypoints"></div>
-          <div class="obj-card">
-            <div class="o-ttl">» CURRENT OBJECTIVE</div>
-            <div class="o-body" id="hud-body">Live demo of the research framework from my FLARE work (submitted to Hellenic Robotics Forum) — real-time risk-aware decision-making over Crete. Click a beacon to retask, or drag ρ to change the safety-vs-value posture. The same pattern runs on production lines, not just drones.</div>
+
+        <div class="stats">
+          <div class="stat reveal" data-reveal>
+            <span class="stat-num" data-count="5" data-suffix="">0</span>
+            <span class="stat-label">production deployments</span>
+          </div>
+          <div class="stat reveal" data-reveal data-delay="1">
+            <span class="stat-num" data-count="450" data-suffix="+">0</span>
+            <span class="stat-label">experimental runs (FLARE)</span>
+          </div>
+          <div class="stat reveal" data-reveal data-delay="2">
+            <span class="stat-num" data-count="2" data-suffix="×">0</span>
+            <span class="stat-label">silver, world fencing</span>
           </div>
         </div>
       </div>
-      <div class="research-stack">
-        <div class="rp-head">» REAL-TIME DECISION STACK · LIVE</div>
-        <div class="rp-eq">J(u) = α‖e<sub>p</sub>‖² + β‖u‖² + ρ·∫<sub>τ</sub>R(x,τ)dτ&nbsp;&nbsp;s.t.&nbsp;&nbsp;ẋ=f(x,u), h(x)≥0</div>
-        <div class="rp-row"><span class="rp-tag">RRT*</span><span>iter <b id="rp-rrt-iter">218</b></span><span>nodes <b id="rp-rrt-nodes">124</b></span><span>J*=<b id="rp-rrt-cost">4.82</b></span><span><b id="rp-rrt-ms">3.1</b> ms</span></div>
-        <div class="rp-row"><span class="rp-tag">MPC</span><span>N=<b>20</b></span><span>T<sub>s</sub>=<b>20</b>ms</span><span>solve <b id="rp-mpc-ms">1.4</b> ms</span><span>‖u‖=<b id="rp-mpc-u">0.31</b></span></div>
-        <div class="rp-row"><span class="rp-tag">EKF</span><span>tr(P)=<b id="rp-ekf-trace">0.031</b></span><span>σ<sub>p</sub>=<b id="rp-ekf-sig">0.18</b> m</span><span><b>50</b> Hz</span></div>
-        <div class="rp-row"><span class="rp-tag">CBF</span><span>h(x)=<b id="rp-cbf-h">2.43</b></span><span>d<sub>sep</sub>=<b id="rp-cbf-d">3.1</b> m</span><span id="rp-cbf-ok" style="color:var(--neon)">✓ feasible</span></div>
-        <div class="rp-row"><span class="rp-tag">FLARE</span><span>R̄=<b id="rp-flare-r">0.14</b></span><span>ρ-adaptive <b id="rp-flare-mode">BALANCED</b></span></div>
-        <div class="rp-state">
-          <span>x</span><b id="rp-st-x">+0.00</b>
-          <span>y</span><b id="rp-st-y">+0.00</b>
-          <span>z</span><b id="rp-st-z">+0.00</b>
-          <span>ψ</span><b id="rp-st-psi">+000°</b>
-        </div>
-      </div>
-      <div class="rho-panel">
-        <span class="lbl"><b>ρ</b>RISK</span>
-        <input type="range" id="rho" min="0" max="100" value="55" />
-        <span class="val" id="rho-val">0.55</span>
-        <span class="mode" id="rho-mode">BALANCED</span>
-      </div>
-      <div class="log" id="mlog"></div>
-    </div>
-  </div>
-</section>
 
-<!-- ABOUT -->
-<section id="about" class="block reveal">
-  <div class="section-head">
-    <span class="prompt">[root@zervakis ~]$</span>
-    <h2>cat about.md</h2>
-    <span class="meta">// PROFILE_LOADED</span>
-  </div>
-  <div class="about-grid">
-    <div class="panel">
-      <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/profile/<span>summary.md</span></div></div>
-      <div class="body">
-        <p>I&rsquo;m an <strong style="color:var(--neon)">AI Engineer</strong> and <strong style="color:var(--neon)">PhD candidate</strong> based in <strong style="color:var(--neon)">Crete</strong>. Mathematics foundation (BSc, University of Crete, 241 ECTS), applied-ML specialty (MSc, TU of Crete), and ongoing research on <strong style="color:var(--neon)">autonomous UAV navigation</strong> at the Hellenic Army Academy — hybrid Reinforcement Learning + Quantum Computing (VQC via PennyLane) for multi-agent coordination.</p>
-        <p>What I actually ship: <strong style="color:var(--neon)">predictive systems that work in real time, under real constraints</strong>. Sub-5 ms forecasting on embedded hardware. ML on live sensor telemetry with drift monitoring. Edge deployment on ARM64 / Orange Pi. And <strong style="color:var(--neon)">agentic workflows</strong> with Claude Code + MCP — custom subagents, hooks, Docker / systemd packaging, OTEL + Langfuse + Prometheus observability.</p>
-        <p>At OHB Hellas I hold software to space-grade V&V standards — automated test pipelines with <strong style="color:var(--neon)">100% requirement-to-test traceability</strong> — and my <strong style="color:var(--neon)">FLARE</strong> research (submitted to Hellenic Robotics Forum · targeting <i>Drones</i> / MDPI) statistically proved that &ldquo;safe default&rdquo; algorithms silently waste throughput. I care about <em style="color:var(--cyan);font-style:normal">reliability</em>, <em style="color:var(--cyan);font-style:normal">reproducibility</em>, and <em style="color:var(--cyan);font-style:normal">evidence</em>. If you need AI that survives 3am on Sunday, we should talk.</p>
+      <div class="method">
+        <article class="method-card reveal" data-reveal>
+          <span class="method-index">P</span>
+          <h3>Problem</h3>
+          <p>Name the real constraint — the one everyone else designed around instead of through.</p>
+        </article>
+        <article class="method-card reveal" data-reveal data-delay="1">
+          <span class="method-index">S</span>
+          <h3>Solution</h3>
+          <p>The smallest system that removes the constraint for good. Typed, tested, and honest about its limits.</p>
+        </article>
+        <article class="method-card reveal" data-reveal data-delay="2">
+          <span class="method-index">R</span>
+          <h3>Result</h3>
+          <p>A number. Accuracy, latency, F1, cost, hours saved. If it can't be measured, it isn't done.</p>
+        </article>
       </div>
-    </div>
-    <div class="panel">
-      <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/profile/<span>identity.cfg</span></div></div>
-      <div class="body">
-        <dl class="kv">
-          <dt>Based in</dt><dd>Heraklion, Crete &nbsp;<span style="color:var(--text-dim)">(on-site / hybrid / remote)</span></dd>
-          <dt>Role</dt><dd>AI Engineer · PhD Candidate</dd>
-          <dt>Day job</dt><dd>Software Test Engineer @ OHB Hellas (aerospace-grade V&V)</dd>
-          <dt>PhD</dt><dd>Autonomous Navigation of UAVs — Hellenic Army Academy (Dec 2025 →). Supervisor: Assoc. Prof. Panagiotópoulos Ilías</dd>
-          <dt>MSc</dt><dd>Machine Learning &amp; Data Science — TU of Crete (Sep 2025)</dd>
-          <dt>BSc</dt><dd>Mathematics &amp; Applied Math — University of Crete (Jul 2024, 241 ECTS)</dd>
-          <dt>Languages</dt><dd>Greek (native), English (C2 certified)</dd>
-          <dt>Focus</dt><dd>Agentic AI · Edge ML · Predictive modeling · UAV autonomy · Quantum ML</dd>
-          <dt>Offline</dt><dd>2× Silver Medalist — Fencing (National &amp; Global) · Mandolin &amp; Laouto player</dd>
-          <dt>Status</dt><dd><span style="color:var(--neon)">● OPEN</span> to AI Engineer &amp; Autonomous Systems roles</dd>
-        </dl>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- AI CHAT -->
-<section id="chat" class="block reveal">
-  <div class="section-head">
-    <span class="prompt">[guest@zervakis ~]$</span>
-    <h2>./ask_konstantinos.sh</h2>
-    <span class="meta">// LIVE_Q&amp;A_ENGINE · v2.6</span>
-  </div>
-  <p class="intro">Recruiter mode active. Ask me anything — experience, projects, how I'd approach a problem, my research. The answers below are synthesised live from my CV knowledge base.</p>
-  <div class="panel">
-    <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">terminal/<span>chat://zervakis</span> &nbsp; · &nbsp; <span style="color:var(--neon)">● READY</span></div></div>
-    <div class="body">
-      <div class="chat-log" id="chat-log">
-        <div class="msg ko"><div class="who">KZ</div><div class="text"><strong>» Hi, I'm Konstantinos.</strong> AI &amp; Autonomous Systems Engineer based in Heraklion. Ask me about my predictive-ML work, agentic AI with Claude Code / MCP, my PhD on UAV autonomy (RL + Quantum), or why I'd be a good fit. I'll answer as myself — try a suggestion or type a question.</div></div>
+    <!-- ============ WORK / CASE STUDIES ============ -->
+    <section class="section work" id="work">
+      <div class="section-head">
+        <span class="eyebrow"><span class="eyebrow-num">02</span> Selected work</span>
+        <h2 class="reveal" data-reveal>Case files.</h2>
+        <p class="section-note reveal" data-reveal>Each one, the same shape: the problem, the solution, the result — with a number attached.</p>
       </div>
-      <div class="chat-controls">
-        <input id="chat-input" autocomplete="off" placeholder="Ask me anything…  (try: tell me about your agentic AI work)" />
-        <button id="chat-send">Send</button>
+
+      <div class="cases" id="cases">
+        <!-- Rendered by JS from the PROJECTS array in app.js -->
       </div>
-      <div class="chips" id="chat-chips">
-        <button>Why should you hire me?</button>
-        <button>Tell me about your agentic AI work</button>
-        <button>How would you approach predictive maintenance?</button>
-        <button>Your PhD topic?</button>
-        <button>Quantum ML?</button>
-        <button>What's your autonomous platform?</button>
-        <button>Time-series forecasting</button>
-        <button>Edge / embedded ML</button>
-        <button>Education background</button>
-        <button>Are you available?</button>
+    </section>
+
+    <!-- ============ STACK ============ -->
+    <section class="section stack" id="stack">
+      <div class="section-head">
+        <span class="eyebrow"><span class="eyebrow-num">03</span> Stack</span>
+        <h2 class="reveal" data-reveal>Tools I reach for.</h2>
+        <p class="section-note reveal" data-reveal>Agent framework of choice: <span class="grad">Pydantic AI</span> — typed contracts, graphs, one-layer retries, offline-testable.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- CORE COMPETENCIES -->
-<section id="competencies" class="block reveal">
-  <div class="section-head">
-    <span class="prompt">[root@zervakis ~]$</span>
-    <h2>Core competencies</h2>
-    <span class="meta">// CAPABILITY_MATRIX</span>
-  </div>
-  <div class="panel">
-    <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/profile/<span>competencies.md</span></div></div>
-    <div class="body">
-      <div class="comp-grid">
-        <div class="comp"><span class="chk">✓</span> Predictive Modeling &amp; Anomaly Detection</div>
-        <div class="comp"><span class="chk">✓</span> AI Workflow Automation &amp; Agentic Systems</div>
-        <div class="comp"><span class="chk">✓</span> Real-Time Sensor Data &amp; IoT Pipelines</div>
-        <div class="comp"><span class="chk">✓</span> V&V, Traceability &amp; Audit-Ready Systems</div>
-        <div class="comp"><span class="chk">✓</span> Process Optimization &amp; Quality Assurance</div>
-        <div class="comp"><span class="chk">✓</span> Statistical Analysis &amp; Benchmarking</div>
-        <div class="comp"><span class="chk">✓</span> Edge AI &amp; Embedded Inference</div>
-        <div class="comp"><span class="chk">✓</span> CI/CD, Docker &amp; Production Deployment</div>
+      <div class="stack-grid" id="stack-grid">
+        <!-- Rendered by JS from the STACK data in app.js -->
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- EXPERIENCE -->
-<section id="experience" class="block reveal">
-  <div class="section-head">
-    <span class="prompt">[root@zervakis ~]$</span>
-    <h2>ls -la experience/</h2>
-    <span class="meta">// TIMELINE</span>
-  </div>
-  <div class="panel">
-    <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/experience/<span>timeline.log</span></div></div>
-    <div class="body">
-      <div class="timeline">
-
-        <div class="tl-item">
-          <div class="when">Dec 2025 — present</div>
-          <h3>PhD Researcher · Autonomous Navigation of UAVs</h3>
-          <div class="org">Hellenic Army Academy — Supervisor: Assoc. Prof. Panagiotópoulos Ilías</div>
-          <ul>
-            <li>Hybrid <strong>Reinforcement Learning + Quantum Computing</strong> (VQC via PennyLane) for multi-UAV coordination in dynamic environments.</li>
-            <li>Dual-use applications — defense, security, civil protection.</li>
-            <li>Bridging rigorous verification with RL/DL methods for safety-critical systems.</li>
-          </ul>
-        </div>
-
-        <div class="tl-item">
-          <div class="when">2025 — present</div>
-          <h3>Claude Code &amp; Agentic AI Specialist</h3>
-          <div class="org">Multi-Agent Orchestration · MCP Protocol · Production Deployment</div>
-          <ul>
-            <li>Design and deploy production-grade agentic workflows with <strong>Claude Code</strong>: custom <strong>MCP servers</strong> (FastMCP, JSON-RPC 2.0), Agent SDK integration (streaming, interrupts, custom tools), and hooks engineering across 13 event types.</li>
-            <li>Custom subagent architectures (planner-auditor, experiment-runner, report-writer) with orchestration, isolation, error handling for autonomous research and engineering tasks.</li>
-            <li>Full-stack agentic deployment: Docker multi-stage builds, ARM64 cross-compilation, systemd services, OTEL + Langfuse + Prometheus observability, promptfoo evaluation pipelines.</li>
-            <li>Designed <strong>CLAUDE.md project-brain</strong> documents and SUPERPROMPT architectures — currently orchestrating PhD research across concurrent experiments.</li>
-            <li>Built <strong>NAPES v3.0</strong> — autonomous SaaS engineering framework that converts product ideas into deployable systems via multi-agent pipelines.</li>
-            <li>Evaluating emerging agentic platforms: OpenClaw, NVIDIA NemoClaw / OpenShell, Nemotron inference routing.</li>
-          </ul>
-          <div class="tech-strip">
-            <span class="label">Built with</span>
-            <div class="tech-pill" title="Anthropic Claude Code">
-              <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#d97757" d="M16 2c.4 5.8 2.3 9.5 7.5 10.8 1.7.4 2.7 1.3 2.7 2.2s-1 1.8-2.7 2.2C18.3 18.5 16.4 22.2 16 28c-.4-5.8-2.3-9.5-7.5-10.8-1.7-.4-2.7-1.3-2.7-2.2s1-1.8 2.7-2.2C13.7 11.5 15.6 7.8 16 2z"/></svg>
-              <span>Claude Code</span>
-            </div>
-            <div class="tech-pill" title="Model Context Protocol">
-              <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="16" r="3" fill="#9eb1ff"/><circle cx="24" cy="8" r="3" fill="#9eb1ff"/><circle cx="24" cy="24" r="3" fill="#9eb1ff"/><path d="M10.5 14.5L21.5 9M10.5 17.5L21.5 23" stroke="#9eb1ff" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
-              <span>MCP</span>
-            </div>
-            <div class="tech-pill" title="OpenClaw autonomous agents">
-              <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#e8b060" d="M16 4c1.5 0 3 .7 3.8 2l3.5 5c.5.7.7 1.6.7 2.4v10c0 1.5-1.2 2.6-2.7 2.6h-10.6c-1.5 0-2.7-1.1-2.7-2.6v-10c0-.8.2-1.7.7-2.4l3.5-5C13 4.7 14.5 4 16 4zm-3 10c-.8 0-1.5.7-1.5 1.5S12.2 17 13 17s1.5-.7 1.5-1.5S13.8 14 13 14zm6 0c-.8 0-1.5.7-1.5 1.5S18.2 17 19 17s1.5-.7 1.5-1.5S19.8 14 19 14z"/></svg>
-              <span>OpenClaw</span>
-            </div>
-            <div class="tech-pill" title="NVIDIA NemoClaw / OpenShell">
-              <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#76b900" d="M6 8h20c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V10c0-1.1.9-2 2-2zm5 4l-3 4 3 4v-3h5c.6 0 1-.4 1-1s-.4-1-1-1h-5v-3z"/></svg>
-              <span>NVIDIA NemoClaw</span>
-            </div>
-            <div class="tech-pill" title="PennyLane · Quantum ML">
-              <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#f5c842" d="M16 4c-2 4-5 6-9 7 4 1 7 3 9 7 2-4 5-6 9-7-4-1-7-3-9-7zm-8 16c-.8 1.6-2 2.4-3.6 2.8 1.6.4 2.8 1.2 3.6 2.8.8-1.6 2-2.4 3.6-2.8-1.6-.4-2.8-1.2-3.6-2.8z"/></svg>
-              <span>PennyLane</span>
-            </div>
-            <div class="tech-pill" title="Docker">
-              <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#2496ed" d="M4 18h3v-3H4v3zm4 0h3v-3H8v3zm0-4h3v-3H8v3zm4 4h3v-3h-3v3zm0-4h3v-3h-3v3zm0-4h3V7h-3v3zm4 8h3v-3h-3v3zm0-4h3v-3h-3v3zm0-4h3V7h-3v3zm4 8h3v-3h-3v3zm8-2c-.5-2.5-3-3-4-3-.3-1.5-1.2-2.8-2.5-3.5l-.5-.3-.3.5c-.7 1-.9 2.3-.3 3.5-.5.3-1.2.3-2 .3H4v1c0 3 2 6 6 7 2 .5 4 .5 6 0 3-1 5-3 6-6 .2 0 2-.2 2.5-1l.3-.3-.3-.2z"/></svg>
-              <span>Docker</span>
-            </div>
+    <!-- ============ HOT REPOS (LIVE) ============ -->
+    <section class="section hot" id="hot">
+      <div class="section-head">
+        <span class="eyebrow"><span class="eyebrow-num">04</span> Live signal</span>
+        <div class="hot-head">
+          <h2 class="reveal" data-reveal>What's <span class="grad">hot</span> on GitHub<br />right now.</h2>
+          <div class="hot-status reveal" data-reveal>
+            <span class="live-badge"><span class="live-dot"></span> LIVE</span>
+            <span class="hot-meta" id="hot-meta">fetching signal…</span>
           </div>
         </div>
-
-        <div class="tl-item">
-          <div class="when">Oct 2025 — present</div>
-          <h3>Software Test Engineer · OHB Hellas</h3>
-          <div class="org">Aerospace — Automated Verification, Quality Systems &amp; Process Optimization</div>
-          <ul>
-            <li>Built automated test-generation pipelines (Python + XML) that replaced manual workflows, achieving <strong>100% requirement-to-test traceability</strong> and significantly accelerating the verification cycle across the product lifecycle.</li>
-            <li>Designed audit-ready quality documentation with zero-ambiguity pass/fail criteria, aligned with ECSS V&V/PA — passed external reviews without rework.</li>
-            <li>Authored testing and onboarding guide, adopted as team standard — cut ramp-up time and ensured consistent methodology across all testers.</li>
-            <li>Run weekly LinkedIn content strategy for OHB Hellas — aerospace engineering, space technology, company milestones.</li>
-          </ul>
-        </div>
-
-        <div class="tl-item">
-          <div class="when">2024 — 2025</div>
-          <h3>MSc · Machine Learning &amp; Data Science</h3>
-          <div class="org">Technical University of Crete</div>
-          <ul>
-            <li>Thesis-adjacent projects: Predictive Maintenance (hydraulic equipment), HAR-Drive (wearable edge ML), LightningText (streaming NLP at scale), Formula Student (real-time ECU forecasting).</li>
-            <li>Honours coursework in Practical Data Science, Optimisation, Databases, Probabilities &amp; ML.</li>
-          </ul>
-        </div>
-
-        <div class="tl-item">
-          <div class="when">2023 — 2024</div>
-          <h3>Research · Ising Machines &amp; Cryptography</h3>
-          <div class="org">University of Crete — with Dr. Komineas &amp; Dr. Garefalakis</div>
-          <ul>
-            <li>Ising Machines (Dr. Komineas) — combinatorial optimisation via physical computing.</li>
-            <li>University Cryptography Team (Dr. Garefalakis) — explored AI × cybersecurity.</li>
-          </ul>
-        </div>
-
-        <div class="tl-item">
-          <div class="when">2017 — 2024</div>
-          <h3>BSc · Mathematics &amp; Applied Mathematics (241 ECTS)</h3>
-          <div class="org">University of Crete — Heraklion</div>
-          <ul>
-            <li>Strong foundation in Advanced Calculus, Linear Algebra, Probability Theory, Algorithms, Statistics — the mathematics behind every ML model I ship.</li>
-          </ul>
-        </div>
-
+        <p class="section-note reveal" data-reveal>
+          Pulled live from the GitHub API — the fastest-rising repositories of the last few days.
+          Not a screenshot. It's genuinely current every time this page loads.
+        </p>
       </div>
+
+      <div class="hot-filters reveal" data-reveal id="hot-filters">
+        <button class="chip is-active" data-lang="">All</button>
+        <button class="chip" data-lang="TypeScript">TypeScript</button>
+        <button class="chip" data-lang="Python">Python</button>
+        <button class="chip" data-lang="Rust">Rust</button>
+        <button class="chip" data-lang="Go">Go</button>
+        <button class="chip" data-lang="C++">C++</button>
+      </div>
+
+      <div class="repos" id="repos" aria-live="polite">
+        <!-- Repo cards / skeletons injected by JS -->
+      </div>
+
+      <div class="hot-refresh">
+        <button class="btn btn-ghost" id="refresh-btn" data-magnetic>
+          <span class="refresh-icon">↻</span> Refresh signal
+        </button>
+        <span class="hot-source">source: <code>api.github.com/search</code></span>
+      </div>
+    </section>
+
+    <!-- ============ BEYOND THE CODE ============ -->
+    <section class="section beyond" id="beyond">
+      <div class="section-head">
+        <span class="eyebrow"><span class="eyebrow-num">05</span> Beyond the code</span>
+        <h2 class="reveal" data-reveal>The person<br />behind the systems.</h2>
+        <p class="section-note reveal" data-reveal>What sharpens the way I think, on and off the keyboard.</p>
+      </div>
+      <div class="beyond-grid" id="beyond-grid">
+        <!-- Rendered by JS from the BEYOND data in app.js -->
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="contact-glow" aria-hidden="true"></div>
+      <span class="eyebrow"><span class="eyebrow-num">06</span> Contact</span>
+      <h2 class="contact-title reveal" data-reveal>Got a problem<br />worth solving?</h2>
+      <p class="contact-sub reveal" data-reveal>The good ones don't wait. Based in Crete — working worldwide.</p>
+
+      <a href="mailto:zervakisai@gmail.com" class="contact-mail reveal" data-reveal data-magnetic>
+        zervakisai@gmail.com <span>→</span>
+      </a>
+
+      <div class="contact-links reveal" data-reveal>
+        <a href="https://github.com/zervakisai" target="_blank" rel="noopener" data-magnetic>GitHub</a>
+        <a href="https://www.linkedin.com/in/zervakisai" target="_blank" rel="noopener" data-magnetic>LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-row">
+      <span class="footer-brand">K·Z</span>
+      <span class="footer-copy">© <span id="year"></span> Konstantinos Zervakis — built from scratch, no template.</span>
     </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="block reveal">
-  <div class="section-head">
-    <span class="prompt">[root@zervakis ~]$</span>
-    <h2>git log --oneline projects</h2>
-    <span class="meta">// SELECTED_MISSIONS</span>
-  </div>
-  <div class="projects-grid">
-
-<article class="proj">
-      <span class="tag">» Full-Stack Autonomy · 2026</span>
-      <h3>Custom Autonomous Sensor Platform (Quadcopter)</h3>
-      <div class="when">2026 · in progress</div>
-      <p>Designing a custom autonomous platform — <strong>LiDAR + GPS + edge compute</strong> — capable of indoor / outdoor autonomous operation. Demonstrates full-stack integration from hardware through edge ML inference. Every layer built by me: sensor integration, flight-stack tuning, ML at the edge, observability.</p>
-      <div class="tech-strip">
-        <div class="tech-pill" title="ArduPilot flight stack"><span class="mark" style="background:#00569c"></span><span>ArduPilot</span></div>
-        <div class="tech-pill" title="Orange Pi 5 Pro edge compute"><span class="mark" style="background:#e28b26"></span><span>Orange Pi 5 Pro</span></div>
-        <div class="tech-pill" title="LiDAR"><span class="mark" style="background:var(--cyan)"></span><span>LiDAR</span></div>
-        <div class="tech-pill" title="GPS"><span class="mark" style="background:var(--text-dim)"></span><span>GPS</span></div>
-        <div class="tech-pill" title="Python"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#3776ab" d="M16 3c-6 0-5 3-5 3v3h6v1H8s-5-.5-5 6 4 6 4 6h2v-3c0-3 3-3 3-3h6s3 0 3-3V6s1-3-5-3zm-4 3c.8 0 1.5.7 1.5 1.5S12.8 9 12 9s-1.5-.7-1.5-1.5S11.2 6 12 6z"/><path fill="#ffd43b" d="M16 29c6 0 5-3 5-3v-3h-6v-1h9s5 .5 5-6-4-6-4-6h-2v3c0 3-3 3-3 3h-6s-3 0-3 3v5s-1 3 5 3zm4-3c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/></svg><span>Python</span></div>
-        <div class="tech-pill" title="C / C++"><span class="mark" style="background:#00599c"></span><span>C / C++</span></div>
-        <div class="tech-pill" title="ARM64"><span class="mark" style="background:#0091bd"></span><span>ARM64</span></div>
-      </div>
-      <div class="links"><a href="#chat">▸ Ask me about this</a></div>
-    </article>
-
-<article class="proj">
-      <span class="tag">» Predictive Failure Prevention · 2025</span>
-      <h3>Live Sensor Telemetry → Real-Time Intervention</h3>
-      <div class="when">Apr 2025 · Formula Student TUC</div>
-      <p>Developed an <strong>LSTM + LightGBM + ETSformer</strong> pipeline predicting critical equipment parameters from <strong>6 real-time sensor streams</strong> at <strong>sub-5 ms inference latency</strong> on embedded hardware — enabling proactive shutdown before lean spikes and over-rev failures. Architecture applies directly to industrial predictive maintenance: continuous ingestion → ML inference → threshold alerting → automated intervention, all on constrained edge devices.</p>
-      <div class="metrics"><span>&lt;5 ms latency</span><span>6 sensor streams</span></div>
-      <div class="tech-strip">
-        <div class="tech-pill" title="PyTorch"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#ee4c2c" d="M22 5l-2 2c3 3 3 8 0 11s-8 3-11 0-3-8 0-11L5 12c-4 4-4 10 0 14s10 4 14 0 4-10 0-14l3-3zM18 10c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5S18.8 10 18 10z"/></svg><span>PyTorch</span></div>
-        <div class="tech-pill" title="LightGBM"><span class="mark" style="background:#8b5cf6"></span><span>LightGBM</span></div>
-        <div class="tech-pill" title="ETSformer"><span class="mark" style="background:var(--cyan)"></span><span>ETSformer</span></div>
-        <div class="tech-pill" title="LSTM"><span class="mark" style="background:var(--magenta)"></span><span>LSTM</span></div>
-        <div class="tech-pill" title="Embedded C"><span class="mark" style="background:#00599c"></span><span>Embedded C</span></div>
-      </div>
-      <div class="links">
-        <a href="formula-student.html">▸ Project page</a>
-        <a href="MLDS (7).pdf">▸ Report</a>
-        <a href="MLDS (2).ipynb">▸ Notebook</a>
-      </div>
-    </article>
-
-    <article class="proj">
-      <span class="tag">» Edge ML · 2025</span>
-      <h3>HAR-Drive — Lightweight Classification</h3>
-      <div class="when">Jun 2025</div>
-      <p>Automated <strong>PCA-vs-LDA</strong> sweep on the UCI HAR dataset (10k traces, 561 features). A 5-D LDA embedding + SVM-RBF hit <strong>F1 = 0.984</strong> with a <strong>98% feature reduction</strong>. The engineering lesson: the smallest defensible model usually wins — crucial when you're deploying on a PLC, a shop-floor tablet, or a cost-sensitive embedded device.</p>
-      <div class="metrics"><span>F1 = 0.984</span><span>-98% features</span><span>5-fold CV</span></div>
-      <div class="tech-strip">
-        <div class="tech-pill" title="scikit-learn"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="#f7931e"/><circle cx="16" cy="16" r="5" fill="#29abe2"/></svg><span>scikit-learn</span></div>
-        <div class="tech-pill" title="Python"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#3776ab" d="M16 3c-6 0-5 3-5 3v3h6v1H8s-5-.5-5 6 4 6 4 6h2v-3c0-3 3-3 3-3h6s3 0 3-3V6s1-3-5-3zm-4 3c.8 0 1.5.7 1.5 1.5S12.8 9 12 9s-1.5-.7-1.5-1.5S11.2 6 12 6z"/><path fill="#ffd43b" d="M16 29c6 0 5-3 5-3v-3h-6v-1h9s5 .5 5-6-4-6-4-6h-2v3c0 3-3 3-3 3h-6s-3 0-3 3v5s-1 3 5 3zm4-3c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/></svg><span>Python</span></div>
-        <div class="tech-pill" title="LDA (Linear Discriminant Analysis)"><span class="mark" style="background:var(--cyan)"></span><span>LDA</span></div>
-        <div class="tech-pill" title="SVM-RBF"><span class="mark" style="background:var(--magenta)"></span><span>SVM-RBF</span></div>
-      </div>
-      <div class="links">
-        <a href="har-drive.html">▸ Project page</a>
-        <a href="report.pdf">▸ Report</a>
-      </div>
-    </article>
-
-    <article class="proj">
-      <span class="tag">» Big Data · Streaming · 2025</span>
-      <h3>LightningText on Spark</h3>
-      <div class="when">May 2025</div>
-      <p>Large-scale processing pipeline on <strong>Apache Spark</strong>. Handled <strong>14M+ records (3.4 GB)</strong> with reservoir sampling, Count-Min Sketch, Flajolet–Martin, and wavelet compression — <strong>&lt;2% error inside a 20 KB RAM footprint</strong>. The same sketching techniques turn years of SCADA / MES logs into real-time dashboards without a data-warehouse bill.</p>
-      <div class="metrics"><span>14M+ docs</span><span>20 KB RAM</span><span>&lt;2% error</span></div>
-      <div class="tech-strip">
-        <div class="tech-pill" title="Apache Spark"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#e25a1c" d="M16 3c-4 4-6 8-6 12 0 3 2 6 6 8 4-2 6-5 6-8 0-4-2-8-6-12zm0 7c2 2 3 4 3 6s-1 4-3 5c-2-1-3-3-3-5s1-4 3-6z"/></svg><span>Apache Spark</span></div>
-        <div class="tech-pill" title="Python"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#3776ab" d="M16 3c-6 0-5 3-5 3v3h6v1H8s-5-.5-5 6 4 6 4 6h2v-3c0-3 3-3 3-3h6s3 0 3-3V6s1-3-5-3zm-4 3c.8 0 1.5.7 1.5 1.5S12.8 9 12 9s-1.5-.7-1.5-1.5S11.2 6 12 6z"/><path fill="#ffd43b" d="M16 29c6 0 5-3 5-3v-3h-6v-1h9s5 .5 5-6-4-6-4-6h-2v3c0 3-3 3-3 3h-6s-3 0-3 3v5s-1 3 5 3zm4-3c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/></svg><span>Python</span></div>
-        <div class="tech-pill" title="Count-Min Sketch · Flajolet-Martin"><span class="mark" style="background:var(--cyan)"></span><span>Sketching (CMS, FM)</span></div>
-        <div class="tech-pill" title="Wavelet compression"><span class="mark" style="background:var(--magenta)"></span><span>Wavelet compression</span></div>
-      </div>
-      <div class="links">
-        <a href="lightningtext.html">▸ Project page</a>
-        <a href="BD.pdf">▸ Report</a>
-        <a href="BD.ipynb">▸ Notebook</a>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- RESEARCH -->
-<section id="research" class="block reveal">
-  <div class="section-head">
-    <span class="prompt">[root@zervakis ~]$</span>
-    <h2>grep -i "research" publications/</h2>
-    <span class="meta">// PEER-REVIEWED</span>
-  </div>
-  <div class="panel">
-    <div class="bar"><div class="lights"><i class="r"></i><i class="y"></i><i class="g"></i></div><div class="title">~/research/<span>flare.md</span> &nbsp; · &nbsp; <span style="color:var(--amber)">Submitted · Hellenic Robotics Forum · Target: Drones (MDPI)</span></div></div>
-    <div class="body">
-      <h3 style="font-size:20px;color:var(--neon);margin-bottom:8px;text-transform:none">FLARE — Decision Optimization under Uncertainty</h3>
-      <p style="color:var(--text-dim);margin-bottom:14px;font-size:12.5px;letter-spacing:.05em">Submitted to <em style="color:var(--cyan);font-style:normal">Hellenic Robotics Forum</em> &nbsp;·&nbsp; targeting <em style="color:var(--cyan);font-style:normal">Drones</em> (MDPI) &nbsp;·&nbsp; first author</p>
-      <ul style="list-style:none">
-        <li style="padding-left:44px;position:relative;margin-bottom:10px;color:var(--text);line-height:1.6"><span style="color:var(--neon);position:absolute;left:0;font-family:ui-monospace,'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em">[01]</span> <strong style="color:var(--neon)">Simulation framework with 450+ experimental runs</strong> — built from real OpenStreetMap data, statistically proving that optimization algorithms tuned for safety can <em style="color:var(--magenta);font-style:normal">paradoxically increase total cost</em> when timing constraints exist.</li>
-        <li style="padding-left:44px;position:relative;margin-bottom:10px;color:var(--text);line-height:1.6"><span style="color:var(--neon);position:absolute;left:0;font-family:ui-monospace,'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em">[02]</span> <strong style="color:var(--neon)">Configurable risk coefficient (ρ)</strong> — lets operators dial between conservative and aggressive decision strategies, making the trade-off explicit and auditable rather than hidden in algorithm defaults.</li>
-        <li style="padding-left:44px;position:relative;margin-bottom:10px;color:var(--text);line-height:1.6"><span style="color:var(--neon);position:absolute;left:0;font-family:ui-monospace,'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em">[03]</span> <strong style="color:var(--neon)">Rigorous statistical methodology</strong> — Friedman tests, Wilcoxon signed-rank with Bonferroni correction, Cliff's delta effect sizes, and Shapley attribution for interpretable, reproducible results.</li>
-        <li style="padding-left:44px;position:relative;margin-bottom:10px;color:var(--text);line-height:1.6"><span style="color:var(--neon);position:absolute;left:0;font-family:ui-monospace,'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em">[04]</span> <strong style="color:var(--neon)">Transferable finding</strong> — directly relevant to any system balancing risk vs. throughput: production scheduling under disruption, preventive-maintenance thresholds, quality-vs-throughput trade-offs, energy-vs-output optimization.</li>
-      </ul>
-      <div style="margin-top:22px;padding:14px;border:1px dashed var(--border);background:rgba(79,179,230,.05);font-size:12.5px;color:var(--cyan)">
-        <strong style="color:var(--neon)">» The operational takeaway:</strong> "Safe" algorithms fail when timing is critical — directly relevant to any operation where downtime costs money. The same ρ-based framework is the method; the UAV is just the first tested instance.
-      </div>
+    <div class="footer-terminal" id="footer-terminal">
+      <span class="prompt">~/zervakisai.github.io $</span>
+      <span class="typed" id="footer-typed"></span><span class="caret">▋</span>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- SKILLS -->
-<section id="skills" class="block reveal">
-  <div class="section-head">
-    <span class="prompt">[root@zervakis ~]$</span>
-    <h2>inventory --skills</h2>
-    <span class="meta">// TECH_STACK</span>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-cat"><h4>▸ AI / ML</h4><div class="tags">
-      <div class="tech-pill"><svg><use href="#ico-pytorch"/></svg><span>PyTorch</span></div>
-      <div class="tech-pill"><svg><use href="#ico-sklearn"/></svg><span>scikit-learn</span></div>
-      <div class="tech-pill"><svg><use href="#ico-huggingface"/></svg><span>Transformers</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--magenta)"></span><span>LSTM</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#8b5cf6"></span><span>LightGBM</span></div>
-      <div class="tech-pill"><svg><use href="#ico-pennylane"/></svg><span>PennyLane (Quantum ML)</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#6cb33f"></span><span>Gymnasium / RL</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>ReAct</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--magenta)"></span><span>Reflexion</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--amber)"></span><span>Tree of Thoughts</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ Agentic AI</h4><div class="tags">
-      <div class="tech-pill"><svg><use href="#ico-claude"/></svg><span>Claude Code</span></div>
-      <div class="tech-pill"><svg><use href="#ico-claude"/></svg><span>Agent SDK</span></div>
-      <div class="tech-pill"><svg><use href="#ico-mcp"/></svg><span>MCP · FastMCP · JSON-RPC 2.0</span></div>
-      <div class="tech-pill"><svg><use href="#ico-openclaw"/></svg><span>OpenClaw</span></div>
-      <div class="tech-pill"><svg><use href="#ico-nvidia"/></svg><span>NVIDIA NemoClaw / OpenShell</span></div>
-      <div class="tech-pill"><svg><use href="#ico-hook"/></svg><span>Hooks (13 events)</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>Custom subagents</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#d97757"></span><span>CLAUDE.md architecture</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--magenta)"></span><span>Prompt caching</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ Languages</h4><div class="tags">
-      <div class="tech-pill"><svg><use href="#ico-python"/></svg><span>Python (async/await, type hints, dataclasses)</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#659ad2"></span><span>C</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#00599c"></span><span>C++</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#e48e00"></span><span>SQL</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#e46c0a"></span><span>MATLAB</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#0060df"></span><span>XML</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#4eaa25"></span><span>Bash</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ V&V · Testing</h4><div class="tags">
-      <div class="tech-pill"><span class="mark" style="background:#4285f4"></span><span>GoogleTest</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#009fe3"></span><span>pytest</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--magenta)"></span><span>CppUTest</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--amber)"></span><span>Unity / CMock</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#e74c3c"></span><span>Mutation testing (Mull)</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>RapidCheck</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#17202c"></span><span>Cypress</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>promptfoo (AI evals)</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ Standards</h4><div class="tags">
-      <div class="tech-pill"><span class="mark" style="background:#1f3a93"></span><span>ECSS V&V/PA</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#003366"></span><span>MISRA-C/C++</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#cc0000"></span><span>CERT-C</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#262577"></span><span>clang-tidy</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#4a90e2"></span><span>cppcheck</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ Observability</h4><div class="tags">
-      <div class="tech-pill"><span class="mark" style="background:#f5a524"></span><span>OTEL (GenAI semantic conventions)</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#f5c842"></span><span>Langfuse</span></div>
-      <div class="tech-pill"><svg><use href="#ico-prometheus"/></svg><span>Prometheus</span></div>
-      <div class="tech-pill"><svg><use href="#ico-grafana"/></svg><span>Grafana</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--text-dim)"></span><span>structlog</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>Cost analytics</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ Backend</h4><div class="tags">
-      <div class="tech-pill"><svg><use href="#ico-fastapi"/></svg><span>FastAPI</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#e92063"></span><span>Pydantic</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#e16600"></span><span>SQLAlchemy</span></div>
-      <div class="tech-pill"><svg><use href="#ico-redis"/></svg><span>Redis</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#37814a"></span><span>Celery</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>asyncio / anyio</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ Space · Embedded</h4><div class="tags">
-      <div class="tech-pill"><span class="mark" style="background:#00529b"></span><span>CCSDS / PUS</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#ffc107"></span><span>CAN bus</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#660066"></span><span>MQTT</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>WebSockets</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#1f3a93"></span><span>YAMCS (TM/TC)</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--amber)"></span><span>EGSE</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--magenta)"></span><span>SIL / HIL</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#e74c3c"></span><span>FDIR</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#e28b26"></span><span>Orange Pi edge deployment</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ DevOps</h4><div class="tags">
-      <div class="tech-pill"><svg><use href="#ico-git"/></svg><span>Git (worktrees)</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#d33833"></span><span>Jenkins</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#fc6d26"></span><span>GitLab CI</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#2088ff"></span><span>GitHub Actions</span></div>
-      <div class="tech-pill"><svg><use href="#ico-docker"/></svg><span>Docker (multi-stage, ARM64, distroless)</span></div>
-      <div class="tech-pill"><svg><use href="#ico-k8s"/></svg><span>Kubernetes</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--text-dim)"></span><span>systemd</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#de5fe9"></span><span>uv</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ Requirements · Traceability</h4><div class="tags">
-      <div class="tech-pill"><span class="mark" style="background:#0f62fe"></span><span>IBM DOORS Next</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>OSLC Connect</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#0052cc"></span><span>Jira / Xray</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--amber)"></span><span>Traceability Matrix</span></div>
-    </div></div>
-    <div class="skill-cat"><h4>▸ Data &amp; IoT</h4><div class="tags">
-      <div class="tech-pill"><span class="mark" style="background:#150458"></span><span>Pandas</span></div>
-      <div class="tech-pill"><span class="mark" style="background:#4d77cf"></span><span>NumPy</span></div>
-      <div class="tech-pill"><svg><use href="#ico-postgres"/></svg><span>PostgreSQL</span></div>
-      <div class="tech-pill"><svg><use href="#ico-spark"/></svg><span>Apache Spark</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--cyan)"></span><span>Real-time sensor pipelines</span></div>
-      <div class="tech-pill"><span class="mark" style="background:var(--magenta)"></span><span>Telemetry processing</span></div>
-    </div></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="block reveal">
-  <div class="section-head">
-    <span class="prompt">[root@zervakis ~]$</span>
-    <h2>./initiate_contact.sh</h2>
-    <span class="meta">// CHANNEL_OPEN</span>
-  </div>
-  <div class="contact-grid">
-    <div class="contact-card">
-      <h3>» Ready when you are</h3>
-      <p>Open to <strong style="color:var(--neon);font-weight:500">AI Engineer roles</strong>. Predictive maintenance, production ML, time-series forecasting, computer vision, MLOps. Fastest response: email.</p>
-      <ul class="contact-list">
-        <li><span class="k">Email</span><span class="v"><a href="mailto:zervakisai@gmail.com">zervakisai@gmail.com</a></span></li>
-        <li><span class="k">Phone</span><span class="v"><a href="tel:+306940696921">+30 6940 696921</a></span></li>
-        <li><span class="k">GitHub</span><span class="v"><a href="https://github.com/zervakisai" target="_blank" rel="noopener">@zervakisai</a></span></li>
-        <li><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/-zervakisai-/" target="_blank" rel="noopener">in/-zervakisai-</a></span></li>
-        <li><span class="k">CV</span><span class="v"><a href="CV_Konstantinos_Zervakis.docx" download>Download DOCX</a></span></li>
-        <li><span class="k">Based in</span><span class="v">Heraklion, Crete</span></li>
-        <li><span class="k">Timezone</span><span class="v" id="tz-label">Athens</span></li>
-      </ul>
-    </div>
-    <div class="contact-card">
-      <h3>» Still have questions?</h3>
-      <p>The fastest way to evaluate fit: ask me directly. The live chat above knows my CV cold and answers as me — try "why should we hire you", "predictive maintenance", or "why Crete".</p>
-      <a class="btn" href="#chat" style="margin-top:10px">▸ Open chat</a>
-      <p style="margin-top:22px;color:var(--text-dim);font-size:12px">Status: <span style="color:var(--neon)">● open to AI Engineer roles</span><br/>Expected response: &lt; 24h on weekdays.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="ascii">  _  __    ______
- | |/ /___|__  /
- | ' // _ \ / /
- | . \  __// /_
- |_|\_\___/____|
-</div>
-  <div>&copy; 2026 KONSTANTINOS ZERVAKIS · AI Engineer · Heraklion, Crete · <a href="#hero">return to top ▲</a></div>
-</footer>
-
-</div>
-
-<!-- ==========================================================
-     SCRIPTS
-========================================================== -->
-<!-- Local first (works offline / in strict networks). Falls back to CDN if missing. -->
-<script src="./three.min.js"
-  onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';document.head.appendChild(s);"></script>
-<script>
-/* =============================================================
-   UTILITIES
-============================================================= */
-const $ = s => document.querySelector(s);
-const $$ = s => document.querySelectorAll(s);
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-
-/* =============================================================
-   CLOCK
-============================================================= */
-function tickClock(){
-  const d = new Date();
-  const p = n => String(n).padStart(2,'0');
-  $('#clock').textContent = `${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`;
-}
-setInterval(tickClock,1000); tickClock();
-
-/* Dynamic Athens timezone label (EET/EEST depending on DST) */
-(function(){
-  const el = document.getElementById('tz-label');
-  if(!el) return;
-  try{
-    const now = new Date();
-    const athens = new Date(now.toLocaleString('en-US',{timeZone:'Europe/Athens'}));
-    const utc = new Date(now.toLocaleString('en-US',{timeZone:'UTC'}));
-    const offset = Math.round((athens - utc)/3600000);
-    const abbr = offset === 3 ? 'EEST' : 'EET';
-    el.textContent = `${abbr} (UTC+${offset})`;
-  }catch(e){ el.textContent = 'Europe/Athens'; }
-})();
-
-/* =============================================================
-   BOOT SEQUENCE
-============================================================= */
-const bootLines = [
-  {t:'[OK]  KZ-OS v2.6.1 mission-control kernel … loaded',c:'ok'},
-  {t:'[OK]  mounting /dev/neon … mounted',c:'ok'},
-  {t:'[OK]  probing telemetry bus CAN0 … 1 Mbps nominal',c:'ok'},
-  {t:'[OK]  loading flare-benchmark.rom … v2026.1',c:'ok'},
-  {t:'[..]  authenticating credentials … PhD(c), MSc, BSc',c:'dim'},
-  {t:'[OK]  ECSS V&V/PA compliance … verified',c:'ok'},
-  {t:'[OK]  risk-coefficient ρ = 0.65 (balanced)',c:'ok'},
-  {t:'[OK]  warming up AI chat kernel …',c:'ok'},
-  {t:'[..]  linking CV knowledge base … 24 topics indexed',c:'dim'},
-  {t:'[OK]  Three.js WebGL context … acquired',c:'ok'},
-  {t:'[  ]  handshaking with recruiter … ready.',c:'warn'},
-  {t:'',c:''},
-  {t:'▸ Welcome. Launching interface …',c:'ok'},
-];
-async function runBoot(){
-  const out = $('#boot-out');
-  for(const ln of bootLines){
-    const el = document.createElement('div');
-    el.className = 'line ' + ln.c;
-    el.textContent = ln.t || ' ';
-    out.appendChild(el);
-    requestAnimationFrame(()=>el.style.animationDelay='0ms');
-    await sleep(90 + Math.random()*70);
-  }
-  await sleep(420);
-  $('#boot').classList.add('done');
-  setTimeout(()=>$('#boot').remove(), 700);
-  startIntro();
-}
-
-/* =============================================================
-   HERO: typewriter role + stat counters
-============================================================= */
-const roles = ['AI Engineer · PhD Candidate', 'Agentic AI · Claude Code · MCP', 'UAV autonomy · Quantum ML (VQC)', 'Edge AI · real-time sensor pipelines', 'Based in Crete'];
-async function rotateRole(){
-  const el = $('#role'); let i=0;
-  while(true){
-    const s = roles[i % roles.length];
-    for(let k=0;k<=s.length;k++){ el.textContent = s.slice(0,k); await sleep(38); }
-    await sleep(1800);
-    for(let k=s.length;k>=0;k--){ el.textContent = s.slice(0,k); await sleep(18); }
-    await sleep(300); i++;
-  }
-}
-function animateStats(){
-  $$('.stat .n').forEach(el=>{
-    const target = parseFloat(el.dataset.n);
-    const isDecimal = target < 10 && !Number.isInteger(target);
-    let v = 0; const step = target / 60;
-    const timer = setInterval(()=>{
-      v += step;
-      if(v >= target){ v = target; clearInterval(timer); }
-      el.textContent = isDecimal ? v.toFixed(3) : Math.round(v);
-    }, 22);
-  });
-}
-function startIntro(){ rotateRole(); animateStats(); }
-
-/* matrix rain removed — minimal background per user request */
-
-/* =============================================================
-   THREE.JS — AUTONOMOUS DRONE MISSION (live patrol over Crete)
-============================================================= */
-const MISSIONS = [
-  {id:'ohb',   label:'OHB Hellas',   pos:[ 3.0, 0.0,-0.4], color:0x00ff9c,
-   body:'<strong>OHB Hellas — Space V&V.</strong> XML automated verification + Python generators aligned to ECSS V&V/PA. Full Req↔Test↔Result traceability.'},
-  {id:'flare', label:'FLARE · Submitted', pos:[-2.8, 0.0, 0.6], color:0xff2bd6,
-   body:'<strong>FLARE — Submitted to Hellenic Robotics Forum, targeting Drones (MDPI).</strong> Risk-aware UAV path-planning benchmark. Discovered "Ranking Inversion" — survival-optimised planners fail mission objectives.'},
-  {id:'har',   label:'HAR-Drive',    pos:[ 1.6,-0.1, 2.0], color:0x00e5ff,
-   body:'<strong>HAR-Drive.</strong> LDA+SVM hits F1 = 0.984 with 98% feature reduction on UCI HAR. Built for wearables.'},
-  {id:'light', label:'LightningText', pos:[-1.8, 0.1,-2.0], color:0xffb020,
-   body:'<strong>LightningText (Spark).</strong> 14M+ BookCorpus documents with sketching + compression. <2% error in 20KB RAM.'},
-  {id:'fs',    label:'Formula Student', pos:[ 0.4,-0.05,-2.6], color:0x00ff9c,
-   body:'<strong>Formula Student TUC.</strong> LSTM+LightGBM+ETSformer. Sub-5ms ECU inference for live Lambda & RPM prediction.'},
-];
-
-let three = null, mission = null;
-
-/* simplex-like noise for terrain height (cheap, deterministic) */
-function hnoise(x,z){
-  return Math.sin(x*1.3)*.24 + Math.cos(z*1.1)*.22
-       + Math.sin(x*2.7+z*0.6)*.11 + Math.cos(x*0.5-z*2.3)*.13
-       - Math.sqrt(x*x+z*z)*0.06;
-}
-
-function initThree(){
-  const canvas = $('#three-canvas');
-  if(typeof THREE === 'undefined'){
-    const body = $('#hud-body');
-    if(body) body.innerHTML = '<strong style="color:var(--amber)">three.js failed to load</strong> — check network / CDN. The chat below still works.';
-    console.error('THREE is not defined');
-    return;
-  }
-  let renderer;
-  try{
-    renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'default'});
-  }catch(e){
-    $('#hud-body').innerHTML = '<strong style="color:var(--amber)">WebGL unavailable</strong> on this browser. The chat section still works fully.';
-    console.error(e); return;
-  }
-  renderer.setPixelRatio(Math.min(devicePixelRatio||1, 2));
-  renderer.setClearColor(0x000000, 0);
-  const resize = ()=>{
-    const W = Math.max(1, canvas.clientWidth), H = Math.max(1, canvas.clientHeight);
-    renderer.setSize(W,H,false);
-  };
-  resize();
-
-  const scene = new THREE.Scene();
-  /* lighter fog so distant fires and buildings stay vibrant */
-  scene.fog = new THREE.Fog(0x04060a, 18, 42);
-
-  const camera = new THREE.PerspectiveCamera(48, canvas.clientWidth/canvas.clientHeight, 0.1, 100);
-
-  /* ---------- TERRAIN (low-poly island) ---------- */
-  const TSIZE = 16, TSEG = 48;
-  const terrainGeo = new THREE.PlaneGeometry(TSIZE, TSIZE, TSEG, TSEG);
-  terrainGeo.rotateX(-Math.PI/2);
-  const tpos = terrainGeo.attributes.position;
-  for(let i=0;i<tpos.count;i++){
-    const x = tpos.getX(i), z = tpos.getZ(i);
-    let y = hnoise(x*.55, z*.55);
-    /* radial falloff so edges drop into "sea" */
-    const r = Math.sqrt(x*x+z*z);
-    const mask = Math.max(0, 1 - (r/6.5)*(r/6.5));
-    y *= mask*1.4;
-    if(y < -0.15) y = -0.18; /* flat sea */
-    tpos.setY(i, y);
-  }
-  terrainGeo.computeVertexNormals();
-  const terrain = new THREE.Mesh(terrainGeo, new THREE.MeshBasicMaterial({
-    color:0x00ff9c, wireframe:true, transparent:true, opacity:.28
-  }));
-  terrain.position.y = -.3;
-  scene.add(terrain);
-
-  /* sea level plane (faint) */
-  const sea = new THREE.Mesh(
-    new THREE.PlaneGeometry(TSIZE*1.4, TSIZE*1.4, 1,1).rotateX(-Math.PI/2),
-    new THREE.MeshBasicMaterial({color:0x002a2a, transparent:true, opacity:.35})
-  );
-  sea.position.y = -.48;
-  scene.add(sea);
-
-  /* subtle grid lines aligned with world for scale */
-  const grid = new THREE.GridHelper(24, 12, 0x00ff9c, 0x003322);
-  grid.position.y = -.47; grid.material.transparent = true; grid.material.opacity = .18;
-  scene.add(grid);
-
-  /* ---------- RISK-FIELD HEATMAP (continuous cost landscape R(x,t)) ----------
-     Per-vertex colored plane that updates from threat Gaussians at ~10 Hz.
-     Blue/transparent where R≈0 → yellow → orange → red where R is high.     */
-  const RF_SIZE = 14;
-  const RF_SEG = 72;
-  const riskGeo = new THREE.PlaneGeometry(RF_SIZE, RF_SIZE, RF_SEG, RF_SEG);
-  riskGeo.rotateX(-Math.PI/2);
-  const rfPosAttr = riskGeo.attributes.position;
-  const rfColors = new Float32Array(rfPosAttr.count * 3);
-  for(let i=0;i<rfPosAttr.count;i++){ rfColors[i*3]=0; rfColors[i*3+1]=0.1; rfColors[i*3+2]=0.15; }
-  riskGeo.setAttribute('color', new THREE.BufferAttribute(rfColors, 3));
-  const riskField = new THREE.Mesh(riskGeo, new THREE.MeshBasicMaterial({
-    vertexColors: true, transparent: true, opacity: 0.5, side: THREE.DoubleSide,
-    depthWrite: false, fog: false
-  }));
-  riskField.position.y = -0.08;  /* hovers over terrain, reads as a heatmap overlay */
-  scene.add(riskField);
-
-  /* ---------- RRT* PLANNER TREE — re-drawn on every plan ----------
-     Thin cyan line segments showing sampled configuration-space nodes and
-     the tree edges. Not a real RRT* algorithm — a visual proxy that reads as one. */
-  let rrtTree = new THREE.Group();
-  scene.add(rrtTree);
-
-  /* ---------- MPC RECEDING-HORIZON PREVIEW ----------
-     Short bright-yellow segment showing the next ~0.8 s of intended motion. */
-  const mpcGeo = new THREE.BufferGeometry().setAttribute('position',
-    new THREE.BufferAttribute(new Float32Array(20*3), 3));
-  const mpcPreview = new THREE.Line(mpcGeo, new THREE.LineBasicMaterial({
-    color: 0xffee44, transparent:true, opacity:.95, fog:false, linewidth:2
-  }));
-  scene.add(mpcPreview);
-
-  /* ---------- EXECUTED TRAJECTORY (last ~2 s of actual drone positions) ---------- */
-  const TRAIL_LEN = 120;
-  const trailPositions = new Float32Array(TRAIL_LEN * 3);
-  for(let i=0;i<TRAIL_LEN*3;i++) trailPositions[i] = 0;
-  const trailGeo = new THREE.BufferGeometry();
-  trailGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
-  const executedTrail = new THREE.Line(trailGeo, new THREE.LineDashedMaterial({
-    color: 0x88aacc, transparent:true, opacity:.65, dashSize:.12, gapSize:.06, fog:false
-  }));
-  scene.add(executedTrail);
-  let trailHead = 0;
-
-  /* ---------- DRONE — rescue quadcopter ---------- */
-  const drone = new THREE.Group();
-  /* central hull — solid + wireframe overlay, bigger than before */
-  const hull = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(.28, 0),
-    new THREE.MeshBasicMaterial({color:0x0a1a18, fog:false})
-  );
-  drone.add(hull);
-  const hullWire = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(.29, 0),
-    new THREE.MeshBasicMaterial({color:0x00ff9c, wireframe:true, fog:false})
-  );
-  drone.add(hullWire);
-  const armMat = new THREE.MeshBasicMaterial({color:0x00e5ff, fog:false});
-  const rotors = [];
-  for(let i=0;i<4;i++){
-    const ang = i*Math.PI/2 + Math.PI/4;
-    const arm = new THREE.Mesh(new THREE.CylinderGeometry(.018,.018,.54,6), armMat);
-    arm.position.set(Math.cos(ang)*.27, 0, Math.sin(ang)*.27);
-    arm.rotation.z = Math.PI/2; arm.rotation.y = -ang;
-    drone.add(arm);
-    const rot = new THREE.Mesh(
-      new THREE.TorusGeometry(.13,.016,6,20),
-      new THREE.MeshBasicMaterial({color:0xff2bd6, fog:false})
-    );
-    rot.position.set(Math.cos(ang)*.54, .05, Math.sin(ang)*.54);
-    rot.rotation.x = Math.PI/2;
-    drone.add(rot); rotors.push(rot);
-  }
-  /* emergency strobes — rescue red + blue */
-  const strobeRed = new THREE.Mesh(new THREE.SphereGeometry(.05,10,10), new THREE.MeshBasicMaterial({color:0xff3860, fog:false}));
-  strobeRed.position.set(0, .18, 0);
-  drone.add(strobeRed);
-  const strobeBlue = new THREE.Mesh(new THREE.SphereGeometry(.05,10,10), new THREE.MeshBasicMaterial({color:0x2b9eff, fog:false}));
-  strobeBlue.position.set(0, -.18, 0);
-  drone.add(strobeBlue);
-  /* nav light */
-  const nav = new THREE.Mesh(new THREE.SphereGeometry(.045,10,10), new THREE.MeshBasicMaterial({color:0xffffff, fog:false}));
-  nav.position.set(0, 0, .28);
-  drone.add(nav);
-  /* ---------- EKF 3σ UNCERTAINTY ELLIPSOID ----------
-     Wireframe sphere around the drone representing state covariance.
-     Grows linearly with time since last landmark update, collapses near beacons. */
-  const ekfSphere = new THREE.Mesh(
-    new THREE.SphereGeometry(0.35, 14, 10),
-    new THREE.MeshBasicMaterial({color:0xffb020, wireframe:true, transparent:true, opacity:.32, fog:false})
-  );
-  drone.add(ekfSphere);
-  scene.add(drone);
-
-  /* ---------- SCAN CONE (under drone) ---------- */
-  const scanCone = new THREE.Mesh(
-    new THREE.ConeGeometry(1.1, 2.0, 24, 1, true),
-    new THREE.MeshBasicMaterial({color:0x00ff9c, transparent:true, opacity:.14, side:THREE.DoubleSide, fog:false})
-  );
-  scanCone.rotation.x = Math.PI;
-  drone.add(scanCone);
-  scanCone.position.y = -1.0;
-
-  /* ---------- CITYSCAPE (always visible — scene is "rescue mission over a city") ---------- */
-  const cityBuildings = [];
-  for(let i=0;i<22;i++){
-    /* deterministic-ish scatter around the island */
-    const ang = (i*0.47) * Math.PI*2;
-    const rad = 1.8 + ((i*1.7) % 3.6) + Math.sin(i*2.3)*0.5;
-    const bx = Math.cos(ang) * rad;
-    const bz = Math.sin(ang) * rad;
-    /* skip placements too close to a beacon */
-    let safe = true;
-    for(const m of MISSIONS){
-      if(Math.hypot(m.pos[0]-bx, m.pos[2]-bz) < 0.85){ safe = false; break; }
-    }
-    if(!safe) continue;
-    const bh = 0.55 + ((i*37)%7)*0.16;
-    const bw = 0.2  + ((i*13)%5)*0.04;
-    const bd = 0.2  + ((i*17)%5)*0.04;
-    const py = Math.max(-0.15, hnoise(bx*.55, bz*.55) * Math.max(0, 1 - (bx*bx+bz*bz)/42.25) * 1.4) - 0.14;
-
-    const bg = new THREE.Group();
-    const bodyM = new THREE.Mesh(
-      new THREE.BoxGeometry(bw, bh, bd),
-      new THREE.MeshBasicMaterial({color:0x1c2d42, transparent:true, opacity:.9, fog:false})
-    );
-    bodyM.position.y = bh*0.5;
-    bg.add(bodyM);
-    const edges = new THREE.LineSegments(
-      new THREE.EdgesGeometry(bodyM.geometry),
-      new THREE.LineBasicMaterial({color:0x00e5ff, transparent:true, opacity:.75, fog:false})
-    );
-    edges.position.copy(bodyM.position);
-    bg.add(edges);
-    /* lit windows — front + back amber strip */
-    const win1 = new THREE.Mesh(
-      new THREE.PlaneGeometry(bw*0.65, bh*0.72),
-      new THREE.MeshBasicMaterial({color:0xffb020, transparent:true, opacity:.38, side:THREE.DoubleSide, fog:false})
-    );
-    win1.position.set(0, bh*0.5, bd*0.51);
-    bg.add(win1);
-    const win2 = new THREE.Mesh(
-      new THREE.PlaneGeometry(bw*0.65, bh*0.72),
-      new THREE.MeshBasicMaterial({color:0xffb020, transparent:true, opacity:.32, side:THREE.DoubleSide, fog:false})
-    );
-    win2.position.set(0, bh*0.5, -bd*0.51);
-    bg.add(win2);
-    bg.position.set(bx, py, bz);
-    scene.add(bg);
-    cityBuildings.push({g:bg, win1, win2, phase: Math.random()*Math.PI*2});
-  }
-
-  /* ---------- BEACONS (project waypoints) ---------- */
-  const beacons = MISSIONS.map(m=>{
-    const g = new THREE.Group();
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(.22,.012,8,28), new THREE.MeshBasicMaterial({color:m.color}));
-    ring.rotation.x = Math.PI/2; g.add(ring);
-    const core = new THREE.Mesh(new THREE.SphereGeometry(.06,10,10), new THREE.MeshBasicMaterial({color:m.color}));
-    g.add(core);
-    const beam = new THREE.Mesh(
-      new THREE.CylinderGeometry(.005,.005,3.6,6),
-      new THREE.MeshBasicMaterial({color:m.color, transparent:true, opacity:.28})
-    );
-    beam.position.y = 1.8; g.add(beam);
-    const px = m.pos[0], pz = m.pos[2];
-    const py = Math.max(-.2, hnoise(px*.55, pz*.55) * Math.max(0, 1 - (px*px+pz*pz)/42.25) * 1.4) - .15;
-    g.position.set(px, py + .05, pz);
-    m.worldPos = new THREE.Vector3(px, py + .6, pz); /* drone flies ~0.75 over beacon */
-    scene.add(g);
-    return {m, g, core};
-  });
-
-  /* ---------- THREAT ZONES — FLARE-themed: wildfires + collapsing buildings ---------- */
-  const threats = [];
-  function spawnThreat(kind){
-    if(threats.length >= 3) return;
-    const a = Math.random()*Math.PI*2;
-    const r = 1.6 + Math.random()*3;
-    const x = Math.cos(a)*r, z = Math.sin(a)*r;
-    /* avoid spawning directly on top of a beacon */
-    for(const b of beacons){ if(Math.hypot(b.g.position.x-x, b.g.position.z-z) < 0.9) return; }
-    const type = kind || (Math.random() < 0.55 ? 'fire' : 'collapse');
-    /* bigger hazards overall so they read from the orbiting camera */
-    const radius = (type==='fire' ? 0.95 : 0.85) + Math.random()*0.55;
-    const py = Math.max(-.2, hnoise(x*.55, z*.55) * Math.max(0, 1 - (x*x+z*z)/42.25) * 1.4) - .14;
-    const g = new THREE.Group();
-    g.position.set(x, py, z);
-    let parts = null;
-
-    if(type === 'fire'){
-      /* charred ground — scorched earth */
-      const scorch = new THREE.Mesh(
-        new THREE.CircleGeometry(radius*1.1, 32),
-        new THREE.MeshBasicMaterial({color:0x1a0600, transparent:true, opacity:.95, side:THREE.DoubleSide, fog:false})
-      );
-      scorch.rotation.x = -Math.PI/2; scorch.position.y = 0.006;
-      g.add(scorch);
-      /* ember bed — bright orange glow */
-      const ember = new THREE.Mesh(
-        new THREE.RingGeometry(radius*0.3, radius*1.0, 40),
-        new THREE.MeshBasicMaterial({color:0xff4400, transparent:true, opacity:.88, side:THREE.DoubleSide, fog:false})
-      );
-      ember.rotation.x = -Math.PI/2; ember.position.y = 0.012;
-      g.add(ember);
-      /* hot-core glow disc */
-      const hotCore = new THREE.Mesh(
-        new THREE.CircleGeometry(radius*0.45, 24),
-        new THREE.MeshBasicMaterial({color:0xffcc33, transparent:true, opacity:.85, side:THREE.DoubleSide, fog:false})
-      );
-      hotCore.rotation.x = -Math.PI/2; hotCore.position.y = 0.018;
-      g.add(hotCore);
-      /* FLARE hazard perimeter — amber caution torus */
-      const warnRing = new THREE.Mesh(
-        new THREE.TorusGeometry(radius*1.18, .02, 8, 48),
-        new THREE.MeshBasicMaterial({color:0xffb020, transparent:true, opacity:.95, fog:false})
-      );
-      warnRing.rotation.x = Math.PI/2; warnRing.position.y = 0.06;
-      g.add(warnRing);
-      /* flame cones — bigger, brighter, more of them */
-      const flames = [];
-      const flameCount = 5 + Math.floor(Math.random()*3);
-      for(let i=0;i<flameCount;i++){
-        const fh = 0.9 + Math.random()*0.8;        /* 0.9–1.7 tall */
-        const fr = 0.18 + Math.random()*0.22;       /* 0.18–0.40 wide */
-        const ang = (i/flameCount)*Math.PI*2 + Math.random()*0.5;
-        const rad = radius * (0.1 + Math.random()*0.55);
-        const outer = new THREE.Mesh(
-          new THREE.ConeGeometry(fr, fh, 12, 1, true),
-          new THREE.MeshBasicMaterial({color:0xff5a00, transparent:true, opacity:.88, side:THREE.DoubleSide, fog:false})
-        );
-        outer.position.set(Math.cos(ang)*rad, fh*0.5, Math.sin(ang)*rad);
-        g.add(outer);
-        const mid = new THREE.Mesh(
-          new THREE.ConeGeometry(fr*0.7, fh*0.85, 10, 1, true),
-          new THREE.MeshBasicMaterial({color:0xffa020, transparent:true, opacity:.95, side:THREE.DoubleSide, fog:false})
-        );
-        mid.position.set(outer.position.x, fh*0.46, outer.position.z);
-        g.add(mid);
-        const inner = new THREE.Mesh(
-          new THREE.ConeGeometry(fr*0.42, fh*0.6, 8, 1, true),
-          new THREE.MeshBasicMaterial({color:0xffee77, transparent:true, opacity:1, side:THREE.DoubleSide, fog:false})
-        );
-        inner.position.set(outer.position.x, fh*0.4, outer.position.z);
-        g.add(inner);
-        flames.push({outer, mid, inner, phase: Math.random()*Math.PI*2, baseX: outer.position.x, baseZ: outer.position.z});
-      }
-      /* smoke plume — dark translucent cone rising, much taller */
-      const smoke = new THREE.Mesh(
-        new THREE.ConeGeometry(radius*1.0, 3.2, 12, 1, true),
-        new THREE.MeshBasicMaterial({color:0x1f1f1f, transparent:true, opacity:.4, side:THREE.DoubleSide, fog:false})
-      );
-      smoke.position.y = 2.1;
-      g.add(smoke);
-      /* secondary wispy smoke */
-      const smoke2 = new THREE.Mesh(
-        new THREE.ConeGeometry(radius*0.55, 2.0, 10, 1, true),
-        new THREE.MeshBasicMaterial({color:0x444444, transparent:true, opacity:.35, side:THREE.DoubleSide, fog:false})
-      );
-      smoke2.position.y = 1.4;
-      g.add(smoke2);
-      scene.add(g);
-      parts = {flames, warnRing, smoke, smoke2, ember, hotCore, scorch};
-    }
-
-    if(type === 'collapse'){
-      /* dust/debris disc on ground */
-      const rubble = new THREE.Mesh(
-        new THREE.CircleGeometry(radius*1.04, 24),
-        new THREE.MeshBasicMaterial({color:0x1f1814, transparent:true, opacity:.9, side:THREE.DoubleSide, fog:false})
-      );
-      rubble.rotation.x = -Math.PI/2; rubble.position.y = 0.005;
-      g.add(rubble);
-      /* red hazard perimeter — structural danger */
-      const warnRing = new THREE.Mesh(
-        new THREE.TorusGeometry(radius*1.12, .02, 8, 48),
-        new THREE.MeshBasicMaterial({color:0xff3860, transparent:true, opacity:.95, fog:false})
-      );
-      warnRing.rotation.x = Math.PI/2; warnRing.position.y = 0.06;
-      g.add(warnRing);
-      /* cluster of buildings — taller, wider, more iconic */
-      const buildings = [];
-      const count = 3 + Math.floor(Math.random()*3);
-      for(let i=0;i<count;i++){
-        const bh = 0.9 + Math.random()*1.1;       /* 0.9–2.0 tall */
-        const bw = 0.22 + Math.random()*0.22;
-        const bd = 0.22 + Math.random()*0.22;
-        const ang = (i/count)*Math.PI*2 + Math.random()*0.6;
-        const rad = radius * (0.2 + Math.random()*0.55);
-        /* pivot at base so rotation tips the building realistically */
-        const pivot = new THREE.Group();
-        pivot.position.set(Math.cos(ang)*rad, 0, Math.sin(ang)*rad);
-        const body = new THREE.Mesh(
-          new THREE.BoxGeometry(bw, bh, bd),
-          new THREE.MeshBasicMaterial({color:0x2b4256, transparent:true, opacity:.95, fog:false})
-        );
-        body.position.y = bh*0.5;
-        pivot.add(body);
-        /* cyan wireframe outline */
-        const edges = new THREE.LineSegments(
-          new THREE.EdgesGeometry(body.geometry),
-          new THREE.LineBasicMaterial({color:0x00e5ff, transparent:true, opacity:.95, fog:false})
-        );
-        edges.position.copy(body.position);
-        pivot.add(edges);
-        /* lit windows — amber strip */
-        const win = new THREE.Mesh(
-          new THREE.PlaneGeometry(bw*0.72, bh*0.78),
-          new THREE.MeshBasicMaterial({color:0xffb020, transparent:true, opacity:.6, side:THREE.DoubleSide, fog:false})
-        );
-        win.position.set(0, bh*0.5, bd*0.51);
-        pivot.add(win);
-        /* back side lit windows too */
-        const winBack = new THREE.Mesh(
-          new THREE.PlaneGeometry(bw*0.72, bh*0.78),
-          new THREE.MeshBasicMaterial({color:0xffb020, transparent:true, opacity:.55, side:THREE.DoubleSide, fog:false})
-        );
-        winBack.position.set(0, bh*0.5, -bd*0.51);
-        pivot.add(winBack);
-        g.add(pivot);
-        buildings.push({
-          pivot, body, edges, win, winBack,
-          basePos: pivot.position.clone(),
-          collapseAt: 2800 + Math.random()*3200,
-          tiltAxis: Math.random()<0.5?'x':'z',
-          tiltDir: Math.random()<0.5?1:-1,
-          maxTilt: Math.PI/2 * (0.75 + Math.random()*0.25),
-          duration: 1300 + Math.random()*600,
-          collapsed: false
-        });
-      }
-      /* dust cloud — grows after collapses trigger */
-      const dust = new THREE.Mesh(
-        new THREE.SphereGeometry(radius*0.7, 18, 12),
-        new THREE.MeshBasicMaterial({color:0xaa9988, transparent:true, opacity:0, side:THREE.DoubleSide, wireframe:false, fog:false})
-      );
-      dust.position.y = radius*0.5;
-      dust.scale.setScalar(0.4);
-      g.add(dust);
-      scene.add(g);
-      parts = {buildings, warnRing, dust, firstCollapseTs:null};
-    }
-
-    const t = {
-      g, x, z, radius, type, parts,
-      baseX: x, baseZ: z, baseRadius: radius,
-      born: performance.now(),
-      ttl: (type==='fire' ? 22000 : 18000) + Math.random()*6000,
-      /* fire-specific growth/drift state */
-      growthSeed: Math.random()*Math.PI*2,
-      driftAng: Math.random()*Math.PI*2,
-      driftSpeed: 0.00015 + Math.random()*0.00025,
-      growMax: type==='fire' ? 1.9 + Math.random()*0.6 : 1.0,
-      lastPlanR: radius
-    };
-    threats.push(t);
-    return t;
-  }
-
-  /* ---------- MOVING OBSTACLES — rescue helicopters on crossing patrols ---------- */
-  function spawnMovingObstacle(opts){
-    opts = opts || {};
-    const centerX = (opts.cx != null) ? opts.cx : (Math.random()*2-1)*1.2;
-    const centerZ = (opts.cz != null) ? opts.cz : (Math.random()*2-1)*1.2;
-    const orbitR  = 2.8 + Math.random()*1.6;
-    /* angular velocity in rad/ms — keep it slow + steady so movement reads as a helicopter */
-    const speed   = (Math.random()<0.5?1:-1) * (0.00012 + Math.random()*0.00008);
-    const altitude = 1.6 + Math.random()*0.5;
-    const angle0 = Math.random()*Math.PI*2;
-    const g = new THREE.Group();
-    /* fuselage — elongated box, emergency red */
-    const body = new THREE.Mesh(
-      new THREE.BoxGeometry(0.28, 0.14, 0.6),
-      new THREE.MeshBasicMaterial({color:0xff3844, fog:false})
-    );
-    g.add(body);
-    /* cockpit glass */
-    const glass = new THREE.Mesh(
-      new THREE.SphereGeometry(0.12, 12, 10, 0, Math.PI*2, 0, Math.PI/2),
-      new THREE.MeshBasicMaterial({color:0x2b9eff, transparent:true, opacity:.75, fog:false})
-    );
-    glass.position.set(0, 0.03, 0.22);
-    glass.rotation.x = Math.PI;
-    g.add(glass);
-    /* tail boom */
-    const tail = new THREE.Mesh(
-      new THREE.BoxGeometry(0.08, 0.06, 0.46),
-      new THREE.MeshBasicMaterial({color:0xd22830, fog:false})
-    );
-    tail.position.set(0, 0.02, -0.5);
-    g.add(tail);
-    /* main rotor */
-    const rotorMain = new THREE.Mesh(
-      new THREE.BoxGeometry(1.1, 0.012, 0.05),
-      new THREE.MeshBasicMaterial({color:0x111111, transparent:true, opacity:.8, fog:false})
-    );
-    rotorMain.position.y = 0.12;
-    g.add(rotorMain);
-    /* rotor disc (blurred sweep) */
-    const rotorDisc = new THREE.Mesh(
-      new THREE.CircleGeometry(0.55, 24),
-      new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:.08, side:THREE.DoubleSide, fog:false})
-    );
-    rotorDisc.rotation.x = -Math.PI/2;
-    rotorDisc.position.y = 0.12;
-    g.add(rotorDisc);
-    /* tail rotor */
-    const rotorTail = new THREE.Mesh(
-      new THREE.BoxGeometry(0.26, 0.012, 0.04),
-      new THREE.MeshBasicMaterial({color:0x111111, fog:false})
-    );
-    rotorTail.position.set(0.08, 0.02, -0.72);
-    rotorTail.rotation.z = Math.PI/2;
-    g.add(rotorTail);
-    /* landing skids */
-    const skidL = new THREE.Mesh(new THREE.BoxGeometry(0.02,0.02,0.4), new THREE.MeshBasicMaterial({color:0x222222, fog:false}));
-    skidL.position.set(-0.12, -0.1, 0); g.add(skidL);
-    const skidR = new THREE.Mesh(new THREE.BoxGeometry(0.02,0.02,0.4), new THREE.MeshBasicMaterial({color:0x222222, fog:false}));
-    skidR.position.set(0.12, -0.1, 0); g.add(skidR);
-    /* strobe beacon on belly */
-    const strobe = new THREE.Mesh(
-      new THREE.SphereGeometry(0.04, 10, 10),
-      new THREE.MeshBasicMaterial({color:0xffee33, fog:false})
-    );
-    strobe.position.y = -0.09;
-    g.add(strobe);
-    /* halo / caution ring on ground shadow to read collision radius */
-    const halo = new THREE.Mesh(
-      new THREE.TorusGeometry(0.55, 0.015, 8, 40),
-      new THREE.MeshBasicMaterial({color:0xff3860, transparent:true, opacity:.85, fog:false})
-    );
-    halo.rotation.x = Math.PI/2;
-    g.add(halo);
-    scene.add(g);
-
-    const obs = {
-      g, type:'moving', parts:{rotorMain, rotorTail, strobe, halo, body, glass, tail, rotorDisc},
-      x: centerX + Math.cos(angle0)*orbitR,
-      z: centerZ + Math.sin(angle0)*orbitR,
-      radius: 0.55,
-      baseX: centerX, baseZ: centerZ,
-      baseRadius: 0.55,
-      orbit: {cx: centerX, cz: centerZ, r: orbitR, ang: angle0, speed, alt: altitude},
-      born: performance.now(),
-      ttl: 40000 + Math.random()*20000,
-      lastPlanR: 0.55
-    };
-    g.position.set(obs.x, altitude, obs.z);
-    threats.push(obs);
-    return obs;
-  }
-
-  /* ---------- PATH (spline through beacons, respawned per retarget/ρ change) ---------- */
-  const SEQ = ['ohb','flare','har','light','fs'];
-  let pathPoints = [];
-  let curve = null;
-  let pathLine = null;
-  let pathProgress = 0; /* 0..pathPoints.length-1 in parameter space 0..1 */
-  let targetIdx = 0;   /* which beacon are we currently flying to in SEQ */
-
-  /* planner state — exposed for HUD */
-  const plannerState = {iter:0, nodes:0, cost:0, solveMs:0, lastMs:0};
-  window.__plannerState = plannerState;
-
-  /* evaluate risk at a point — Gaussian contributions from each threat */
-  function riskAt(x, z){
-    let R = 0;
-    for(const th of threats){
-      const d2 = (x-th.x)*(x-th.x) + (z-th.z)*(z-th.z);
-      const rr = (th.radius || 0.5);
-      const weight = th.type==='moving' ? 1.2 : th.type==='fire' ? 1.5 : 1.0;
-      R += weight * Math.exp(-d2 / (2*rr*rr));
-    }
-    return R;
-  }
-
-  function buildPath(){
-    /* Risk-aware path planning — RRT*-style search proxy, biased samples toward goal,
-       pruned by a cost functional J = length + ρ·∫R + λ·altitudeChange.
-       This is a visual/behavioral proxy, not a full RRT*, but the metrics (iter,
-       nodes, J*, solve ms) are computed from the actual work done here.           */
-    const planStart = performance.now();
-    const from = drone.position.clone();
-    const toBeacon = MISSIONS.find(m=>m.id===SEQ[targetIdx]);
-    const to = toBeacon.worldPos.clone();
-    const rho = (parseFloat($('#rho').value) || 55) / 100;
-
-    /* --- Phase 1: RRT*-ish sample-and-prune (generates tree viz + counts) --- */
-    const SAMPLE_COUNT = 60;
-    const samplesXY = [];
-    const ellipseA = Math.max(2.4, from.distanceTo(to) * 0.75);
-    const ellipseB = 2.0;
-    const mx = (from.x+to.x)*0.5, mz = (from.z+to.z)*0.5;
-    const axisAng = Math.atan2(to.z-from.z, to.x-from.x);
-    let iterCount = 0;
-    for(let i=0;i<SAMPLE_COUNT;i++){
-      iterCount++;
-      /* goal-biased sampling: 18% chance straight toward goal */
-      let sx, sz;
-      if(Math.random() < 0.18){
-        sx = to.x + (Math.random()-0.5)*0.6; sz = to.z + (Math.random()-0.5)*0.6;
-      } else {
-        const r = Math.sqrt(Math.random());
-        const th = Math.random()*Math.PI*2;
-        const lx = Math.cos(th)*r*ellipseA, lz = Math.sin(th)*r*ellipseB;
-        sx = mx + Math.cos(axisAng)*lx - Math.sin(axisAng)*lz;
-        sz = mz + Math.sin(axisAng)*lx + Math.cos(axisAng)*lz;
-      }
-      /* reject if inside any threat's hard core (hard constraint) */
-      let rejected = false;
-      for(const th of threats){
-        if(Math.hypot(sx-th.x, sz-th.z) < (th.radius||0.5) * 0.85){ rejected = true; iterCount++; break; }
-      }
-      if(rejected) continue;
-      samplesXY.push({x: sx, z: sz});
-    }
-
-    /* --- Phase 2: build actual spline path (the one the drone follows) --- */
-    const N = 42;
-    const pts = [];
-    let J_risk = 0, J_len = 0;
-    let prevP = null;
-    for(let i=0;i<=N;i++){
-      const tt = i/N;
-      const p = new THREE.Vector3().lerpVectors(from, to, tt);
-      /* push away from threats — stronger detour so avoidance is obvious */
-      for(const th of threats){
-        const d = Math.hypot(p.x - th.x, p.z - th.z);
-        const extra = th.type === 'fire' ? 0.65 : th.type === 'moving' ? 0.75 : 0.35;
-        const safetyRadius = th.radius + extra + rho*1.3;
-        if(d < safetyRadius){
-          const push = (safetyRadius - d) * (1.4 + rho*1.6);
-          const nx = (p.x - th.x)/(d||1), nz = (p.z - th.z)/(d||1);
-          p.x += nx*push; p.z += nz*push;
-          if(th.type === 'fire')        p.y += 0.45 + rho*0.3;
-          else if(th.type === 'moving') p.y -= 0.35 + rho*0.2;
-          else                           p.y += 0.25 + rho*0.25;
-        }
-      }
-      const terrainY = hnoise(p.x*.55, p.z*.55) * Math.max(0, 1 - (p.x*p.x+p.z*p.z)/42.25) * 1.4;
-      const minAlt = Math.max(-.1, terrainY) + 0.6 + rho*0.35;
-      if(p.y < minAlt) p.y = minAlt;
-      pts.push(p);
-      J_risk += riskAt(p.x, p.z);
-      if(prevP) J_len += p.distanceTo(prevP);
-      prevP = p;
-    }
-    const J_star = J_len + rho * J_risk * 0.35;
-    pathPoints = pts;
-    curve = new THREE.CatmullRomCurve3(pts, false, 'centripetal', 0.5);
-
-    /* --- Phase 3: rebuild RRT tree visualization --- */
-    rrtTree.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material) o.material.dispose?.(); });
-    while(rrtTree.children.length) rrtTree.remove(rrtTree.children[0]);
-    /* draw nearest-neighbor edges between samples — reads as a tree */
-    const treePts = [from, ...samplesXY.map(s => new THREE.Vector3(s.x, from.y*0.5 + 0.2, s.z)), to];
-    const edgeSegs = [];
-    for(let i=1;i<treePts.length-1;i++){
-      /* connect to nearest already-in-tree predecessor */
-      let best = 0, bestD = Infinity;
-      for(let j=0;j<i;j++){
-        const d = treePts[i].distanceTo(treePts[j]);
-        if(d < bestD){ bestD = d; best = j; }
-      }
-      edgeSegs.push(treePts[best].x, treePts[best].y, treePts[best].z);
-      edgeSegs.push(treePts[i].x, treePts[i].y, treePts[i].z);
-    }
-    const treeGeo = new THREE.BufferGeometry();
-    treeGeo.setAttribute('position', new THREE.Float32BufferAttribute(edgeSegs, 3));
-    const treeLines = new THREE.LineSegments(
-      treeGeo,
-      new THREE.LineBasicMaterial({color:0x00e5ff, transparent:true, opacity:0.22, fog:false})
-    );
-    rrtTree.add(treeLines);
-    /* tiny dots at each sample node */
-    const nodeGeo = new THREE.BufferGeometry();
-    const nodePos = [];
-    for(const p of treePts){ nodePos.push(p.x, p.y, p.z); }
-    nodeGeo.setAttribute('position', new THREE.Float32BufferAttribute(nodePos, 3));
-    const nodePts = new THREE.Points(nodeGeo, new THREE.PointsMaterial({
-      color:0x00e5ff, size:0.05, transparent:true, opacity:0.55, sizeAttenuation:true, fog:false
-    }));
-    rrtTree.add(nodePts);
-
-    /* --- Phase 4: draw committed path (brighter, thicker) --- */
-    if(pathLine){
-      pathLine.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material) o.material.dispose?.(); });
-      scene.remove(pathLine);
-    }
-    pathLine = new THREE.Group();
-    const curveSamples = curve.getPoints(120);
-    const geo = new THREE.BufferGeometry().setFromPoints(curveSamples);
-    const col = rho>0.66 ? 0xff2bd6 : rho<0.33 ? 0x00ff9c : 0x00e5ff;
-    const mainLine = new THREE.Line(geo, new THREE.LineDashedMaterial({
-      color: col, transparent:true, opacity:.95, dashSize:.18, gapSize:.1, fog:false
-    }));
-    mainLine.computeLineDistances();
-    pathLine.add(mainLine);
-    try {
-      const tubeGeo = new THREE.TubeGeometry(curve, 80, 0.022, 8, false);
-      const tube = new THREE.Mesh(
-        tubeGeo,
-        new THREE.MeshBasicMaterial({color: col, transparent:true, opacity:.35, fog:false})
-      );
-      pathLine.add(tube);
-    } catch(e){}
-    scene.add(pathLine);
-    pathProgress = 0;
-
-    /* --- Phase 5: record planner metrics --- */
-    plannerState.iter = iterCount;
-    plannerState.nodes = treePts.length;
-    plannerState.cost = J_star;
-    plannerState.solveMs = performance.now() - planStart;
-    plannerState.lastMs = performance.now();
-  }
-
-  three = {renderer, scene, camera, drone, rotors, scanCone, beacons, threats, spawnThreat, spawnMovingObstacle,
-           buildPath, getPath:()=>curve, getTargetId:()=>SEQ[targetIdx],
-           retarget:(id)=>{
-             const i = SEQ.indexOf(id);
-             if(i>=0){ targetIdx = i; buildPath(); }
-           },
-           nextTarget:()=>{ targetIdx = (targetIdx+1) % SEQ.length; buildPath(); },
-           getProgress:()=>pathProgress, setProgress:(v)=>{pathProgress=v}};
-
-  /* resize */
-  const ro = new ResizeObserver(()=>{
-    const W = canvas.clientWidth, H = canvas.clientHeight;
-    renderer.setSize(W,H,false);
-    camera.aspect = W/H; camera.updateProjectionMatrix();
-  });
-  ro.observe(canvas);
-
-  /* initialize drone position near first beacon */
-  drone.position.set(0, 1.2, 3);
-  /* prime the executed-trail buffer so it doesn't draw from origin before the drone moves */
-  for(let i=0;i<TRAIL_LEN;i++){
-    trailPositions[i*3]   = drone.position.x;
-    trailPositions[i*3+1] = drone.position.y;
-    trailPositions[i*3+2] = drone.position.z;
-  }
-  buildPath();
-
-  /* animate loop */
-  let t0 = performance.now(), lastPosForVel = drone.position.clone();
-  let cameraAngle = 0;
-  let awaitingArrival = false;
-  let replanAccum = 0;
-  /* research-grade sim state */
-  let ekfTime = 0;           /* ms since last "landmark update" (EKF resets near beacons) */
-  let ekfSig = 0.12;          /* current positional σ (metres) */
-  let riskFieldAccum = 0;     /* throttle risk-field recompute to ~10 Hz */
-  let metricAccum = 0;        /* throttle DOM updates to ~4 Hz */
-  let mpcLastSolve = 1.2;     /* simulated rolling MPC solve time (ms) */
-  let cbfDsep = 3.0;          /* closest-separation distance */
-  const cbfOk = $('#rp-cbf-ok');
-  function animate(t){
-    try{
-      const dt = Math.min(0.05, (t - t0) * 0.001); t0 = t;
-      rotors.forEach((r,i)=>{ r.rotation.z += 0.8 * (i%2?1:-1); });
-      beacons.forEach(b=>{
-        b.g.rotation.y += 0.012;
-        b.core.scale.setScalar(1 + Math.sin(t*0.003)*0.25);
-      });
-      scanCone.scale.setScalar(1 + Math.sin(t*0.004)*0.06);
-      /* rescue strobes — red/blue alternating */
-      const strobePhase = (t*0.004) % (Math.PI*2);
-      strobeRed.material.opacity = 0.4 + Math.abs(Math.sin(strobePhase))*0.6;
-      strobeRed.material.transparent = true;
-      strobeBlue.material.opacity = 0.4 + Math.abs(Math.sin(strobePhase + Math.PI))*0.6;
-      strobeBlue.material.transparent = true;
-      /* city window flicker — subtle per-building */
-      cityBuildings.forEach(cb => {
-        const f1 = 0.32 + Math.sin(t*0.002 + cb.phase)*0.1 + (Math.random()<0.003 ? 0.35 : 0);
-        const f2 = 0.28 + Math.sin(t*0.0025 + cb.phase*1.4)*0.08;
-        cb.win1.material.opacity = f1;
-        cb.win2.material.opacity = f2;
-      });
-      for(let i=threats.length-1;i>=0;i--){
-        const th = threats[i];
-        const age = t - th.born;
-        const op = age < 400 ? age/400 : age > th.ttl-600 ? Math.max(0,(th.ttl-age)/600) : 1;
-
-        if(th.type === 'fire'){
-          const {flames, warnRing, smoke, smoke2, ember, hotCore, scorch} = th.parts;
-          /* === FIRE GROWTH + SPREAD (smoothed, bounded) ===
-             - radius grows with damped asymptotic curve toward growMax
-             - subtle breathing pulse (low-freq only, no jitter)
-             - drift oscillates in a small bounded circle (no unbounded spiral) */
-          const ageSec = age / 1000;
-          /* exponential saturation toward growMax — smooth, no kinks */
-          const growBase = 1 + (th.growMax - 1) * (1 - Math.exp(-ageSec * 0.07));
-          const pulse = 1 + Math.sin(t*0.0014 + th.growthSeed) * 0.03;  /* only low-freq */
-          const scaleXZ = growBase * pulse;
-          th.radius = th.baseRadius * scaleXZ;
-          /* scale flat visuals (ground-plane) with the spreading radius */
-          th.g.scale.set(scaleXZ, 1, scaleXZ);
-          /* drift — bounded oscillation around base position (wind wobble) */
-          th.driftAng += th.driftSpeed * dt * 1000;
-          const driftR = 0.35 * (1 - Math.exp(-ageSec * 0.08));  /* asymptotes at 0.35 m */
-          th.x = th.baseX + Math.cos(th.driftAng) * driftR;
-          th.z = th.baseZ + Math.sin(th.driftAng) * driftR;
-          th.g.position.x = th.x;
-          th.g.position.z = th.z;
-          /* flicker each flame with per-flame phase */
-          flames.forEach(fl => {
-            const flick = 0.86 + Math.sin(t*0.018 + fl.phase)*0.14 + (Math.random()-0.5)*0.08;
-            const tall  = 0.9  + Math.sin(t*0.022 + fl.phase*1.3)*0.12 + (Math.random()-0.5)*0.05;
-            fl.outer.scale.set(flick, tall, flick);
-            fl.mid.scale.set(flick*0.92, tall*0.95, flick*0.92);
-            fl.inner.scale.set(flick*0.85, tall*0.9, flick*0.85);
-            fl.outer.material.opacity = 0.88 * op * (0.82 + Math.random()*0.18);
-            fl.mid.material.opacity   = 0.95 * op * (0.85 + Math.random()*0.15);
-            fl.inner.material.opacity = 1.0  * op * (0.88 + Math.random()*0.12);
-            /* small lateral jitter to suggest wind */
-            const jx = Math.sin(t*0.006 + fl.phase)*0.03;
-            const jz = Math.cos(t*0.007 + fl.phase)*0.03;
-            fl.outer.position.x = fl.baseX + jx;
-            fl.outer.position.z = fl.baseZ + jz;
-            fl.mid.position.x = fl.outer.position.x;
-            fl.mid.position.z = fl.outer.position.z;
-            fl.inner.position.x = fl.outer.position.x;
-            fl.inner.position.z = fl.outer.position.z;
-          });
-          warnRing.rotation.z = t * 0.0012;
-          warnRing.material.opacity = op * (0.78 + Math.sin(t*0.008)*0.22);
-          smoke.rotation.y = t * 0.0005;
-          smoke.material.opacity = 0.4 * op * (0.85 + Math.sin(t*0.003)*0.15);
-          smoke.scale.y = 1 + Math.sin(t*0.002)*0.15;
-          smoke2.rotation.y = -t * 0.0007;
-          smoke2.material.opacity = 0.35 * op * (0.8 + Math.sin(t*0.0045)*0.2);
-          smoke2.scale.y = 1 + Math.sin(t*0.0025 + 1)*0.18;
-          ember.material.opacity = 0.88 * op * (0.85 + Math.sin(t*0.01)*0.15);
-          hotCore.material.opacity = 0.85 * op * (0.82 + Math.sin(t*0.015)*0.18);
-        }
-
-        else if(th.type === 'collapse'){
-          const {buildings, warnRing, dust} = th.parts;
-          warnRing.rotation.z = -t * 0.001;
-          warnRing.material.opacity = op * (0.72 + Math.sin(t*0.006)*0.24);
-
-          let anyCollapsingNow = false;
-          buildings.forEach(b => {
-            if(age >= b.collapseAt){
-              if(!b.collapsed){
-                b.collapsed = true;
-                if(th.parts.firstCollapseTs === null) th.parts.firstCollapseTs = age;
-              }
-              anyCollapsingNow = true;
-              const pRaw = Math.min(1, (age - b.collapseAt) / b.duration);
-              /* ease-out-quad tilt so it looks like gravity */
-              const eased = pRaw*(2 - pRaw);
-              const tilt = b.maxTilt * eased * b.tiltDir;
-              if(b.tiltAxis === 'x') b.pivot.rotation.x = tilt;
-              else b.pivot.rotation.z = tilt;
-              /* sag building slightly as it falls */
-              b.pivot.position.y = -eased * 0.08;
-              /* fade window lights as power fails */
-              b.win.material.opacity = Math.max(0, 0.55 * (1 - pRaw*1.2));
-            } else {
-              /* pre-collapse shake — increasing amplitude */
-              const timeTo = b.collapseAt - age;
-              if(timeTo < 1100){
-                const shakeAmp = (1 - timeTo/1100) * 0.012;
-                b.pivot.position.x = b.basePos.x + (Math.random()-0.5) * shakeAmp;
-                b.pivot.position.z = b.basePos.z + (Math.random()-0.5) * shakeAmp;
-              }
-            }
-          });
-          /* dust cloud expands after first collapse */
-          if(th.parts.firstCollapseTs !== null){
-            const dustAge = age - th.parts.firstCollapseTs;
-            const dScale = Math.min(1.6, 0.4 + dustAge * 0.0008);
-            dust.scale.setScalar(dScale);
-            dust.material.opacity = Math.min(0.45, dustAge * 0.0003) * op;
-          }
-        }
-
-        else if(th.type === 'moving'){
-          const o = th.orbit;
-          const {rotorMain, rotorTail, strobe, halo} = th.parts;
-          /* advance along orbit — analytic position from angle (smooth, no accumulation jitter) */
-          o.ang += o.speed * dt * 1000;
-          th.x = o.cx + Math.cos(o.ang) * o.r;
-          th.z = o.cz + Math.sin(o.ang) * o.r;
-          /* bob the altitude — heli drift */
-          const alt = o.alt + Math.sin(t*0.0015 + th.growthSeed)*0.08;
-          th.g.position.set(th.x, alt, th.z);
-          /* yaw from analytic tangent — no frame-to-frame diff jitter */
-          const tangentYaw = Math.atan2(-Math.sin(o.ang)*Math.sign(o.speed), Math.cos(o.ang)*Math.sign(o.speed));
-          /* smooth slerp toward target yaw (shortest angle) */
-          let dYaw = tangentYaw - th.g.rotation.y;
-          while(dYaw >  Math.PI) dYaw -= Math.PI*2;
-          while(dYaw < -Math.PI) dYaw += Math.PI*2;
-          th.g.rotation.y += dYaw * Math.min(1, dt*6);
-          /* slight bank into the turn */
-          th.g.rotation.z = -Math.sign(o.speed) * 0.22;
-          /* spin rotors — frame-rate-independent */
-          rotorMain.rotation.y += 18 * dt;
-          rotorTail.rotation.x += 22 * dt;
-          /* strobe pulse */
-          strobe.material.transparent = true;
-          strobe.material.opacity = 0.5 + Math.abs(Math.sin(t*0.012))*0.5;
-          /* halo caution glow */
-          halo.rotation.z = t * 0.002;
-          halo.material.opacity = 0.75 + Math.sin(t*0.008)*0.2;
-        }
-
-        if(age > th.ttl){ scene.remove(th.g); threats.splice(i,1); buildPath(); }
-      }
-      /* periodic live replan — drone reacts to growing fire + moving helis
-         Throttled + proximity-gated to avoid jittery re-routes every frame. */
-      replanAccum += dt;
-      if(replanAccum > 0.9 && !awaitingArrival && curve){
-        replanAccum = 0;
-        /* look-ahead: only replan if a hazard is near the drone's upcoming corridor */
-        const lookAhead = curve.getPoint(Math.min(1, pathProgress + 0.25));
-        const dp = drone.position;
-        let dirty = false;
-        for(const th of threats){
-          /* how close does the hazard come to the drone or the next segment? */
-          const dNow = Math.hypot(th.x - dp.x, th.z - dp.z);
-          const dAhead = Math.hypot(th.x - lookAhead.x, th.z - lookAhead.z);
-          const reach = (th.radius || 0.5) + 1.2;
-          if(dNow < reach || dAhead < reach){
-            if(th.type === 'moving'){ dirty = true; break; }
-            if(th.type === 'fire' && Math.abs(th.radius - (th.lastPlanR||th.baseRadius)) > 0.22){
-              th.lastPlanR = th.radius; dirty = true; break;
-            }
-          }
-        }
-        if(dirty){ buildPath(); pathProgress = 0; }
-      }
-      if(curve && !awaitingArrival){
-        const speed = 0.11 + (1 - (parseFloat($('#rho').value)/100)) * 0.08;
-        pathProgress += dt * speed;
-        if(pathProgress >= 1){
-          pathProgress = 1;
-          awaitingArrival = true;
-          onArrive(SEQ[targetIdx]);
-          targetIdx = (targetIdx+1) % SEQ.length;
-          setTimeout(()=>{ awaitingArrival = false; buildPath(); }, 700);
-        }
-        const p = curve.getPoint(Math.min(1, pathProgress));
-        /* longer look-ahead for stable yaw — averages out local curve wiggles */
-        const pNext = curve.getPoint(Math.min(1, pathProgress + 0.05));
-        drone.position.copy(p);
-        const dir = pNext.clone().sub(p);
-        if(dir.lengthSq() > 1e-6){
-          const yaw = Math.atan2(dir.x, dir.z);
-          /* shortest-angle slerp — prevents full-circle spins at ±π wrap */
-          let dYaw = yaw - drone.rotation.y;
-          while(dYaw >  Math.PI) dYaw -= Math.PI*2;
-          while(dYaw < -Math.PI) dYaw += Math.PI*2;
-          /* dt-based lerp so smoothness is independent of framerate */
-          drone.rotation.y += dYaw * Math.min(1, dt*5);
-          /* bank into the turn — subtle roll proportional to yaw rate */
-          drone.rotation.z = -dYaw * 0.8 + Math.sin(t*0.002)*0.03;
-        } else {
-          drone.rotation.z = Math.sin(t*0.002)*0.03;
-        }
-      }
-      /* === RESEARCH-GRADE UPDATES === */
-      /* --- MPC receding-horizon preview (next ~0.8s of committed curve) --- */
-      if(curve){
-        const horiz = 20;
-        const win = 0.15;  /* normalized look-ahead */
-        const posAttr = mpcPreview.geometry.attributes.position;
-        for(let i=0;i<horiz;i++){
-          const tt = Math.min(1, pathProgress + (i/horiz)*win);
-          const pp = curve.getPoint(tt);
-          posAttr.array[i*3]   = pp.x;
-          posAttr.array[i*3+1] = pp.y + 0.02;  /* slightly above path */
-          posAttr.array[i*3+2] = pp.z;
-        }
-        posAttr.needsUpdate = true;
-        mpcPreview.geometry.computeBoundingSphere();
-      }
-      /* --- Executed trajectory trail (rolling buffer of drone pos) --- */
-      trailPositions[trailHead*3]   = drone.position.x;
-      trailPositions[trailHead*3+1] = drone.position.y;
-      trailPositions[trailHead*3+2] = drone.position.z;
-      trailHead = (trailHead + 1) % TRAIL_LEN;
-      /* flatten buffer starting from oldest sample so the line renders in order */
-      const flat = new Float32Array(TRAIL_LEN*3);
-      for(let i=0;i<TRAIL_LEN;i++){
-        const src = ((trailHead + i) % TRAIL_LEN) * 3;
-        flat[i*3] = trailPositions[src];
-        flat[i*3+1] = trailPositions[src+1];
-        flat[i*3+2] = trailPositions[src+2];
-      }
-      trailGeo.setAttribute('position', new THREE.BufferAttribute(flat, 3));
-      executedTrail.computeLineDistances();
-      trailGeo.attributes.position.needsUpdate = true;
-
-      /* --- EKF uncertainty — grows over time, shrinks near beacons (landmark fix) --- */
-      ekfTime += dt*1000;
-      ekfSig = Math.min(0.55, 0.12 + ekfTime*0.000045);
-      let landmarkNearby = false;
-      for(const b of beacons){
-        const d = Math.hypot(drone.position.x - b.g.position.x, drone.position.z - b.g.position.z);
-        if(d < 0.9){ landmarkNearby = true; break; }
-      }
-      if(landmarkNearby){
-        ekfSig = Math.max(0.08, ekfSig * 0.92);
-        if(ekfTime > 800) ekfTime = 0;  /* trigger a "landmark update" discretely */
-      }
-      /* scale ellipsoid — 3σ visualisation */
-      const ekfScale = 1.0 + ekfSig * 1.3;
-      ekfSphere.scale.setScalar(ekfScale);
-      ekfSphere.material.opacity = 0.18 + ekfSig*0.45;
-
-      /* --- Risk field heatmap — recompute vertex colors at ~10 Hz --- */
-      riskFieldAccum += dt;
-      if(riskFieldAccum > 0.1){
-        riskFieldAccum = 0;
-        const pos = rfPosAttr.array;
-        const col = rfColors;
-        for(let vi=0;vi<rfPosAttr.count;vi++){
-          const wx = pos[vi*3];
-          const wz = pos[vi*3+2];
-          const R = riskAt(wx, wz);
-          /* clamp + shape: perceptual ramp blue→cyan→yellow→orange→red */
-          const r = Math.min(1, R * 0.95);
-          if(r < 0.15){ col[vi*3]=0.02; col[vi*3+1]=0.18; col[vi*3+2]=0.32; }
-          else if(r < 0.4){ const k=(r-0.15)/0.25; col[vi*3]=0.02+k*0.05; col[vi*3+1]=0.18+k*0.55; col[vi*3+2]=0.32+k*0.45; }
-          else if(r < 0.7){ const k=(r-0.4)/0.3;  col[vi*3]=0.07+k*0.85; col[vi*3+1]=0.73+k*0.15; col[vi*3+2]=0.77-k*0.72; }
-          else             { const k=Math.min(1,(r-0.7)/0.35); col[vi*3]=0.92+k*0.08; col[vi*3+1]=0.88-k*0.7; col[vi*3+2]=0.05-k*0.05; }
-        }
-        riskGeo.attributes.color.needsUpdate = true;
-      }
-
-      /* --- MPC solve time proxy (rolling average with noise) --- */
-      mpcLastSolve = mpcLastSolve*0.9 + (1.1 + Math.random()*0.8)*0.1;
-
-      /* --- CBF: closest separation to any hazard --- */
-      let minSep = Infinity;
-      for(const th of threats){
-        const d = Math.hypot(drone.position.x - th.x, drone.position.z - th.z) - (th.radius || 0.5);
-        if(d < minSep) minSep = d;
-      }
-      cbfDsep = Math.max(0, minSep);
-
-      /* --- Throttled HUD metric push (4 Hz) --- */
-      metricAccum += dt;
-      if(metricAccum > 0.25){
-        metricAccum = 0;
-        const $set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
-        $set('rp-rrt-iter', String(plannerState.iter));
-        $set('rp-rrt-nodes', String(plannerState.nodes));
-        $set('rp-rrt-cost', plannerState.cost.toFixed(2));
-        $set('rp-rrt-ms', plannerState.solveMs.toFixed(1));
-        $set('rp-mpc-ms', mpcLastSolve.toFixed(1));
-        $set('rp-mpc-u', (0.18 + Math.abs(Math.sin(t*0.001))*0.25).toFixed(2));
-        $set('rp-ekf-trace', (ekfSig*ekfSig*3).toFixed(3));
-        $set('rp-ekf-sig', ekfSig.toFixed(2));
-        $set('rp-cbf-h', (cbfDsep + 0.4).toFixed(2));
-        $set('rp-cbf-d', cbfDsep.toFixed(2));
-        if(cbfOk){
-          if(cbfDsep > 0.4){ cbfOk.textContent = '✓ feasible'; cbfOk.style.color = 'var(--neon)'; }
-          else            { cbfOk.textContent = '! tightening'; cbfOk.style.color = '#ffb020'; }
-        }
-        /* mean risk along remaining path */
-        let Rsum = 0, Rn = 0;
-        if(curve){
-          for(let i=0;i<6;i++){
-            const tt = Math.min(1, pathProgress + i*0.05);
-            const pp = curve.getPoint(tt);
-            Rsum += riskAt(pp.x, pp.z); Rn++;
-          }
-        }
-        $set('rp-flare-r', (Rn?Rsum/Rn:0).toFixed(2));
-        $set('rp-flare-mode', ($('#rho-mode')?$('#rho-mode').textContent:''));
-        /* state vector */
-        const fmt = (v) => (v>=0?'+':'') + v.toFixed(2);
-        $set('rp-st-x', fmt(drone.position.x));
-        $set('rp-st-y', fmt(drone.position.y));
-        $set('rp-st-z', fmt(drone.position.z));
-        const psiDeg = ((-drone.rotation.y * 180/Math.PI) + 360) % 360;
-        $set('rp-st-psi', (psiDeg>=0?'+':'') + Math.round(psiDeg).toString().padStart(3,'0') + '°');
-      }
-
-      cameraAngle += dt * 0.07;
-      const camR = 5.6, camH = 2.6;
-      camera.position.set(Math.cos(cameraAngle)*camR, camH, Math.sin(cameraAngle)*camR);
-      camera.lookAt(drone.position);
-
-      const vel = drone.position.clone().sub(lastPosForVel).length() / Math.max(dt,.0001);
-      lastPosForVel.copy(drone.position);
-      telemetryTick(drone.position, drone.rotation.y, vel, dt, SEQ[targetIdx]);
-
-      renderer.render(scene, camera);
-    }catch(err){
-      console.warn('anim-frame', err);
-    }
-    requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
-
-  /* force correct sizing once layout settles */
-  setTimeout(resize, 80);
-  setTimeout(resize, 400);
-  window.addEventListener('resize', resize);
-}
-
-/* =============================================================
-   TELEMETRY + MISSION LOG
-============================================================= */
-let battery = 100, missionStart = performance.now();
-let lastLogIds = new Set(); /* de-dupe quick events */
-
-function telemetryTick(pos, yaw, vel, dt, targetId){
-  /* altitude: scale from world-y (rough) */
-  const alt = Math.round(Math.max(0, (pos.y + 0.5) * 90));
-  $('#hud-alt').textContent = String(alt).padStart(3,'0')+' m';
-  /* speed */
-  $('#hud-spd').textContent = (vel*14).toFixed(1)+' m/s';
-  /* heading */
-  let hdg = ((-yaw*180/Math.PI)+360) % 360;
-  $('#hud-hdg').textContent = String(Math.round(hdg)).padStart(3,'0')+'°';
-  /* battery drain */
-  const rho = parseFloat($('#rho').value)/100;
-  battery -= dt * (0.25 + (1-rho)*0.3);
-  if(battery < 22 && !lastLogIds.has('bat-low')){ lastLogIds.add('bat-low'); logMsg('wr','BAT','Battery reserve under 22% — swapping to energy-optimal path'); }
-  if(battery <= 0){ battery = 100; missionStart = performance.now(); logMsg('in','OPS','Battery swapped on pad · resuming patrol'); lastLogIds.delete('bat-low'); }
-  const bel = $('#hud-bat'); bel.textContent = Math.max(0,Math.round(battery))+'%';
-  $('#hud-bat-c').classList.toggle('warn', battery < 30);
-}
-
-function logMsg(k, tag, msg){
-  const log = $('#mlog');
-  const d = new Date(); const hh=String(d.getUTCHours()).padStart(2,'0');
-  const mm=String(d.getUTCMinutes()).padStart(2,'0');
-  const ss=String(d.getUTCSeconds()).padStart(2,'0');
-  const line = document.createElement('div');
-  line.className = 'lg';
-  line.innerHTML = `<span class="t">${hh}:${mm}:${ss}</span><span class="k ${k}">[${tag}]</span><span class="m">${msg}</span>`;
-  log.appendChild(line);
-  /* cap log */
-  while(log.children.length > 120) log.removeChild(log.firstChild);
-  log.scrollTop = log.scrollHeight;
-}
-
-function onArrive(id){
-  const m = MISSIONS.find(x=>x.id===id);
-  if(!m) return;
-  logMsg('ok','WP',`Reached beacon ${m.label.toUpperCase()} · objective captured`);
-  $$('#waypoints button').forEach(b=>b.classList.toggle('active', b.dataset.id===id));
-  $('#hud-body').innerHTML = m.body;
-  $('#mission-name').textContent = 'PATROL // ' + m.label.toUpperCase();
-}
-
-function buildWaypoints(){
-  const wp = $('#waypoints'); wp.innerHTML = '';
-  MISSIONS.forEach(m=>{
-    const b = document.createElement('button');
-    b.textContent = '» ' + m.label;
-    b.dataset.id = m.id;
-    b.addEventListener('click', ()=>{
-      three && three.retarget(m.id);
-      logMsg('in','CMD',`Manual retask → ${m.label.toUpperCase()}`);
-    });
-    wp.appendChild(b);
-  });
-}
-
-/* ρ control */
-function bindRho(){
-  const r = $('#rho'), v = $('#rho-val'), m = $('#rho-mode');
-  function upd(){
-    const rho = parseInt(r.value,10)/100;
-    v.textContent = rho.toFixed(2);
-    let mode = 'BALANCED';
-    if(rho < 0.25) mode = 'AGGRESSIVE';
-    else if(rho < 0.55) mode = 'EFFICIENT';
-    else if(rho > 0.8) mode = 'SAFETY-FIRST';
-    else if(rho > 0.55) mode = 'CAUTIOUS';
-    m.textContent = mode;
-    if(three){ three.buildPath(); logMsg('in','RHO',`Risk coefficient set to ${rho.toFixed(2)} · mode ${mode} · replanning path`); }
-  }
-  r.addEventListener('input', upd);
-  upd();
-}
-
-/* mission events */
-function startMissionEvents(){
-  logMsg('ok','INIT','FLARE stack bootstrapped · sensor fusion online · 5 waypoints loaded');
-  logMsg('in','EKF','Covariance initialized · Q = diag(σ²_IMU) · P₀ = 0.01·I');
-  logMsg('ok','RRT*','Tree bootstrapped · goal-biased sampling (18%) · ellipsoidal informed subset');
-  logMsg('in','MPC','Horizon N=20 · Ts=20 ms · QP warm-start enabled · SQP inner loop ≤ 3 iter');
-  logMsg('in','CBF','Control barrier functions armed · h(x) ≥ 0 enforced via affine QP');
-  logMsg('in','FLARE','Risk functional R(x,t) instantiated · ρ-adaptive path replanning active');
-  setTimeout(()=>logMsg('ok','PERCEPT','YOLOv8-seg + thermal fusion online · 3 hazard classes'), 2500);
-  setTimeout(()=>logMsg('ok','COMM','Link budget closed · BER 4.2e-6 · RTT 28 ms · LOS 98.6%'), 4200);
-  /* periodic hazards — each spawn triggers a real metric-stamped replan */
-  setInterval(()=>{
-    if(document.hidden || !three) return;
-    if(Math.random() < 0.6){
-      const t = three.spawnThreat();
-      if(t){
-        if(t.type === 'fire'){
-          logMsg('er','HAZARD',`Thermal anomaly detected @ (${t.x.toFixed(1)}, ${t.z.toFixed(1)}) · class=FIRE · r=${t.radius.toFixed(2)} m · re-solving`);
-        } else {
-          logMsg('er','HAZARD',`Structural event @ (${t.x.toFixed(1)}, ${t.z.toFixed(1)}) · class=COLLAPSE · r=${t.radius.toFixed(2)} m · re-solving`);
-        }
-        three.buildPath();
-        setTimeout(()=>{
-          const ps = window.__plannerState || {};
-          logMsg('ok','RRT*',`Replan converged · ${ps.iter||40} iter · J*=${(ps.cost||0).toFixed(2)} · ${(ps.solveMs||3).toFixed(1)} ms`);
-        }, 120);
-      }
-    }
-  }, 7500);
-  /* early seed */
-  setTimeout(()=>{
-    if(!three) return;
-    const a = three.spawnThreat('fire');
-    if(a) logMsg('er','HAZARD',`Thermal anomaly detected @ (${a.x.toFixed(1)}, ${a.z.toFixed(1)}) · class=FIRE · r=${a.radius.toFixed(2)} m · re-solving`);
-    three.buildPath();
-  }, 5800);
-  setTimeout(()=>{
-    if(!three) return;
-    const b = three.spawnThreat('collapse');
-    if(b) logMsg('er','HAZARD',`Structural event @ (${b.x.toFixed(1)}, ${b.z.toFixed(1)}) · class=COLLAPSE · r=${b.radius.toFixed(2)} m · re-solving`);
-    three.buildPath();
-  }, 9200);
-  /* seed two airborne assets */
-  setTimeout(()=>{
-    if(!three) return;
-    const h1 = three.spawnMovingObstacle({cx: 0.6, cz: -0.8});
-    if(h1) logMsg('wr','TRAFFIC','Dynamic obstacle acquired · class=ROTORCRAFT · CBF separation ≥ 0.8 m enforced');
-    three.buildPath();
-  }, 6400);
-  setTimeout(()=>{
-    if(!three) return;
-    const h2 = three.spawnMovingObstacle({cx: -1.2, cz: 0.4});
-    if(h2) logMsg('wr','TRAFFIC','Second dynamic obstacle · ADS-B-In track 0x4B1C2A · coordinated deconfliction (ICAO-DO-365)');
-    three.buildPath();
-  }, 12500);
-  /* periodic traffic injection */
-  setInterval(()=>{
-    if(document.hidden || !three) return;
-    const movingCount = three.threats.filter(x=>x.type==='moving').length;
-    if(movingCount < 2 && Math.random() < 0.45){
-      const h = three.spawnMovingObstacle();
-      if(h){
-        logMsg('wr','TRAFFIC',`Inbound aerial asset · orbit r=${h.orbit.r.toFixed(1)} m · MPC deconfliction active`);
-        three.buildPath();
-      }
-    }
-  }, 11000);
-  /* wildfire growth status ping */
-  setInterval(()=>{
-    if(document.hidden || !three) return;
-    const fires = three.threats.filter(x=>x.type==='fire');
-    if(fires.length){
-      const f = fires[Math.floor(Math.random()*fires.length)];
-      const growPct = Math.round(((f.radius/f.baseRadius) - 1) * 100);
-      if(growPct > 5){
-        logMsg('er','FLARE',`R(x,t) updated · fire spread +${growPct}% · ρ-adaptive re-solve @ ${(performance.now()/1000).toFixed(1)}s`);
-      }
-    }
-  }, 5200);
-  /* dynamic research-grade ticks — each log line cites real(-looking) metrics */
-  const pings = [
-    ()=>['in','MPC',`QP solved · iter 2/3 · primal res ${(Math.random()*1e-4+5e-6).toExponential(1)} · ‖u*‖=${(0.2+Math.random()*0.25).toFixed(2)}`],
-    ()=>['in','EKF',`Measurement update · S=H·P·Hᵀ+R · Mahalanobis d²=${(0.5+Math.random()*2).toFixed(2)} accepted`],
-    ()=>['ok','CBF',`h(x)=${(1.5+Math.random()*1.5).toFixed(2)} · ḣ(x)+αh(x) ≥ 0 ✓`],
-    ()=>['in','RRT*',`Rewire iteration · ${(20+Math.floor(Math.random()*30))} neighbors · cost improved Δ=${(Math.random()*0.15).toFixed(3)}`],
-    ()=>['in','PERCEPT',`Detection batch · 2 class_FIRE · 1 class_COLLAPSE · NMS IoU=0.45 · conf ≥ 0.72`],
-    ()=>['ok','IMU',`Zero-velocity update · bias drift ${(Math.random()*0.03).toFixed(4)} rad/s · corrected`],
-    ()=>['in','SLAM',`Loop closure · landmark id=${Math.floor(Math.random()*900+100)} · residual ${(Math.random()*0.12).toFixed(3)} m`],
-    ()=>['in','FLARE',`ρ∈[0.25,0.85] sweep · Pareto front updated · safety-vs-energy tradeoff logged`],
-    ()=>['ok','CTRL',`Lyapunov candidate V̇ < 0 · attitude loop stable · gyro sat 0/3`],
-    ()=>['in','COMM',`TM frame 0x${Math.floor(Math.random()*0xFFFF).toString(16).padStart(4,'0').toUpperCase()} · CRC32 ✓ · SNR 21.4 dB`],
-  ];
-  setInterval(()=>{
-    if(document.hidden) return;
-    const p = pings[Math.floor(Math.random()*pings.length)]();
-    logMsg(p[0], p[1], p[2]);
-  }, 2800);
-}
-
-/* =============================================================
-   BACKGROUND OPACITY — 3D stays visible behind all sections,
-   brighter over the hero, softer behind the content so text reads
-============================================================= */
-(function(){
-  const canvas = $('#three-canvas');
-  const mask = document.querySelector('.hero-scene-mask');
-  function tick(){
-    if(!canvas) return;
-    const h = window.innerHeight || 800;
-    const y = window.scrollY || 0;
-    /* 1.0 over the hero, fades linearly to .38 one viewport past it */
-    const o = Math.max(0.38, 1 - (y/(h*0.9)) * 0.62);
-    canvas.style.opacity = String(o);
-    if(mask) mask.style.opacity = String(0.55 + (1-o)*0.8);
-  }
-  window.addEventListener('scroll', tick, {passive:true});
-  window.addEventListener('resize', tick);
-  tick();
-})();
-
-/* =============================================================
-   REVEAL ON SCROLL
-============================================================= */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-},{threshold:.08});
-$$('.reveal').forEach(el=>io.observe(el));
-
-/* =============================================================
-   AI CHAT — CV-grounded responder
-============================================================= */
-const KB = [
-  {k:['hire','why hire','fit','why should','reason to hire','what makes you','should we hire','should i hire'],
-   r:'Four reasons. **One** — I ship **production-grade ML**, not notebooks: FastAPI services, Docker images, Prometheus / Grafana drift monitoring, SHAP for trust. **Two** — I work to **aerospace-grade discipline** (ECSS V&V, 100% Req↔Test traceability, reproducibility) so every claim is evidence-backed. **Three** — I ship **lean**: 98% feature reduction without losing F1, 20 KB RAM on 14M+ records, sub-5 ms inference on embedded controllers. **Four** — I automate my own workflow with **agentic AI** (Claude Code, MCP, custom subagents), so I move faster than an engineer who does everything by hand. Math foundation + aerospace quality + agentic speed.'},
-  {k:['agentic','agent','agents','claude code','mcp','subagent','orchestration','automation','workflow'],
-   r:'**Agentic AI is where I spend the other half of my engineering time.** I build production-grade workflows with **Claude Code**: custom **MCP servers** (FastMCP, JSON-RPC 2.0), **Agent SDK** integration with streaming / interrupts / custom tools, and hooks engineering across **13 event types**. I design custom subagent architectures (planner-auditor, experiment-runner, report-writer) with proper orchestration, isolation, and error handling. Full-stack deployment — Docker multi-stage, ARM64 cross-compile, systemd, OTEL + Langfuse + Prometheus observability, promptfoo evaluation. Also built **NAPES v3.0**, an autonomous SaaS engineering framework that converts product ideas into deployable systems via multi-agent pipelines.'},
-  {k:['mcp','model context protocol','fastmcp','json-rpc','server'],
-   r:'**MCP** is how I give Claude-powered agents real capability. I build custom **FastMCP** servers over **JSON-RPC 2.0**, expose domain tools, and wire them into Agent SDK workflows with streaming and interrupts. I\'ve productionized this across multiple stacks — the key is treating MCP servers like any other service: typed contracts, observability hooks (OTEL), tests (promptfoo), and containerized deployment.'},
-  {k:['quantum','pennylane','vqc','variational','quantum ml','qml'],
-   r:'**Quantum ML** is an active part of my PhD. I use **PennyLane** for Variational Quantum Circuits (VQC) inside a hybrid RL loop — the quantum layer acts as a differentiable policy/value approximator coupled to classical critics. The target is multi-UAV coordination in dynamic environments; the method is any problem where classical RL hits representational ceilings on combinatorial state spaces.'},
-  {k:['autonomous platform','quadcopter','drone','orange pi','ardupilot','hardware','lidar','custom platform','edge compute'],
-   r:'Currently building a **custom autonomous quadcopter** (2026): LiDAR + GPS + edge compute (**Orange Pi 5 Pro + ArduPilot**), targeting indoor/outdoor autonomous operation. The point is full-stack ownership — sensor integration, flight-stack tuning, ML inference at the edge, and the whole observability layer on top. An engineer who has wired a LiDAR onto a flight controller *and* shipped an MLOps pipeline around it is a different buy.'},
-  {k:['supervisor','panagiotopoulos','panagiotópoulos','ilias','who is your'],
-   r:'My PhD supervisor is **Assoc. Prof. Panagiotópoulos Ilías** at the Hellenic Army Academy. Research line: autonomous navigation of UAVs, with hybrid RL + quantum components.'},
-  {k:['media','radio','skai','podcast','interview','linkedin','public','content','press'],
-   r:'**Media &amp; public engagement:** guest on **SKAI Crete Radio FM** discussing AI, autonomous systems, and aerospace career paths. Featured in a career-focused podcast on AI industry trends, space technology careers, and agentic AI. At OHB Hellas I manage the weekly **LinkedIn content strategy** — aerospace engineering, company milestones, employer-brand visibility.'},
-  {k:['music','mandolin','laouto','λαούτο','μαντολίνο','lute','instrument','play'],
-   r:'Outside engineering — I play **mandolin** and **laouto** (traditional Greek lute). Cretan music has the same discipline I respect in engineering: tight timing, listening to the ensemble, and a lot of practice before it sounds effortless.'},
-  {k:['predictive maintenance','maintenance','pm','downtime','breakdown','failure','hydraulic','pump','motor','compressor'],
-   r:'**Predictive maintenance** is my most production-ready project pattern. On the UCI-447 hydraulic dataset I built the full loop: engineered time-series features from raw sensors, trained XGBoost + Random Forest with SHAP attribution for operator trust, wrapped it in a **FastAPI** service, packaged with Docker, and plugged in **Prometheus + Grafana + Evidently** for drift monitoring. The same template applies to any rotating / thermal / fluid equipment — pumps, motors, compressors, chillers — anything with rich sensor streams and real downtime cost. I\'d start by instrumenting one critical asset, proving lift in MTTR / scrap rate, then scale.'},
-  {k:['production ml','mlops','productionise','serve','serving','deploy','deployment','real-time','drift','monitoring'],
-   r:'**My production-ML loop**: (1) feature store / engineered features with reproducible lineage, (2) model training with MLflow tracking, (3) **FastAPI** service or batch job, (4) Docker + Kubernetes for packaging, (5) Prometheus + Grafana for latency/throughput, (6) **Evidently** for feature and prediction drift with alerting, (7) SHAP for per-prediction explanations the domain expert actually trusts. Nothing runs without monitoring, and nothing is "done" until the evidence is reproducible — that\'s the ECSS mindset applied to ML.'},
-  {k:['time-series','time series','forecast','forecasting','sensor','telemetry','lstm','etsformer','arima'],
-   r:'**Time-series forecasting is my home turf.** On Formula Student I built a forecast-first ECU pipeline (**LSTM + LightGBM + ETSformer**) that predicts Lambda (λ) and RPM from live telemetry with **sub-5 ms inference on an embedded controller** — so the system *pre-empts* failures instead of just alerting after them. Same stack applies to thermal deviations, pressure anomalies, vibration patterns — any high-rate sensor where reacting too late is expensive.'},
-  {k:['crete','heraklion','ηρακλειο','ηράκλειο','greek','greece','location','where are you','why local','local'],
-   r:'I\'m born, raised, and educated in **Heraklion**. BSc Mathematics at the University of Crete (2017–2024), MSc at TU of Crete. I\'m available **on-site, hybrid, or remote** — based locally, happy to be part of a team that builds serious technical work out of Crete.'},
-  {k:['computer vision','vision','qc','quality control','defect','inspection','camera'],
-   r:'**Computer vision for QC** is a natural adjacency to my classical-ML foundation: surface-defect detection, dimensional / gauge checks, label and print verification, anomaly heatmaps. I know when a CNN earns its keep and when a simpler classical pipeline + SHAP is the right answer for a buyer who needs to trust it. HAR-Drive proved I can hit F1 = 0.984 with 98% fewer features — that instinct matters when cameras run on edge boxes, not on a 40 GB GPU.'},
-  {k:['big data','spark','streaming','scada','mes','log','data warehouse','volume'],
-   r:'**LightningText** is my proof I can compress huge data streams without losing the signal: 14M+ records (3.4 GB) on **Apache Spark**, with reservoir sampling, Count-Min Sketch, Flajolet–Martin, and wavelet compression — **&lt;2% error inside 20 KB of RAM**. The same sketching turns years of SCADA / MES / production logs into real-time insights without a runaway warehouse bill.'},
-  {k:['edge','edge ml','embedded','low-latency','footprint','small model','tinyml','plc'],
-   r:'**Edge / embedded ML** is where my engineering instincts show up. HAR-Drive: F1 = 0.984 with 98% fewer features. Formula Student: sub-5 ms inference on an embedded controller. LightningText: 20 KB RAM on 14M+ records. On a shop floor that usually means classical ML or a tiny NN running on a PLC or gateway, feeding a supervisory layer — not a Kubernetes cluster per machine.'},
-  {k:['flare','mdpi','drones','paper','publication','research paper','risk','rho','ρ','ranking inversion','hellenic robotics','forum'],
-   r:'**FLARE** is my first-author research, **submitted to the Hellenic Robotics Forum** with target journal **Drones (MDPI)**. On the surface it\'s a UAV path-planning benchmark; underneath, it\'s a general framework for **decision-making under uncertainty**. Headline result: **"Ranking Inversion"** — agents optimised purely for safety often *fail* the overall mission because they become too risk-averse. The fix is a configurable risk coefficient **ρ** that dials safety-vs-value per scenario. 450+ experimental runs, validated with Friedman, Wilcoxon signed-rank (Bonferroni), and Cliff\'s delta. Same logic applies to preventive-maintenance thresholds, quality-vs-throughput, stock-vs-service level, energy-vs-output — any industrial trade-off where "maximum safety" is a worse policy than the right risk posture.'},
-  {k:['research interest','interests','focus','what do you research','phd topic','phd'],
-   r:'My PhD (Hellenic Army Academy, Dec 2025 →) is on **Autonomous Navigation of UAVs** — hybrid **Reinforcement Learning + Quantum Computing** (VQC via **PennyLane**) for multi-UAV coordination in dynamic environments. Dual-use applications: defense, security, civil protection. The underlying methods — risk-aware optimization, reliable estimation, verifiable ML — transfer directly into industrial AI.'},
-  {k:['ohb','hellas','space','aerospace','current job','where do you work','software test','test engineer','day job'],
-   r:'**Software Test Engineer at OHB Hellas** (Oct 2025 →). I built automated test-generation pipelines (Python + XML) that replaced manual verification workflows, achieving **100% requirement-to-test traceability** and significantly accelerating the verification cycle. Designed audit-ready quality documentation aligned with **ECSS V&V/PA** — passed external reviews without rework. Authored a testing and onboarding guide, adopted as team standard. That production-grade quality discipline travels — it\'s what separates shelfware ML from ML you can trust in production.'},
-  {k:['skill','skills','stack','tools','technologies','tech'],
-   r:'**ML/DL:** PyTorch, scikit-learn, XGBoost, LightGBM, Transformers, LSTM, ETSformer, SHAP, RL.  \n**Production ML:** FastAPI, Docker, Kubernetes, MLflow, Prometheus, Grafana, Evidently.  \n**Time-series:** feature engineering, anomaly detection, sub-5 ms embedded inference.  \n**Big data:** Apache Spark, Pandas, NumPy, sketching (CMS, FM), reservoir sampling.  \n**Languages:** Python, C, C++, SQL, MATLAB, XML.  \n**Industrial interfaces:** CAN bus, MQTT, WebSockets, REST, Embedded C.  \n**Quality engineering:** pytest, ECSS V&V/PA, MISRA-C/C++, CERT-C, mutation & property-based testing.  \n**DevOps:** Git, GitHub Actions, GitLab CI, Jenkins, Docker, Kubernetes.  \n**Traceability:** DOORS Next, OSLC, Jira/Xray.'},
-  {k:['education','degree','master','msc','bsc','bachelor','study','studied','university'],
-   r:'**BSc** — Mathematics & Applied Mathematics, **University of Crete** (Heraklion, 2017–2024, **241 ECTS**).  \n**MSc** — Machine Learning & Data Science, **Technical University of Crete** (2024–2025).  \n**PhD** — ML for real-time decision-making, **Hellenic Army Academy** (Dec 2025 → present). All of it in or near Heraklion — the math foundation, the ML specialty, and the research rigour behind how I build AI.'},
-  {k:['formula','student','ecu','engine','racing','lstm','etsformer','motorsport','tuc capstone'],
-   r:'**Formula Student TUC — Predictive Engine Modeling (Apr 2025).** Forecast-first pipeline (**LSTM + LightGBM + ETSformer**) predicting λ and RPM from live telemetry, sub-5 ms on an embedded ECU. The real demonstration: I can take noisy, high-rate industrial sensor data and produce real-time, actionable forecasts on hardware constrained to a few MB of memory.'},
-  {k:['har','har-drive','activity recognition','svm','lda','classification','classifier'],
-   r:'**HAR-Drive (Jun 2025).** Automated PCA-vs-LDA sweep on UCI HAR (561 features, 10k traces). A 5-D LDA embedding + SVM-RBF hit **F1 = 0.984** with a **98% feature reduction** over the raw baseline. The industrial takeaway: when your model runs on edge boxes at the line, feature discipline > architecture choice.'},
-  {k:['lightning','lightningtext','bookcorpus','nlp','text'],
-   r:'**LightningText (May 2025).** Apache Spark pipeline over **14M+ records (3.4 GB)** using reservoir sampling, Count-Min Sketch, Flajolet–Martin, and wavelet compression — **&lt;2% error inside 20 KB of RAM**. Designed to prove ultra-lightweight, high-throughput analytics on constrained environments.'},
-  {k:['available','availability','open to','looking','hiring','join','relocate','remote','work with'],
-   r:'I\'m **open to AI Engineer roles**. Based in **Crete**, available **on-site, hybrid, or remote**. Fastest reach: **zervakisai@gmail.com**.'},
-  {k:['contact','email','reach','phone','linkedin','github'],
-   r:'Email **zervakisai@gmail.com**, phone **+30 6940 696921**, GitHub **@zervakisai**, LinkedIn **in/-zervakisai-**. I typically respond within 24h on weekdays.'},
-  {k:['fencing','silver','medal','sport','athletics'],
-   r:'Outside engineering — **2× Silver Medalist** at National and Global Fencing Championships. Fencing taught me composure under pressure, reading the other side\'s intent, and acting decisively inside a tight OODA loop — habits I lean on when an ML system fails in production.'},
-  {k:['hobby','hobbies','free time','outside work'],
-   r:'Outside engineering: **fencing** (2× Silver Medalist, national &amp; global), **Cretan music** (mandolin &amp; laouto), and reading technical papers like they\'re novels. All three teach the same thing: composure, timing, and the discipline to practice until it looks effortless.'},
-  {k:['ising','komineas','cryptography','garefalakis'],
-   r:'During my BSc I worked on **Ising Machines** with **Dr. Komineas** (combinatorial optimisation via physical computing) and was on the **University Cryptography Team** with **Dr. Garefalakis**, exploring AI × cybersecurity. Solid grounding in why optimization and security actually matter.'},
-  {k:['language','spoken languages'],
-   r:'**Greek (native)** and **English (C2)**. Happy to work, present, and deliver in either.'},
-  {k:['hello','hi','hey','yo','γεια','greetings','καλησπερα','καλημερα'],
-   r:'» Hey — I\'m Konstantinos, AI Engineer &amp; PhD Candidate from Crete. Ask me about predictive modeling, agentic AI (Claude Code / MCP), edge ML, my PhD on UAV autonomy, or why I\'d be a good fit. Try a chip below or type a question.'},
-  {k:['who are you','introduce','about you','yourself','summary'],
-   r:'I\'m **Konstantinos Zervakis** — **AI Engineer** and **PhD Candidate** from **Crete**. BSc Math (University of Crete), MSc ML (TUC), PhD on Autonomous UAV Navigation at the Hellenic Army Academy. I ship production ML (predictive maintenance, time-series forecasting, edge inference), design **agentic AI workflows** (Claude Code, MCP, custom subagents), and I\'m the first author of **FLARE** (submitted to Hellenic Robotics Forum, targeting Drones/MDPI). Currently at OHB Hellas doing aerospace-grade quality engineering. Math foundation, aerospace discipline, agentic speed.'},
-  {k:['ecss','v&v','verification','validation','traceability','doors','xray','standards','quality','reliability'],
-   r:'At OHB Hellas I work to **ECSS V&V/PA** practice — requirements in **IBM DOORS Next**, linked tests in **Jira/Xray** via OSLC, executed as XML/pytest suites producing audit-ready, reproducible evidence with a full **Req↔Test↔Result** matrix. That same discipline is what I bring to ML: every model claim is backed by reproducible evidence and monitored in production.'},
-  {k:['ml','deep learning','model','pytorch','scikit','transformer'],
-   r:'ML toolbelt: **PyTorch** for DL, **scikit-learn** / **XGBoost** / **LightGBM** for classical and tabular, **Transformers / LSTM / ETSformer** for sequences and forecasting, **SHAP** for attribution. Default: the simplest model that clears the bar, with a clear story for monitoring and drift — because on a production line, "we retrained and it works again" is not a plan.'},
-];
-function reply(q){
-  const s = q.toLowerCase();
-  let best = null, bestScore = 0;
-  for(const item of KB){
-    let sc = 0;
-    for(const kw of item.k){ if(s.includes(kw)) sc += kw.length; }
-    if(sc > bestScore){ bestScore = sc; best = item; }
-  }
-  if(best && bestScore >= 2) return best.r;
-  return 'Hm — I don\'t have a crisp answer to that in my CV knowledge base. Try asking about **predictive maintenance**, **production ML**, **time-series forecasting**, **Plastika Kritis fit**, my **skills**, **education**, or **availability**. Or just email me directly at **zervakisai@gmail.com**.';
-}
-function mdInline(s){
-  /* convert lightweight markdown */
-  return s
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g,'<em>$1</em>')
-    .replace(/  \n/g,'<br/>')
-    .replace(/\n/g,'<br/>');
-}
-async function typeInto(el, html){
-  /* type word-by-word for speed but preserve tags */
-  const tmp = document.createElement('div'); tmp.innerHTML = html;
-  const text = tmp.innerHTML;
-  const tokens = text.match(/(<[^>]+>|[^<]+)/g) || [text];
-  el.innerHTML = '';
-  const caret = document.createElement('span'); caret.className='cursor-blink'; el.appendChild(caret);
-  for(const tok of tokens){
-    if(tok.startsWith('<')){ caret.insertAdjacentHTML('beforebegin', tok); }
-    else{
-      for(const ch of tok){
-        caret.insertAdjacentText('beforebegin', ch);
-        if(ch !== ' ') await sleep(9);
-      }
-    }
-  }
-  caret.remove();
-}
-function pushMsg(who, html){
-  const log = $('#chat-log');
-  const m = document.createElement('div'); m.className = 'msg ' + who;
-  const w = document.createElement('div'); w.className='who'; w.textContent = who==='me'?'YOU':'KZ';
-  const t = document.createElement('div'); t.className='text';
-  m.appendChild(w); m.appendChild(t); log.appendChild(m);
-  log.scrollTop = log.scrollHeight;
-  return t;
-}
-async function ask(q){
-  if(!q.trim()) return;
-  pushMsg('me', mdInline(q)).innerHTML = mdInline(q);
-  const t = pushMsg('ko', '');
-  await sleep(280);
-  const r = reply(q);
-  await typeInto(t, mdInline(r));
-  $('#chat-log').scrollTop = $('#chat-log').scrollHeight;
-}
-$('#chat-send').addEventListener('click', ()=>{ const v = $('#chat-input').value; $('#chat-input').value=''; ask(v); });
-$('#chat-input').addEventListener('keydown', e=>{ if(e.key==='Enter'){ const v = e.target.value; e.target.value=''; ask(v); } });
-$$('#chat-chips button').forEach(b=>b.addEventListener('click', ()=>ask(b.textContent)));
-
-/* =============================================================
-   INIT
-============================================================= */
-function waitForTHREE(maxMs){
-  return new Promise((resolve)=>{
-    const t0 = performance.now();
-    (function tick(){
-      if(typeof THREE !== 'undefined') return resolve(true);
-      if(performance.now() - t0 > maxMs) return resolve(false);
-      setTimeout(tick, 80);
-    })();
-  });
-}
-window.addEventListener('load', async ()=>{
-  buildWaypoints();
-  bindRho();
-  startMissionEvents();
-  const ok = await waitForTHREE(4000);
-  if(!ok){
-    const body = $('#hud-body');
-    if(body) body.innerHTML = '<strong style="color:var(--amber)">three.js failed to load.</strong> Make sure <code>three.min.js</code> is in the repo, or that the CDN is reachable. The rest of the site (chat, projects, research) still works.';
-    runBoot(); return;
-  }
-  try{ initThree(); }
-  catch(e){
-    console.error('initThree failed:', e);
-    const body = $('#hud-body');
-    if(body) body.innerHTML = '<strong style="color:var(--amber)">3D engine error:</strong> ' + (e && e.message ? e.message : e) + '<br/>Check console. Rest of the site works fine.';
-  }
-  runBoot();
-});
-</script>
+  <script src="app.js"></script>
 </body>
 </html>
