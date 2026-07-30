@@ -143,6 +143,7 @@ function renderCases() {
           <span class="case-num">CASE ${num}</span>
           <h3 class="case-title">${esc(p.title)}</h3>
           <p class="muted" style="color:var(--muted);font-size:.92rem">${esc(p.subtitle)}</p>
+          <span class="case-metric">${esc(p.metric)}</span>
           <div class="case-tags">${badge}${tags}</div>
           <div class="case-tags" style="margin-top:auto">${link}</div>
         </div>
@@ -151,7 +152,7 @@ function renderCases() {
           <div class="psr-divider"></div>
           <div class="psr psr-s"><span class="psr-key">Solution</span><span class="psr-val">${p.solution}</span></div>
           <div class="psr-divider"></div>
-          <div class="psr psr-r"><span class="psr-key">Result</span><span class="psr-val">${p.result}<br><span style="font-family:var(--font-mono);font-size:.8rem;color:var(--muted)">↳ ${esc(p.metric)}</span></span></div>
+          <div class="psr psr-r"><span class="psr-key">Result</span><span class="psr-val">${p.result}</span></div>
         </div>
       </article>`;
   }).join('');
