@@ -94,6 +94,40 @@ const PROJECTS = [
 ];
 
 /* ---------------------------------------------------------------------
+   DATA — ARCHIVE (earlier case files, compact — link to legacy pages)
+   --------------------------------------------------------------------- */
+const ARCHIVE = [
+  {
+    kicker: 'Motorsport · Embedded · 2025',
+    title: 'Formula Student TUC',
+    desc: 'Forecast-first ECU pipeline predicting Lambda (λ) and RPM spikes with LSTM, ARIMAX and ETSformer — preventing lean spikes and over-rev failures before they become mechanical damage.',
+    metrics: ['<5 ms inference', 'live telemetry'],
+    href: 'formula-student.html',
+  },
+  {
+    kicker: 'NLP · Big Data · 2025',
+    title: 'LightningText',
+    desc: 'Real-time text analytics over 14M BookCorpus paragraphs on Apache Spark — reservoir sampling, Count-Min Sketch and wavelet compression instead of brute force.',
+    metrics: ['20 KB RAM', '<2% error', '8× leaner storage'],
+    href: 'lightningtext.html',
+  },
+  {
+    kicker: 'ML · Wearables · 2025',
+    title: 'HAR-DRive',
+    desc: 'PCA vs LDA on UCI HAR: a 5-dimensional LDA with an SVM-RBF cuts features by 98% and still scores macro-F1 0.984 — activity recognition that fits a wearable.',
+    metrics: ['F1 0.984', '−98% features'],
+    href: 'har-drive.html',
+  },
+  {
+    kicker: 'Predictive maintenance · 2024',
+    title: 'Hydraulic PdM',
+    desc: 'End-to-end production ML for the UCI 447 hydraulic dataset — XGBoost with SHAP explainability, served over FastAPI with MLflow, Prometheus and Grafana.',
+    metrics: ['FastAPI', 'SHAP', 'Grafana'],
+    href: 'predictive-maintenance.html',
+  },
+];
+
+/* ---------------------------------------------------------------------
    DATA — STACK
    --------------------------------------------------------------------- */
 const STACK = [
@@ -156,6 +190,19 @@ function renderCases() {
         </div>
       </article>`;
   }).join('');
+}
+
+function renderArchive() {
+  const el = $('#archive-grid');
+  if (!el) return;
+  el.innerHTML = ARCHIVE.map((a, i) => `
+    <a class="archive-card reveal" data-reveal data-delay="${i % 4}" href="${a.href}">
+      <span class="archive-kicker">${esc(a.kicker)}</span>
+      <h3>${esc(a.title)}</h3>
+      <p>${esc(a.desc)}</p>
+      <div class="archive-metrics">${a.metrics.map((m) => `<span>${esc(m)}</span>`).join('')}</div>
+      <span class="archive-open">Open case file ↗</span>
+    </a>`).join('');
 }
 
 function renderStack() {
@@ -473,6 +520,7 @@ function initFooterTyping() {
 document.addEventListener('DOMContentLoaded', () => {
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
   renderCases();
+  renderArchive();
   renderStack();
   renderBeyond();
   initReveal();
