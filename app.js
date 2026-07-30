@@ -50,20 +50,6 @@ const PROJECTS = [
     private: false,
   },
   {
-    title: 'SmartFactory-RAG',
-    subtitle: 'Industrial AI — RAG + predictive maintenance + live sensors',
-    framework: null,
-    tags: ['RAG', 'BGE-M3', 'hybrid retrieval', 'predictive maintenance', 'FastAPI'],
-    problem:
-      'On a factory floor, one hour of downtime costs €50,000+ — yet teams buy three separate vendors for document retrieval, failure prediction, and sensor monitoring.',
-    solution:
-      'One assistant that unifies technical-document retrieval, equipment-failure prediction, and live sensor monitoring. Hybrid retrieval — BM25 + BGE-M3 + a cross-encoder reranker — beats a dense-only baseline by 23%.',
-    result: '<strong>94.2%</strong> retrieval accuracy · <strong>0.91 F1</strong> on failure prediction · 120 ms p95 latency · 10K msg/s sensor throughput.',
-    metric: '94.2% retrieval · 120 ms p95',
-    repo: 'https://github.com/zervakisai/smart-factory-rag',
-    private: false,
-  },
-  {
     title: 'FLARE Benchmark',
     subtitle: 'Risk-parameterised UAV path planning under uncertainty',
     framework: null,
@@ -75,20 +61,6 @@ const PROJECTS = [
     result: '<strong>450+</strong> experimental runs · Friedman χ²(4) = 190.8 (p &lt; 0.001), Wilcoxon (Bonferroni), Cliff’s δ. Submitted to <strong>Sensors (MDPI) 2026</strong> — lead author.',
     metric: 'Sensors / MDPI 2026 · 450+ runs',
     repo: 'https://github.com/zervakisai/uavplan',
-    private: false,
-  },
-  {
-    title: 'QBench',
-    subtitle: 'Quantum-classical ML benchmark suite',
-    framework: null,
-    tags: ['Quantum ML', 'PennyLane', 'Ray', 'ONNX', 'Apache-2.0'],
-    problem:
-      'Quantum-ML hype is everywhere; rigorous, fair comparison isn’t.',
-    solution:
-      'An open-source framework for head-to-head evaluation of quantum vs classical ML on sequential decision-making — equal compute budgets, seeded and checkpointed for full reproducibility.',
-    result: 'Demšar (2006) methodology across <strong>12 algorithms × 7 environments</strong> · distributed training on Ray · ONNX export for deployment.',
-    metric: '12 algos × 7 envs · reproducible',
-    repo: 'https://github.com/zervakisai/quantum-ml-pipeline',
     private: false,
   },
 ];
@@ -117,13 +89,6 @@ const ARCHIVE = [
     desc: 'PCA vs LDA on UCI HAR: a 5-dimensional LDA with an SVM-RBF cuts features by 98% and still scores macro-F1 0.984 — activity recognition that fits a wearable.',
     metrics: ['F1 0.984', '−98% features'],
     href: 'har-drive.html',
-  },
-  {
-    kicker: 'Predictive maintenance · 2024',
-    title: 'Hydraulic PdM',
-    desc: 'End-to-end production ML for the UCI 447 hydraulic dataset — XGBoost with SHAP explainability, served over FastAPI with MLflow, Prometheus and Grafana.',
-    metrics: ['FastAPI', 'SHAP', 'Grafana'],
-    href: 'predictive-maintenance.html',
   },
 ];
 
