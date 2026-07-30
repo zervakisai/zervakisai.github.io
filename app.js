@@ -17,35 +17,36 @@ const CONFIG = {
 
 /* ---------------------------------------------------------------------
    DATA — CASE FILES (problem → solution → result)
-   Agent projects lead with Pydantic AI (same architecture as AIRTH).
+   Vinea is the flagship agentic project (featured: true).
    --------------------------------------------------------------------- */
 const PROJECTS = [
   {
-    title: 'AIRTH',
+    title: 'Vinea',
     subtitle: 'Agronomic decision agents for a vineyard',
     framework: 'Pydantic AI',
-    tags: ['Pydantic AI', 'pydantic-graph', 'typed contracts', 'uv', 'OTel / Logfire'],
+    featured: true,
+    tags: ['Pydantic AI', 'pydantic-graph', 'FAO-56', 'output validators', 'uv', '12 tagged phases'],
     problem:
       '“Should I irrigate? Can I spray?” A grower’s daily calls hide real cost — a wrong one wastes scarce water, or sprays into the wrong window and risks the vintage. A raw LLM will confidently invent the agronomy.',
     solution:
-      'A Pydantic AI graph of three typed agents — Irrigation, Spray, and a Coordinator that reconciles them — sitting on an <em>exact</em> deterministic agronomy core. The LLM is a bounded judgement-and-explanation layer; because the physics is ground truth, every decision is scored precisely, not guessed by an LLM judge. Retries owned in one layer; offline-testable with <code>TestModel</code>.',
-    result: 'Full 3-agent advisory runs end-to-end via <strong>pydantic-graph</strong>, confidence bounded by data quality — and <strong>a zero-key deterministic fallback</strong> means <code>uv run airth</code> always produces output.',
-    metric: '3 typed agents · fully offline-testable',
-    repo: null,
-    private: true,
+      'One design constraint: <em>every number is computed in plain Python — the model judges and explains, it never calculates.</em> A FAO-56 water balance and spray-window analysis run nightly per block; a small <strong>pydantic-graph</strong> of typed agents (Irrigation, Spray, Coordinator) judges the borderline calls and sequences the day. Output validators hold the agents to the numbers: depletion echoed verbatim, spray windows a subset of the deterministic candidates, confidence capped by the weakest leg.',
+    result: 'An advisory <strong>cannot ship a hallucinated quantity</strong> — validation blocks it and a nightly eval oracle recomputes it; the same boundary stops prompt injection. Built in <strong>12 tagged phases</strong> from CLI to Kubernetes without touching the AST-frozen core — and <code>uv run vinea</code> always produces output, even with zero API keys.',
+    metric: '12 phases · 0 hallucinated numbers',
+    repo: 'https://github.com/zervakisai/vinea',
+    private: false,
   },
   {
-    title: 'AgenticRAG',
-    subtitle: 'Multi-agent RAG orchestrator with a custom MCP server',
-    framework: 'Pydantic AI',
-    tags: ['Pydantic AI', 'MCP / FastMCP', 'DAG orchestration', 'quality gates', 'JSON-RPC 2.0'],
+    title: 'SAR Unwrap',
+    subtitle: 'Training-free InSAR phase unwrapping on a consumer GPU',
+    framework: null,
+    tags: ['InSAR', 'GPU', 'weighted IRLS', 'integer LP', 'training-free'],
     problem:
-      'Single LLMs collapse on complex, multi-step questions — and let hallucinations walk straight through to the user.',
+      'Phase unwrapping is the long pole of InSAR: SNAPHU is accurate but takes <em>minutes</em> per scene with no GPU path, while deep-learning unwrappers degrade off-distribution — exactly where an autonomous disaster responder meets an unseen scene.',
     solution:
-      'A production orchestrator that decomposes a query into a pipeline of specialist agents — Researcher, Analyst, Coder, Writer — with DAG-based execution and quality gates that catch hallucinations before they ship. Tools exposed over a custom MCP server (FastMCP, JSON-RPC 2.0, 12 specialist tools).',
-    result: '<strong>83.9% F1</strong> on complex multi-step queries — <strong>+42.7%</strong> over a single-agent baseline · 88.4% source relevance · 91.7% quality-gate pass rate.',
-    metric: '+42.7% F1 vs single-agent',
-    repo: 'https://github.com/zervakisai/agentic-rag-orchestrator',
+      'A hybrid that is fast, accurate and training-free: a GPU multi-scale warm-started weighted-IRLS solve (FFT-preconditioned conjugate gradient) recovers the fringe pattern in milliseconds, plus an exact region-contracted integer-LP leveling stage — the totally-unimodular dual of minimum-cost-flow — to remove residual offset drift.',
+    result: '<strong>71×</strong> faster than SNAPHU on airborne UAVSAR at <strong>99.5%</strong> per-component agreement — up to 130× on Sentinel-1 scenes — and SNAPHU parity at low coherence (99.3% at 0.35) where the fast path-follower collapses to 70.3%. Single RTX 3060.',
+    metric: '71× vs SNAPHU · 99.5% agreement',
+    repo: 'https://github.com/zervakisai/sar',
     private: false,
   },
   {
@@ -135,9 +136,11 @@ function renderCases() {
     const link = p.private
       ? `<span class="case-tag" title="Private repository">🔒 private repo</span>`
       : `<a class="case-tag" href="${p.repo}" target="_blank" rel="noopener">View on GitHub ↗</a>`;
+    const flag = p.featured ? `<span class="case-flag">★ Flagship agentic project</span>` : '';
     return `
-      <article class="case reveal" data-reveal>
+      <article class="case${p.featured ? ' case-featured' : ''} reveal" data-reveal>
         <div class="case-aside">
+          ${flag}
           <span class="case-num">CASE ${num}</span>
           <h3 class="case-title">${esc(p.title)}</h3>
           <p class="muted" style="color:var(--muted);font-size:.92rem">${esc(p.subtitle)}</p>
