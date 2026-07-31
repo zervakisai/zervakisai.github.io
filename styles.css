@@ -324,6 +324,9 @@ a { color: inherit; text-decoration: none; }
 .psr-r .psr-val { font-family: var(--font-display); font-weight: 500; font-size: 1.15rem; }
 .psr-r .psr-val strong { color: var(--gold); }
 .psr-divider { height: 1px; background: var(--border); }
+.case-diagram { display: block; margin-top: 0.5rem; padding: clamp(0.8rem, 2vw, 1.4rem); border: 1px solid var(--border); border-radius: 16px; background: rgba(255,255,255,0.012); transition: border-color .4s; }
+.case-diagram img { display: block; width: 100%; height: auto; }
+.case-diagram:hover { border-color: rgba(var(--glow-cyan), 0.35); }
 
 /* Archive — earlier case files, compact */
 .archive { margin-top: 3.5rem; }

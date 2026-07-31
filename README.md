@@ -17,7 +17,7 @@ A single-page, zero-build static site: dark "Neural Obsidian" aesthetic, case fi
 
 Open `app.js` and edit the data blocks near the top:
 
-- `PROJECTS` — your case files (title, subtitle, tags, `problem`, `solution`, `result`, `metric`, `repo`, `private`). HTML is allowed in `problem/solution/result`.
+- `PROJECTS` — your case files (title, subtitle, tags, `problem`, `solution`, `result`, `metric`, `repo`, `private`, and optional `diagram` — path to an SVG/PNG rendered below the result). HTML is allowed in `problem/solution/result`.
 - `STACK` — skill groups. A trailing `*` on a tag renders it highlighted (e.g. `'Pydantic AI*'`).
 - `BEYOND` — the "beyond the code" cards.
 - `CONFIG` — GitHub username and the "hot repos" window (`hotWindowDays`, `hotMinStars`, `hotCount`).

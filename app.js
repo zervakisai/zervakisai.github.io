@@ -34,6 +34,7 @@ const PROJECTS = [
     metric: '12 phases · 0 hallucinated numbers',
     repo: 'https://github.com/zervakisai/vinea',
     private: false,
+    diagram: 'vinea-architecture.svg',
   },
   {
     title: 'SAR Unwrap',
@@ -136,6 +137,11 @@ function renderCases() {
       ? `<span class="case-tag" title="Private repository">🔒 private repo</span>`
       : `<a class="case-tag" href="${p.repo}" target="_blank" rel="noopener">View on GitHub ↗</a>`;
     const flag = p.featured ? `<span class="case-flag">★ Flagship agentic project</span>` : '';
+    const diagram = p.diagram
+      ? `<a class="case-diagram" href="${p.diagram}" target="_blank" rel="noopener" title="Open full size">
+           <img src="${p.diagram}" alt="${esc(p.title)} architecture — the plain-Python core computes every number; the agents judge and explain; output validators gate what ships" loading="lazy"/>
+         </a>`
+      : '';
     return `
       <article class="case${p.featured ? ' case-featured' : ''} reveal" data-reveal>
         <div class="case-aside">
@@ -153,6 +159,7 @@ function renderCases() {
           <div class="psr psr-s"><span class="psr-key">Solution</span><span class="psr-val">${p.solution}</span></div>
           <div class="psr-divider"></div>
           <div class="psr psr-r"><span class="psr-key">Result</span><span class="psr-val">${p.result}</span></div>
+          ${diagram}
         </div>
       </article>`;
   }).join('');
