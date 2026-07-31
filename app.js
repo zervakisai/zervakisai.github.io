@@ -34,6 +34,7 @@ const PROJECTS = [
     metric: '12 phases · 0 hallucinated numbers',
     repo: 'https://github.com/zervakisai/vinea',
     private: false,
+    demo: 'vinea-demo.html',
     diagram: 'vinea-architecture.svg',
   },
   {
@@ -136,6 +137,11 @@ function renderCases() {
     const link = p.private
       ? `<span class="case-tag" title="Private repository">🔒 private repo</span>`
       : `<a class="case-tag" href="${p.repo}" target="_blank" rel="noopener">View on GitHub ↗</a>`;
+    // A project with a `demo` gets a highlighted entry point. Deliberately first
+    // and deliberately loud: a working thing to click beats a paragraph about it.
+    const demo = p.demo
+      ? `<a class="case-tag" href="${p.demo}" style="color:#04120F;background:var(--cyan);border-color:var(--cyan);font-weight:600">▶ Try the live demo</a>`
+      : '';
     const flag = p.featured ? `<span class="case-flag">★ Flagship agentic project</span>` : '';
     const diagram = p.diagram
       ? `<a class="case-diagram" href="${p.diagram}" target="_blank" rel="noopener" title="Open full size">
@@ -151,7 +157,7 @@ function renderCases() {
           <p class="muted" style="color:var(--muted);font-size:.92rem">${esc(p.subtitle)}</p>
           <span class="case-metric">${esc(p.metric)}</span>
           <div class="case-tags">${badge}${tags}</div>
-          <div class="case-tags" style="margin-top:auto">${link}</div>
+          <div class="case-tags" style="margin-top:auto">${demo}${link}</div>
         </div>
         <div class="case-body">
           <div class="psr psr-p"><span class="psr-key">Problem</span><span class="psr-val">${p.problem}</span></div>

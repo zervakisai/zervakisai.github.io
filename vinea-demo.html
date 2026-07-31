@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinea — live demo · should I irrigate? can I spray?</title>
+<meta name="description" content="A month of real vineyard advisories, computed by Vinea's deterministic FAO-56 core from real weather. Every number is checkable by hand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05060A;
+  --text:#EAF0F6;
+  --text-dim:#838F9F;
+  --text-mute:#4C5665;
+  --surface:rgba(255,255,255,0.024);
+  --surface-hi:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.09);
+  --border-strong:rgba(255,255,255,0.14);
+  --cyan:#5EEAD4;
+  --cyan-bright:#86FFEC;
+  --gold:#F2C46B;
+  --magenta:#FF6BAE;
+  --radius:14px;
+  --blur:saturate(1.3) blur(22px);
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+html,body{background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;font-size:15px;line-height:1.65;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{position:relative;overflow-x:hidden}
+::selection{background:rgba(94,234,212,0.28);color:var(--text)}
+a{color:var(--cyan);text-decoration:none}
+
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(1300px 780px at 12% -5%,rgba(94,234,212,0.10),transparent 55%),
+  radial-gradient(1000px 600px at 95% 15%,rgba(242,196,107,0.07),transparent 60%),
+  radial-gradient(1100px 700px at 88% 100%,rgba(255,107,174,0.06),transparent 60%),
+  radial-gradient(900px 560px at 10% 95%,rgba(94,234,212,0.05),transparent 60%),
+  linear-gradient(180deg,#05060A 0%,#080A11 50%,#05060A 100%)}
+.mesh{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='96' viewBox='0 0 56 96'><path d='M28 2 L54 17 L54 47 L28 62 L2 47 L2 17 Z M28 50 L54 65 L54 95 L28 110 L2 95 L2 65 Z' fill='none' stroke='rgba(160,210,255,0.07)' stroke-width='0.9'/></svg>");
+  background-size:56px 96px;
+  mask-image:radial-gradient(ellipse at 50% 40%,#000 0%,rgba(0,0,0,0.5) 50%,transparent 85%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 0%,rgba(0,0,0,0.5) 50%,transparent 85%)}
+
+nav.top{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);background:rgba(12,16,24,0.6);border:1px solid var(--border);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.45);display:flex;align-items:center;gap:12px;padding:8px 14px}
+nav.top .brand{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--text);letter-spacing:-0.01em;font-size:13px}
+nav.top .brand .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+nav.top a.back{color:var(--text-dim);padding:6px 12px;font-size:12.5px;border-radius:999px;transition:all .15s}
+nav.top a.back:hover{color:var(--text);background:var(--surface-hi)}
+
+.wrap{position:relative;z-index:5;max-width:920px;margin:0 auto;padding:120px 24px 60px}
+.panel{background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--border);border-radius:var(--radius);box-shadow:inset 0 1px 0 rgba(255,255,255,0.04),0 20px 60px rgba(0,0,0,0.35);padding:36px}
+.panel + .panel{margin-top:20px}
+.tag{display:inline-block;font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-mute);border:1px solid var(--border);padding:4px 12px;border-radius:999px;margin-bottom:18px}
+h1{font-size:clamp(26px,3.6vw,36px);font-weight:600;letter-spacing:-0.02em;line-height:1.15;margin-bottom:18px}
+h2{font-size:19px;font-weight:600;letter-spacing:-0.01em;margin-bottom:12px}
+p{color:var(--text-dim);margin-bottom:16px;line-height:1.7}
+p:last-of-type{margin-bottom:0}
+p strong{color:var(--text);font-weight:500}
+.metrics{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 20px}
+.metrics span{font-size:11px;color:var(--text-dim);border:1px solid var(--border);background:var(--surface);padding:4px 10px;border-radius:999px}
+.links{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;font-size:13px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;transition:all .15s}
+.btn:hover{background:var(--surface-hi);border-color:var(--border-strong);transform:translateY(-1px)}
+.constraint{margin-top:20px;padding:16px 18px;border-left:2px solid var(--cyan);
+  background:linear-gradient(90deg,rgba(94,234,212,.07),transparent);border-radius:0 10px 10px 0}
+.constraint strong{color:var(--cyan)}
+.constraint p{margin:0;color:var(--text-dim)}
+
+/* ---- controls ---- */
+.sites{display:flex;gap:8px;flex-wrap:wrap}
+.site-btn{flex:1 1 220px;text-align:left;padding:13px 15px;border-radius:12px;cursor:pointer;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;transition:all .15s}
+.site-btn:hover{background:var(--surface-hi);border-color:var(--border-strong)}
+.site-btn[aria-pressed="true"]{border-color:rgba(94,234,212,.45);background:linear-gradient(180deg,rgba(94,234,212,.10),transparent)}
+.site-btn .n{font-weight:600;font-size:14.5px}
+.site-btn .r{color:var(--text-dim);font-size:12px;margin-top:2px}
+.datebar{margin-top:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.datebar label{color:var(--text-mute);font-size:11px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+input[type=range]{flex:1 1 160px;min-width:0;accent-color:var(--cyan)}
+.datebar .val{font-family:var(--mono);font-size:13.5px;color:var(--text);min-width:10.5ch}
+
+.chart{margin-top:18px;background:rgba(0,0,0,.22);border:1px solid var(--border);border-radius:12px;padding:14px 14px 8px}
+.chart-title{color:var(--text-mute);font-size:11px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.chart-title .rng{font-family:var(--mono);text-transform:none;letter-spacing:0}
+svg{display:block;width:100%;height:auto}
+
+/* ---- advisory ---- */
+.adv-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  padding-bottom:16px;margin-bottom:0;border-bottom:1px solid var(--border)}
+.adv-head h2{margin:0}
+.pill{font-size:10.5px;font-family:var(--mono);padding:4px 11px;border-radius:999px;border:1px solid rgba(242,196,107,.35);color:var(--gold);background:rgba(242,196,107,.08)}
+.legs{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--border)}
+.leg h3{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-mute);margin-bottom:12px;font-weight:500}
+.verdict{font-size:clamp(22px,4vw,30px);font-weight:600;letter-spacing:-.02em;line-height:1.1;font-family:var(--mono)}
+.verdict.yes{color:var(--cyan)} .verdict.no{color:var(--gold)}
+.sub{color:var(--text-dim);font-size:12.5px;margin-top:6px;font-family:var(--mono)}
+.window{margin-top:10px;padding:10px 12px;background:var(--surface);border-radius:10px;border-left:2px solid var(--cyan)}
+.window .t{font-family:var(--mono);font-size:13.5px;color:var(--text)}
+.window .why{color:var(--text-dim);font-size:12px;margin-top:3px}
+.rationale{margin-top:14px;color:var(--text-dim);font-size:13px;line-height:1.6}
+.conf{margin-top:16px}
+.bar{height:4px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--gold))}
+.conf .lbl{color:var(--text-mute);font-size:11px;margin-top:6px;font-family:var(--mono)}
+.plan{padding:22px 0 0}
+.plan h3{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-mute);margin-bottom:8px;font-weight:500}
+.plan p{margin:0;color:var(--text);font-size:15px}
+.facts{margin:10px 0 0;padding:0;list-style:none;color:var(--text-dim);font-size:12.5px}
+.facts li{margin-top:4px}
+.facts li::before{content:"·";color:var(--cyan);margin-right:8px}
+
+details{margin-top:20px;border-top:1px solid var(--border);padding-top:6px}
+summary{padding:12px 0;cursor:pointer;font-size:13px;color:var(--cyan);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";color:var(--text-mute)}
+details[open] summary::before{content:"▾ "}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px}
+td{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
+td:first-child{color:var(--text-dim);padding-right:14px}
+td:last-child{text-align:right;white-space:nowrap;color:var(--text)}
+tr.total td{border-bottom:none;padding-top:12px;font-weight:600}
+tr.total td:last-child{color:var(--cyan)}
+.eq{margin-top:14px;padding:13px 15px;background:rgba(0,0,0,.28);border-radius:10px;
+  font-family:var(--mono);font-size:12px;color:var(--text-dim);line-height:1.85;overflow-x:auto}
+.eq strong{color:var(--text);font-weight:600}
+.bands{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;font-family:var(--mono);font-size:11px}
+.band{padding:4px 10px;border-radius:999px;border:1px solid var(--border)}
+.band.ideal{color:var(--cyan);border-color:rgba(94,234,212,.3)}
+.band.marginal{color:var(--gold);border-color:rgba(242,196,107,.3)}
+.band.unsuitable{color:var(--magenta);border-color:rgba(255,107,174,.3)}
+
+.note{margin-top:18px;padding:15px 17px;border:1px dashed var(--border-strong);border-radius:12px;
+  color:var(--text-dim);font-size:13px;background:rgba(255,255,255,.012)}
+.note strong{color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.tile h4{font-size:13.5px;font-weight:600;margin-bottom:6px}
+.tile p{margin:0;font-size:12.5px;color:var(--text-dim)}
+.foot{margin-top:24px;padding-top:18px;border-top:1px solid var(--border);color:var(--text-mute);font-size:12px}
+.foot a{color:var(--text-dim)}
+
+@media(max-width:700px){
+  .wrap{padding:100px 16px 40px}
+  .panel{padding:22px 18px}
+  .legs{grid-template-columns:1fr;gap:22px}
+  /* The date row stacks rather than compressing: a range input squeezed to 60px
+     is unusable, and a row that will not shrink gives the whole document a
+     horizontal scrollbar. */
+  .datebar{display:grid;grid-template-columns:auto 1fr;row-gap:6px}
+  .datebar .val{grid-column:2;justify-self:end;min-width:0}
+  /* Mono lines are the other overflow source -- they have no spaces to break on. */
+  .sub,.eq,.window .t{overflow-wrap:anywhere}
+  table{font-size:11.5px}
+  td:last-child{white-space:normal}
+  /* height:auto on a 720x150 viewBox gives a 67px sparkline on a phone. The SVG
+     uses preserveAspectRatio="none", so a fixed height just stretches it. */
+  #chart{height:110px}
+}
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+<div class="mesh"></div>
+
+<nav class="top">
+  <div class="brand"><span class="dot"></span>KZ</div>
+  <a class="back" href="index.html">← Back to home</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="panel">
+    <span class="tag">» Vinea · live demo</span>
+    <h1>Should I irrigate? Can I spray?</h1>
+    <div class="metrics">
+      <span>Pydantic AI</span><span>pydantic-graph</span><span>FAO-56</span>
+      <span>Postgres RLS</span><span>Helm</span><span>SLOs in SQL</span>
+    </div>
+    <p>A daily, grower-facing advisory for tomorrow, produced overnight from hourly
+    vineyard weather. Below is <strong>a month of real advisories</strong> for two real
+    Greek wine regions — pick a site, drag the date, and check the arithmetic yourself.</p>
+
+    <div class="constraint">
+      <p><strong>The one design constraint.</strong> Every number is computed in plain
+      Python; the model judges and explains, it never calculates. That is why an advisory
+      cannot ship a hallucinated quantity — and why a prompt injection cannot change a
+      value it cannot reach.</p>
+    </div>
+
+    <div class="links">
+      <a class="btn" href="https://github.com/zervakisai/vinea" target="_blank" rel="noopener noreferrer">↗ Code on GitHub</a>
+      <a class="btn" href="https://github.com/zervakisai/vinea/tree/main/docs/adr" target="_blank" rel="noopener noreferrer">↗ 12 decision records</a>
+      <a class="btn" href="index.html">← Home</a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="sites" id="sites"></div>
+    <div class="datebar">
+      <label for="day">Run date</label>
+      <input type="range" id="day" min="0" max="0" value="0">
+      <span class="val" id="dayval">—</span>
+    </div>
+    <div class="chart">
+      <div class="chart-title">
+        <span>Soil water depletion (mm)</span>
+        <span class="rng" id="chartlegend"></span>
+      </div>
+      <svg id="chart" viewBox="0 0 720 150" preserveAspectRatio="none" role="img"
+           aria-label="Soil water depletion over the exported window"></svg>
+    </div>
+  </div>
+
+  <div class="panel" id="card"></div>
+
+  <div class="panel">
+    <h2>What you are looking at</h2>
+    <p>Real hourly weather for Nemea and Naoussa, run through the real pipeline: a
+    FAO-56 water balance and a four-gate spray-window analysis, one advisory per night.
+    Every figure was produced by <code>features.py</code> — the same code path the
+    nightly batch runs — and frozen into a JSON file this page reads. Nothing is
+    computed in your browser; it renders numbers, it does not produce them.</p>
+
+    <div class="note">
+      <strong>Two honest labels.</strong> This is a <em>replay</em>, not a live service —
+      GitHub Pages serves files, and the system's Postgres, queue, API and worker are not
+      running behind it. And every advisory here is <strong>deterministic</strong>
+      (<code>degraded=true</code>): no model was called, so the prose is templated rather
+      than written. The physics is identical either way; what an LLM adds is judgement on
+      the borderline nights and language a grower can act on.
+    </div>
+
+    <div class="grid">
+      <div class="tile"><h4>Checkable by hand</h4><p>Open “Check the arithmetic” on any
+      card. ET₀ × Kc, minus effective rain, clamped to [0, TAW]. If the total disagrees
+      with the headline, the headline is wrong.</p></div>
+      <div class="tile"><h4>Missing stays missing</h4><p>Empty and non-finite cells
+      become <code>None</code>, are counted, and lower confidence — never zero-filled.
+      The confidence figure is that penalty, not a vibe.</p></div>
+      <div class="tile"><h4>Two sites, one codebase</h4><p>Nemea and Naoussa differ
+      because their weather differs, not because anything was special-cased. Per-tenant
+      weather is enforced end to end.</p></div>
+    </div>
+
+    <div class="foot">
+      Weather: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>, CC BY 4.0 ·
+      Agronomy: FAO Irrigation and Drainage Paper 56, CC BY 4.0 ·
+      Code: MIT · <span id="generated"></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const fmt1 = n => (n === null || n === undefined) ? "—" : n.toFixed(1);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const hhmm = iso => iso.slice(11, 16);
+const nice = iso => new Date(iso + "T00:00:00").toLocaleDateString("en-GB",
+  {weekday:"short", day:"numeric", month:"short"});
+
+let DATA = null, site = 0, day = 0;
+
+fetch("vinea-demo-data.json")
+  .then(r => r.ok ? r.json() : Promise.reject("HTTP " + r.status))
+  .then(d => { DATA = d; boot(); })
+  .catch(e => {
+    $("#card").innerHTML = `<h2>Could not load the demo data</h2>
+      <p>${esc(String(e))}. The source is on
+      <a href="https://github.com/zervakisai/vinea">GitHub</a>.</p>`;
+  });
+
+function boot(){
+  $("#sites").innerHTML = DATA.sites.map((s, i) => `
+    <button class="site-btn" data-i="${i}" aria-pressed="${i === 0}">
+      <div class="n">${esc(s.name)}</div>
+      <div class="r">${esc(s.region)}</div>
+    </button>`).join("");
+  $("#sites").addEventListener("click", e => {
+    const b = e.target.closest(".site-btn");
+    if (!b) return;
+    site = +b.dataset.i;
+    [...$("#sites").children].forEach((c, i) => c.setAttribute("aria-pressed", i === site));
+    clampDay(); render();
+  });
+  $("#day").addEventListener("input", e => { day = +e.target.value; render(); });
+  $("#generated").textContent = "Computed " + DATA.generated_at.slice(0, 10) +
+    " · " + DATA.sites[0].nights.length + " nights per site";
+  clampDay();
+  day = DATA.sites[0].nights.length - 1;
+  render();
+}
+
+function clampDay(){
+  const n = DATA.sites[site].nights.length;
+  $("#day").max = n - 1;
+  if (day > n - 1) day = n - 1;
+  $("#day").value = day;
+}
+
+function render(){
+  const s = DATA.sites[site], n = s.nights[day];
+  $("#day").value = day;
+  $("#dayval").textContent = n.run_date;
+  drawChart(s, day);
+  $("#card").innerHTML = card(s, n);
+}
+
+function card(s, n){
+  const a = n.advisory, irr = a.irrigation, spr = a.spray, f = n.features;
+  const windows = spr.recommended_windows || [];
+
+  return `
+    <div class="adv-head">
+      <h2>${esc(s.name)} — advice for ${nice(a.date)}</h2>
+      <span class="pill">deterministic · no model called</span>
+    </div>
+
+    <div class="legs">
+      <div class="leg">
+        <h3>Irrigation</h3>
+        <div class="verdict ${irr.should_irrigate_tomorrow ? "yes" : "no"}">
+          ${irr.should_irrigate_tomorrow ? fmt1(irr.recommended_depth_mm) + " mm" : "Hold"}</div>
+        <div class="sub">depletion ${fmt1(irr.current_depletion_mm)} mm ·
+          trigger ${fmt1(f.raw_mm)} · TAW ${fmt1(f.taw_mm)}</div>
+        <p class="rationale">${esc(irr.rationale)}</p>
+        <div class="conf">
+          <div class="bar"><i style="width:${(irr.confidence * 100).toFixed(0)}%"></i></div>
+          <div class="lbl">confidence ${irr.confidence.toFixed(2)}</div>
+        </div>
+      </div>
+
+      <div class="leg">
+        <h3>Spray</h3>
+        <div class="verdict ${spr.can_spray_tomorrow ? "yes" : "no"}">
+          ${spr.can_spray_tomorrow
+            ? windows.length + " window" + (windows.length === 1 ? "" : "s")
+            : "No safe window"}</div>
+        <div class="sub">${bandLine(f.band_counts)}</div>
+        ${windows.map(w => `<div class="window">
+            <div class="t">${hhmm(w.start)} → ${hhmm(w.end)}</div>
+            <div class="why">${esc(w.reason)}</div>
+          </div>`).join("")}
+        ${(!windows.length && spr.limiting_factors.length)
+          ? `<p class="rationale">${esc(spr.limiting_factors.join("; "))}</p>` : ""}
+        <div class="conf">
+          <div class="bar"><i style="width:${(spr.confidence * 100).toFixed(0)}%"></i></div>
+          <div class="lbl">confidence ${spr.confidence.toFixed(2)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan">
+      <h3>The day</h3>
+      <p>${esc(a.summary)}</p>
+      ${a.conflicts_resolved && a.conflicts_resolved.length
+        ? `<ul class="facts">${a.conflicts_resolved.map(c => `<li>${esc(c)}</li>`).join("")}</ul>` : ""}
+    </div>
+
+    <details>
+      <summary>Check the arithmetic</summary>
+      <table>
+        <tr><td>ETc accumulated over 30 days <span style="color:var(--text-mute)">(ET₀ × Kc ${f.kc})</span></td>
+            <td>${fmt1(f.cumulative_etc_mm)} mm</td></tr>
+        <tr><td>Effective rain tomorrow <span style="color:var(--text-mute)">(${fmt1(f.forecast_rain_tomorrow_mm)} × ${f.effective_rain_fraction})</span></td>
+            <td>${fmt1(f.effective_rain_tomorrow_mm)} mm</td></tr>
+        <tr><td>ETc tomorrow</td><td>${fmt1(f.etc_tomorrow_mm)} mm</td></tr>
+        <tr><td>Trigger: RAW = p ${f.mad_fraction} × TAW ${fmt1(f.taw_mm)}</td>
+            <td>${fmt1(f.raw_mm)} mm</td></tr>
+        <tr class="total"><td>Depletion now, clamped to [0, TAW]</td>
+            <td>${fmt1(f.current_depletion_mm)} mm</td></tr>
+      </table>
+
+      <div class="eq">
+        depletion ${fmt1(f.current_depletion_mm)} mm
+        ${f.should_irrigate_trigger ? "<strong>≥</strong>" : "<strong>&lt;</strong>"}
+        RAW ${fmt1(f.raw_mm)} mm &nbsp;→&nbsp;
+        <strong>${f.should_irrigate_trigger ? "irrigate" : "hold"}</strong><br>
+        projected after tomorrow: <strong>${fmt1(f.projected_depletion_mm)} mm</strong>
+        ${f.notes && f.notes.length ? "<br>" + f.notes.map(esc).join("<br>") : ""}
+      </div>
+
+      <div class="bands">
+        ${Object.entries(f.band_counts || {}).map(([k, v]) =>
+          `<span class="band ${k}">${k} × ${v}h</span>`).join("")}
+      </div>
+
+      <div class="eq" style="margin-top:12px">
+        data quality: ${n.quality.rows_loaded} rows ·
+        ${n.quality.gap_count} gap hours ·
+        ${n.quality.nan_cells} empty cells
+        (${n.quality.spray_critical_nan_cells} spray-critical) →
+        confidence ceiling <strong>${(1 - n.quality.confidence_penalty).toFixed(2)}</strong>
+      </div>
+    </details>`;
+}
+
+function bandLine(counts){
+  const order = ["ideal", "marginal", "unsuitable"];
+  const parts = order.filter(k => counts && counts[k]).map(k => `${counts[k]}h ${k}`);
+  return parts.length ? parts.join(" · ") : "no classified hours";
+}
+
+function drawChart(s, active){
+  const vals = s.nights.map(n => n.features.current_depletion_mm);
+  const raw = s.nights[0].features.raw_mm;
+  const taw = s.nights[0].features.taw_mm;
+  const W = 720, H = 150, pad = 8;
+  const bottom = Math.max(taw, Math.max(...vals) * 1.05);
+  const x = i => pad + (i / Math.max(1, vals.length - 1)) * (W - 2 * pad);
+  const y = v => H - pad - (v / bottom) * (H - 2 * pad);
+
+  const line = vals.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const area = `${line} L${x(vals.length - 1).toFixed(1)},${H - pad} L${x(0).toFixed(1)},${H - pad} Z`;
+
+  $("#chart").innerHTML = `
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5EEAD4" stop-opacity=".26"/>
+      <stop offset="100%" stop-color="#5EEAD4" stop-opacity="0"/>
+    </linearGradient></defs>
+    <line x1="${pad}" x2="${W - pad}" y1="${y(raw).toFixed(1)}" y2="${y(raw).toFixed(1)}"
+          stroke="#F2C46B" stroke-width="1" stroke-dasharray="4 4" opacity=".75"/>
+    <text x="${pad + 4}" y="${(y(raw) - 6).toFixed(1)}" fill="#F2C46B"
+          font-size="10" font-family="'JetBrains Mono',monospace">RAW ${raw.toFixed(0)} mm — irrigate above this</text>
+    <path d="${area}" fill="url(#g)"/>
+    <path d="${line}" fill="none" stroke="#5EEAD4" stroke-width="2"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <line x1="${x(active).toFixed(1)}" x2="${x(active).toFixed(1)}" y1="${pad}" y2="${H - pad}"
+          stroke="#EAF0F6" stroke-width="1" opacity=".3"/>
+    <circle cx="${x(active).toFixed(1)}" cy="${y(vals[active]).toFixed(1)}" r="4"
+            fill="#05060A" stroke="#EAF0F6" stroke-width="2"/>`;
+
+  $("#chartlegend").textContent =
+    `${s.nights[0].run_date} → ${s.nights[s.nights.length - 1].run_date}`;
+}
+</script>
+</body>
+</html>
