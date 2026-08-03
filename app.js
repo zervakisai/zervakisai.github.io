@@ -22,16 +22,16 @@ const CONFIG = {
 const PROJECTS = [
   {
     title: 'Vinea',
-    subtitle: 'Agronomic decision agents for a vineyard',
+    subtitle: 'Should I water the vines? Can I spray? — answered overnight',
     framework: 'Pydantic AI',
     featured: true,
     tags: ['Pydantic AI', 'pydantic-graph', 'FAO-56', 'output validators', 'uv', '12 tagged phases'],
     problem:
-      '“Should I irrigate? Can I spray?” A grower’s daily calls hide real cost — a wrong one wastes scarce water, or sprays into the wrong window and risks the vintage. A raw LLM will confidently invent the agronomy.',
+      'Two questions a vineyard manager answers every morning, and both cost real money to get wrong: water the wrong night and scarce water is wasted, spray in the wrong hour and it drifts, evaporates or washes off — risking the vintage. A raw LLM will confidently invent the agronomy.',
     solution:
       'One design constraint: <em>every number is computed in plain Python — the model judges and explains, it never calculates.</em> A FAO-56 water balance and spray-window analysis run nightly per block; a small <strong>pydantic-graph</strong> of typed agents (Irrigation, Spray, Coordinator) judges the borderline calls and sequences the day. Output validators hold the agents to the numbers: depletion echoed verbatim, spray windows a subset of the deterministic candidates, confidence capped by the weakest leg.',
     result: 'An advisory <strong>cannot ship a hallucinated quantity</strong> — validation blocks it and a nightly eval oracle recomputes it; the same boundary stops prompt injection. Built in <strong>12 tagged phases</strong> from CLI to Kubernetes without touching the AST-frozen core — and <code>uv run vinea</code> always produces output, even with zero API keys.',
-    metric: '12 phases · 0 hallucinated numbers',
+    metric: 'Every number checkable by hand',
     repo: 'https://github.com/zervakisai/vinea',
     private: false,
     demo: 'vinea-demo.html',
